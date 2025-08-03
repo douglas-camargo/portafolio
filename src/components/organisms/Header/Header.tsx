@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, use } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Navigation } from '../../molecules/Navigation/Navigation';
 import { useLanguage } from '../../../contexts/LanguageContext';
@@ -12,12 +12,12 @@ export const Header = () => {
   const { currentLanguage, changeLanguage } = useLanguage();
   const { theme, toggleTheme } = useTheme();
   
-  const navItems = [
+  const navItems = useMemo(() => [
     { label: t('portfolio'), active: activeSection === 'portfolio', id: 'portfolio' },
     { label: t('education'), active: activeSection === 'education', id: 'education' },
     { label: t('skills'), active: activeSection === 'skills', id: 'skills' },
     { label: t('contacts'), active: activeSection === 'contacts', id: 'contacts' },
-  ];
+  ], [t, activeSection]);
 
   useEffect(() => {
     const sections = ['about', 'portfolio', 'education', 'skills', 'contacts'];
@@ -56,11 +56,11 @@ export const Header = () => {
   
 
 
-  const handleLanguageChange = (language: string) => {
+  const handleLanguageChange = useCallback((language: string) => {
     changeLanguage(language);
-  };
+  }, [changeLanguage]);
 
-  const scrollToSection = (sectionId: string) => {
+  const scrollToSection = useCallback((sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
       const headerHeight = 80; // Altura aproximada del header fijo
@@ -74,7 +74,7 @@ export const Header = () => {
     
     // Cerrar el menú móvil si está abierto
     setIsMenuOpen(false);
-  };
+  }, []);
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 flex w-full items-start justify-between py-4 px-4 md:px-20 ${theme === 'dark' ? 'bg-[#151515]/95' : 'bg-white/95'} backdrop-blur-sm border-b ${theme === 'dark' ? 'border-white/10' : 'border-gray-200'} transition-colors duration-300`}>

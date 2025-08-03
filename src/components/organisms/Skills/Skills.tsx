@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, use } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../../contexts/ThemeContext';
 import { Card, CardContent } from '../../atoms/Card/Card';
@@ -8,7 +8,7 @@ export const Skills = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
 
-  const techIcons = [
+  const techIcons = useMemo(() => [
     { name: 'HTML5', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
     { name: 'CSS3', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
     { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
@@ -19,7 +19,7 @@ export const Skills = () => {
     { name: 'GitHub', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg' },
     { name: 'Tailwind CSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg' },
     { name: 'Bootstrap', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg' },
-  ];
+  ], []);
 
   const skillCategories = [
     {
@@ -80,6 +80,7 @@ export const Skills = () => {
                     }`}
                     alt={tech.name}
                     src={tech.icon}
+                    loading="lazy"
                   />
                   <span
                     className={`text-xs text-center font-['Lato',Helvetica] ${
