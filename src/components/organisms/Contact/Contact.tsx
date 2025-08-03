@@ -10,7 +10,7 @@ export const Contact = () => {
   const [activeButton, setActiveButton] = useState<string | null>(null);
   
   const contactInfo = useMemo(() => ({
-    email: 'ALEXANDERS@GMAIL.COM',
+    email: 'DOUGLAS.CAMARGO.DEV@GMAIL.COM',
     phone: '+58 424 1232755',
   }), []);
 
@@ -48,7 +48,7 @@ export const Contact = () => {
         window.open('https://www.linkedin.com/in/douglas-camargo-4858a5178/', '_blank');
         break;
       case 'GMAIL':
-        window.open('mailto:alexanders@gmail.com', '_blank');
+        window.open('mailto:douglas.camargo.dev@gmail.com', '_blank');
         break;
       default:
         break;
