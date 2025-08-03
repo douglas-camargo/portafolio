@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, use } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Badge } from '../../atoms/Badge/Badge';
 
@@ -51,6 +51,7 @@ export const ProjectCard = ({
       <img 
         src={image} 
         alt={`Project ${id}`}
+        loading="lazy"
         className={`w-full h-full object-cover transition-all duration-500 ease-in-out ${
           isHovered ? 'scale-110' : 'scale-100'
         }`}

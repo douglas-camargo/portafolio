@@ -11,4 +11,21 @@ export default defineConfig({
       plugins: [tailwind()],
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          i18n: ['react-i18next', 'i18next', 'i18next-browser-languagedetector'],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1000,
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-i18next'],
+  },
+  esbuild: {
+    jsx: 'automatic',
+  },
 });

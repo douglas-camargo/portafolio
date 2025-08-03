@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback, use } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../../contexts/ThemeContext';
 import { Button } from '../../atoms/Button/Button';
@@ -9,12 +9,12 @@ export const Contact = () => {
   const { theme } = useTheme();
   const [activeButton, setActiveButton] = useState<string | null>(null);
   
-  const contactInfo = {
+  const contactInfo = useMemo(() => ({
     email: 'ALEXANDERS@GMAIL.COM',
     phone: '+58 424 1232755',
-  };
+  }), []);
 
-  const handleWhatsAppContact = () => {
+  const handleWhatsAppContact = useCallback(() => {
     const numero = '584241232755';
     const mensaje = 'Hola!%20me%20interesa%20tu%20trabajo%20como%20desarrollador.';
     
@@ -31,9 +31,9 @@ export const Contact = () => {
       : `${versionPc}phone=${numero}&text=${mensaje}`;
     
     window.open(url, '_blank');
-  };
+  }, []);
 
-  const handleButtonClick = (buttonName: string) => {
+  const handleButtonClick = useCallback((buttonName: string) => {
     setActiveButton(buttonName);
     
     // Ejecutar la función correspondiente según el botón
@@ -53,14 +53,14 @@ export const Contact = () => {
       default:
         break;
     }
-  };
+  }, [handleWhatsAppContact]);
 
-  const socialLinks = [
+  const socialLinks = useMemo(() => [
     { name: 'WHATSAPP' },
     { name: 'GITHUB' },
     { name: 'LINKEDIN' },
     { name: 'GMAIL' },
-  ];
+  ], []);
 
   return (
     <section id="contacts" className="w-full py-16 px-4 md:px-20">

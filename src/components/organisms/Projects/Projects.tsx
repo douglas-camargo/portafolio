@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback, use } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../../contexts/ThemeContext';
 import { Carousel } from '../../molecules/Carousel/Carousel';
@@ -10,7 +10,7 @@ export const Projects = () => {
   const { theme } = useTheme();
   const [currentCarouselIndex, setCurrentCarouselIndex] = useState(0);
   
-  const projects = [
+  const projects = useMemo(() => [
     {
       id: 1,
       tags: [
@@ -59,17 +59,17 @@ export const Projects = () => {
       githubUrl: '', // Sin botón CODE
       pageUrl: 'https://quizzical-wozniak-484579.netlify.app/',
     },
-  ];
+  ], []);
 
   const totalSlides = projects.length; // 1 proyecto por vista
 
-  const handleCarouselIndexChange = (index: number) => {
+  const handleCarouselIndexChange = useCallback((index: number) => {
     setCurrentCarouselIndex(index);
-  };
+  }, []);
 
-  const goToSlide = (index: number) => {
+  const goToSlide = useCallback((index: number) => {
     setCurrentCarouselIndex(index);
-  };
+  }, []);
 
   return (
     <section id="portfolio" className="w-full py-12 relative px-4 md:px-20">
