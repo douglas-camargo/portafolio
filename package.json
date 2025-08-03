@@ -6,13 +6,20 @@
   "description": "Portfolio made by engineer Douglas Camargo",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "svg": "node scripts/svg-to-components.cjs"
   },
   "dependencies": {
+    "i18next": "^25.3.2",
+    "i18next-browser-languagedetector": "^8.2.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-i18next": "^15.6.1"
   },
   "devDependencies": {
+    "@svgr/cli": "^8.1.0",
+    "@svgr/core": "^8.1.0",
+    "@types/react": "^19.1.9",
     "@vitejs/plugin-react": "4.3.4",
     "esbuild": "0.24.0",
     "globals": "15.12.0",

@@ -5,7 +5,10 @@ interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'outline';
   size?: 'sm' | 'md' | 'lg';
   className?: string;
+  borderRadius?: string;
   onClick?: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 }
 
 export const Button = ({
@@ -13,9 +16,12 @@ export const Button = ({
   variant = 'primary',
   size = 'md',
   className = '',
-  onClick
+  borderRadius = '',
+  onClick,
+  onMouseEnter,
+  onMouseLeave
 }: ButtonProps) => {
-  const baseClasses = 'font-semibold rounded-lg transition-colors duration-200 cursor-pointer inline-flex items-center justify-center';
+  const baseClasses = 'font-semibold transition-colors duration-200 cursor-pointer inline-flex items-center justify-center';
   
   const variantClasses = {
     primary: 'bg-[#d9d9d9] text-[#151515] hover:bg-[#c0c0c0]',
@@ -31,8 +37,10 @@ export const Button = ({
   
   return (
     <button
-      className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
+      className={`${variantClasses[variant]} ${sizeClasses[size]} ${className} ${baseClasses} ${borderRadius ? borderRadius : 'rounded-lg'}`}
       onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       {children}
     </button>
