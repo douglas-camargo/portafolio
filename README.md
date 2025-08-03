@@ -24,7 +24,7 @@ Portfolio profesional de Douglas Camargo, desarrollador Front-end especializado 
 
 ```bash
 # Clonar el repositorio
-git clone https://github.com/douglas-camargo/portfolio.git
+git clone https://github.com/douglas-camargo/portafolio.git
 
 # Instalar dependencias
 npm install
