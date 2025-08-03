@@ -38,24 +38,26 @@ export const Projects = () => {
     {
       id: 3,
       tags: [
-        { id: 1, name: 'VUE.JS' },
-        { id: 2, name: 'CSS3' },
+        { id: 1, name: 'HTML' },
+        { id: 2, name: 'CSS' },
+        { id: 3, name: 'JAVASCRIPT' },
       ],
-      image: 'https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800',
+      image: '/images/hsectechnology.webp',
       showViewButton: true,
-      githubUrl: 'https://github.com/douglas-camargo',
-      pageUrl: 'https://example.com/project3',
+      githubUrl: '', // Sin botón CODE
+      pageUrl: 'https://hsectechnology.com/index.html',
     },
     {
       id: 4,
       tags: [
-        { id: 1, name: 'NODE.JS' },
-        { id: 2, name: 'EXPRESS' },
+        { id: 1, name: 'NEXT.JS' },
+        { id: 2, name: 'JAVASCRIPT' },
+        { id: 3, name: 'CSS' },
       ],
-      image: 'https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=800',
+      image: '/images/proyecto-seguridad.webp',
       showViewButton: true,
-      githubUrl: 'https://github.com/douglas-camargo',
-      pageUrl: 'https://example.com/project4',
+      githubUrl: '', // Sin botón CODE
+      pageUrl: 'https://quizzical-wozniak-484579.netlify.app/',
     },
   ];
 

@@ -86,7 +86,13 @@ export const ProjectCard = ({
           `}
           onMouseEnter={() => setIsViewButtonHovered(true)}
           onMouseLeave={() => setIsViewButtonHovered(false)}
-          onClick={() => githubUrl && window.open(githubUrl, '_blank')}
+          onClick={() => {
+            if (githubUrl) {
+              window.open(githubUrl, '_blank');
+            } else if (pageUrl) {
+              window.open(pageUrl, '_blank');
+            }
+          }}
         >
           <div className="font-['Lato',Helvetica] font-normal text-[#151515] text-xs sm:text-sm">
             {t('projects.view')}
@@ -98,12 +104,14 @@ export const ProjectCard = ({
       <div className={`absolute bottom-3 right-3.5 flex gap-2 transition-opacity duration-300 ${
         isHovered ? 'opacity-100' : 'opacity-0'
       }`}>
-        <button 
-          className="text-gray-800 bg-gray-200 text-xs px-2 py-1 sm:px-3 sm:py-1 rounded-lg hover:bg-gray-300 transition-colors duration-300 font-semibold"
-          onClick={() => githubUrl && window.open(githubUrl, '_blank')}
-        >
-          CODE
-        </button>
+        {githubUrl && (
+          <button 
+            className="text-gray-800 bg-gray-200 text-xs px-2 py-1 sm:px-3 sm:py-1 rounded-lg hover:bg-gray-300 transition-colors duration-300 font-semibold"
+            onClick={() => githubUrl && window.open(githubUrl, '_blank')}
+          >
+            CODE
+          </button>
+        )}
         <button 
           className="text-gray-800 bg-gray-200 text-xs px-2 py-1 sm:px-3 sm:py-1 rounded-lg hover:bg-gray-300 transition-colors duration-300 font-semibold"
           onClick={() => pageUrl && window.open(pageUrl, '_blank')}
