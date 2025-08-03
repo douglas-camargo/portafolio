@@ -1,6 +1,7 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import { getDefaultLanguage } from './services/countryDetection';
 
 const resources = {
   en: {
@@ -19,7 +20,7 @@ const resources = {
       // Hero Section
       hero: {
         title: 'WEB DEVELOPER-FRONTEND',
-        name: 'ALEXANDER SUAREZ',
+        name: 'DOUGLAS CAMARGO',
         description: 'Programmer with over 4 years of experience in software and web application development. I have worked in the tech industry solving complex problems and improving efficiency through teamwork. My achievements include the creation and implementation of complex, large-scale systems. I seek technological challenges and projects that have a positive impact on society.',
         contactMe: 'CONTACT ME',
         downloadCV: 'DOWNLOAD CV'
@@ -85,7 +86,7 @@ const resources = {
       // Hero Section
       hero: {
         title: 'DESARROLLADOR WEB-FRONTEND',
-        name: 'ALEXANDER SUAREZ',
+        name: 'DOUGLAS CAMARGO',
         description: 'Programador con más de 4 años de experiencia en desarrollo de software y aplicaciones web. He trabajado en la industria tecnológica resolviendo problemas complejos y mejorando la eficiencia mediante el trabajo en equipo. Mis logros incluyen la creación e implementación de sistemas complejos y a gran escala. Busco desafíos tecnológicos y proyectos con impacto positivo en la sociedad.',
         contactMe: 'CONTACTARME',
         downloadCV: 'DESCARGAR CV'
@@ -137,16 +138,37 @@ const resources = {
   }
 };
 
+// Inicializar i18n de forma síncrona primero
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
     resources,
+    lng: 'en', // Forzar inglés por defecto
     fallbackLng: 'en',
     debug: false,
     interpolation: {
       escapeValue: false,
     },
+    detection: {
+      order: ['querystring', 'cookie', 'localStorage', 'navigator', 'htmlTag'],
+      caches: ['localStorage', 'cookie'],
+    },
+    react: {
+      useSuspense: false,
+    },
   });
+
+// Función para actualizar el idioma después de la detección
+export const updateLanguageFromCountry = async () => {
+  try {
+    const defaultLanguage = await getDefaultLanguage();
+    if (defaultLanguage !== i18n.language) {
+      i18n.changeLanguage(defaultLanguage);
+    }
+  } catch (error) {
+    // Silenciosamente usar inglés por defecto
+  }
+};
 
 export default i18n; 

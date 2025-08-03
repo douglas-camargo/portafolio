@@ -51,14 +51,14 @@ export const Hero = () => {
 
   return (
     <section id="about" className="flex flex-col items-start px-4 md:px-20 py-8 md:py-16 w-full relative mt-20">
-      <div className={`font-['Lato',Helvetica] font-extralight text-lg md:text-4xl tracking-[0] leading-normal mb-4 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
-        {t('hero.title')}
-      </div>
-
       <div className="w-full flex flex-col lg:flex-row items-start gap-8 mb-14">
         {/* Left side - Text content */}
-        <div className="flex-1 max-w-full lg:max-w-[670px]">
-          <h1 className={`font-['Oswald',Helvetica] font-medium text-4xl md:text-6xl lg:text-9xl tracking-[0] leading-tight md:leading-[120px] mb-6 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
+        <div className="flex-1 max-w-full lg:max-w-[670px] text-center lg:text-left">
+          <div className={`font-['Lato',Helvetica] font-extralight text-lg sm:text-lg md:text-3xl lg:text-4xl tracking-[0] leading-normal mb-4 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
+            {t('hero.title')}
+          </div>
+
+          <h1 className={`font-['Oswald',Helvetica] font-medium text-5xl sm:text-7xl md:text-8xl lg:text-8xl xl:text-9xl tracking-[0] leading-tight md:leading-[120px] mb-6 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
             {t('hero.name').split(' ')[0]}
             <br />
             {t('hero.name').split(' ')[1]}
@@ -74,12 +74,12 @@ export const Hero = () => {
         </div>
 
         {/* Right side - Image */}
-        <div className="flex-shrink-0 w-full lg:w-[514px] h-[300px] md:h-[386px] relative order-first lg:order-last">
+        <div className="flex-shrink-0 w-full lg:w-[514px] h-[300px] sm:h-[400px] md:h-[500px] relative order-first lg:order-last">
           <div className="relative h-full rounded-[20px] overflow-hidden">
             <img
-              className="absolute w-full h-full object-cover rounded-[20px]"
-              alt="Profile photo"
-              src="https://images.pexels.com/photos/1606609/pexels-photo-1606609.jpeg?auto=compress&cs=tinysrgb&w=800"
+              className="absolute w-full h-full object-cover object-[center_28%] rounded-[20px]"
+              alt="Douglas Camargo"
+              src="/images/fotoDouglas.webp"
             />
             <div className="w-full rounded-[20px] bg-gradient-to-r from-[#151515] via-[#313131]/50 to-transparent absolute h-full top-0 left-0" />
           </div>
