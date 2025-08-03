@@ -1,0 +1,1 @@
+export { LanguageDetector } from './LanguageDetector'; 
