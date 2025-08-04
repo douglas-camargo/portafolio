@@ -62,7 +62,7 @@ export const Projects = () => {
   
   const totalSlides = PROJECTS_DATA.length;
 
-  const titleClasses = `font-['Lato',Helvetica] font-extralight text-2xl md:text-4xl tracking-[0] leading-[normal] whitespace-nowrap mb-8 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`;
+  const titleClasses = `font-['Lato',Helvetica] font-light text-2xl md:text-4xl tracking-[0] leading-[normal] whitespace-nowrap mb-8 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`;
 
   const handleCarouselIndexChange = useCallback((index: number) => {
     setCurrentCarouselIndex(index);
