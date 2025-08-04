@@ -38,15 +38,16 @@ export const ProjectCard = ({
 
   return (
     <div 
-      className="
+      className={`
         w-full aspect-square
         sm:aspect-[4/3]
         md:aspect-[5/4] 
         lg:aspect-[600/386] lg:max-w-[600px]
         xl:max-w-[690px]
         2xl:max-w-[700px]
-        bg-[#292929] rounded-3xl relative overflow-hidden cursor-pointer mx-auto
-      "
+        bg-[#292929] rounded-3xl relative overflow-hidden mx-auto
+        ${hasAnimation && isHovered ? 'cursor-pointer' : ''}
+        `}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
