@@ -74,6 +74,8 @@ export const Carousel = ({
     }
   };
 
+  const duplicatedChildren = [...childrenArray, ...childrenArray, ...childrenArray];
+
   return (
     <div className={`relative ${className}`}>
       <div className="overflow-hidden">
@@ -82,11 +84,12 @@ export const Carousel = ({
             screenSize === 'mobile' || screenSize === 'tablet' ? 'gap-2' : 'gap-0.5'
           }`}
           style={{ 
-            transform: `translateX(-${currentIndex * getTranslatePercentage()}%)` 
+            transform: `translateX(-${(currentIndex + totalItems) * getTranslatePercentage()}%)` 
           }}
         >
-          {childrenArray.map((child, index) => {
-            const isLeftPosition = index === currentIndex;
+          {duplicatedChildren.map((child, index) => {
+            const originalIndex = index % totalItems;
+            const isLeftPosition = originalIndex === currentIndex;
 
             if (React.isValidElement(child)) {
               return (
@@ -97,7 +100,7 @@ export const Carousel = ({
                     screenSize === 'desktop' ? 'w-[calc(55%-1px)] mr-5' :
                     'w-[calc(60%-1px)]'
                   } ${
-                    index === currentIndex && hoveredImageIndex === index ? 'scale-105' : 'scale-100'
+                    originalIndex === currentIndex && hoveredImageIndex === index ? 'scale-105' : 'scale-100'
                   }`}
                   onMouseEnter={() => setHoveredImageIndex(index)}
                   onMouseLeave={() => setHoveredImageIndex(null)}
@@ -116,7 +119,7 @@ export const Carousel = ({
       <Button
         variant="secondary"
         size="lg"
-        className={`absolute top-1/2 transform -translate-y-1/2 w-[50px] h-[50px] md:w-[60px] md:h-[60px] z-10 left-2 2xl:left-4 transition-transform duration-300 ease-in-out ${
+        className={`absolute top-1/2 transform -translate-y-1/2 w-[50px] h-[50px] md:w-[60px] md:h-[60px] z-10 left-4 transition-transform duration-300 ease-in-out ${
           hoveredButton === 'prev' ? 'scale-110' : 'scale-100'
         }`}
         borderRadius="rounded-full"
