@@ -41,7 +41,7 @@ export const ProjectCard = ({
       className="
         w-full aspect-square
         sm:aspect-[4/3]
-        md:aspect-[5/4] md:max-w-[500px]
+        md:aspect-[5/4] 
         lg:aspect-[600/386] lg:max-w-[600px]
         xl:max-w-[690px]
         2xl:max-w-[700px]
@@ -62,7 +62,7 @@ export const ProjectCard = ({
       <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" />
       
       {tags.length > 0 && (
-        <div className={`absolute top-3 left-3.5 flex flex-wrap gap-2 md:gap-3 transition-all duration-300 ml-1 lg:ml-2 ${
+        <div className={`absolute top-3 left-5 md:left-3 lg:left-4 xl:left-7 2xl:left-2 flex flex-wrap gap-2 md:gap-3 transition-all duration-300 ml-1 lg:ml-2 ${
           hasAnimation && isHovered ? 'opacity-100' : 'opacity-0'
         }`}>
           {tags.map((tag) => (

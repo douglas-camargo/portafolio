@@ -25,7 +25,11 @@ export const Carousel = ({
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 768) {
+      if (window.innerWidth < 500) {
+        setScreenSize('mobile-small');
+      } else if (window.innerWidth < 600) {
+        setScreenSize('mobile-medium');
+      } else if (window.innerWidth < 768) {
         setScreenSize('mobile');
       } else if (window.innerWidth < 1024) {
         setScreenSize('tablet');
@@ -62,33 +66,34 @@ export const Carousel = ({
     updateIndex(newIndex);
   };
 
-  const getTranslatePercentage = () => {
-    if (screenSize === 'mobile') {
-      return 102.5;
-    } else if (screenSize === 'tablet') {
-      return 101.25;
-    } else if (screenSize === 'desktop') {
-      return 57;
+  const isMobile = screenSize === 'mobile-small' || screenSize === 'mobile-medium' || screenSize === 'mobile' || screenSize === 'tablet';
+
+  const duplicatedChildren = isMobile ? childrenArray : [...childrenArray, ...childrenArray, ...childrenArray];
+
+  const getTransformValue = () => {
+    if (isMobile) {
+      // Para móviles y tablets, cada slide ocupa 100% del ancho
+      return currentIndex * 100;
     } else {
-      return 60.05;
+      // Para desktop, usamos el sistema de triplicado
+      const translatePercentage = screenSize === '2xl' ? 60.05 : 57;
+      return (currentIndex + totalItems) * translatePercentage;
     }
   };
-
-  const duplicatedChildren = [...childrenArray, ...childrenArray, ...childrenArray];
 
   return (
     <div className={`relative ${className}`}>
       <div className="overflow-hidden">
         <div 
           className={`flex transition-transform duration-300 ease-in-out ${
-            screenSize === 'mobile' || screenSize === 'tablet' ? 'gap-2' : 'gap-0.5'
+            isMobile ? 'gap-0' : 'gap-0.5'
           }`}
           style={{ 
-            transform: `translateX(-${(currentIndex + totalItems) * getTranslatePercentage()}%)` 
+            transform: `translateX(-${getTransformValue()}%)` 
           }}
         >
           {duplicatedChildren.map((child, index) => {
-            const originalIndex = index % totalItems;
+            const originalIndex = isMobile ? index : index % totalItems;
             const isLeftPosition = originalIndex === currentIndex;
 
             if (React.isValidElement(child)) {
@@ -96,7 +101,7 @@ export const Carousel = ({
                 <div 
                   key={index} 
                   className={`flex-shrink-0 transition-transform duration-300 ease-in-out ${
-                    screenSize === 'mobile' || screenSize === 'tablet' ? 'w-full' : 
+                    isMobile ? 'w-full' : 
                     screenSize === 'desktop' ? 'w-[calc(55%-1px)] mr-5' :
                     'w-[calc(60%-1px)]'
                   } ${
@@ -119,7 +124,7 @@ export const Carousel = ({
       <Button
         variant="secondary"
         size="lg"
-        className={`absolute top-1/2 transform -translate-y-1/2 w-[50px] h-[50px] md:w-[60px] md:h-[60px] z-10 left-4 transition-transform duration-300 ease-in-out ${
+        className={`absolute top-1/2 transform -translate-y-1/2 w-[50px] h-[50px] md:w-[60px] md:h-[60px] z-10 left-2 sm:left-3 md:left-2 lg:left-4 transition-transform duration-300 ease-in-out ${
           hoveredButton === 'prev' ? 'scale-110' : 'scale-100'
         }`}
         borderRadius="rounded-full"
