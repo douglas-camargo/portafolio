@@ -41,7 +41,6 @@ export const Carousel = ({
     return () => window.removeEventListener('resize', handleResize);
   }, []);
   
-  // Usar índice externo si se proporciona, sino usar el interno
   const currentIndex = externalIndex !== undefined ? externalIndex : internalIndex;
   
   const updateIndex = (newIndex: number) => {
@@ -63,16 +62,15 @@ export const Carousel = ({
     updateIndex(newIndex);
   };
 
-  // Calcular el porcentaje de traslación basado en el tamaño de pantalla
   const getTranslatePercentage = () => {
     if (screenSize === 'mobile') {
-      return 102.5; // 1 imagen por vista en móvil y tablet
+      return 102.5;
     } else if (screenSize === 'tablet') {
       return 101.25;
     } else if (screenSize === 'desktop') {
-      return 55; // Ajustado para que la imagen se vea completa incluyendo el gap
+      return 57;
     } else {
-      return 60; // Ajustado para que la imagen se vea completa incluyendo el gap
+      return 60.05;
     }
   };
 
@@ -82,13 +80,12 @@ export const Carousel = ({
         <div 
           className={`flex transition-transform duration-300 ease-in-out ${
             screenSize === 'mobile' || screenSize === 'tablet' ? 'gap-2' : 'gap-0.5'
-          }`} // gap-0.5 = 2px para lg y superiores, gap-2 = 8px para móvil y tablet
+          }`}
           style={{ 
             transform: `translateX(-${currentIndex * getTranslatePercentage()}%)` 
           }}
         >
           {childrenArray.map((child, index) => {
-            // Determinar si esta imagen está en la posición izquierda
             const isLeftPosition = index === currentIndex;
 
             if (React.isValidElement(child)) {
@@ -97,10 +94,10 @@ export const Carousel = ({
                   key={index} 
                   className={`flex-shrink-0 transition-transform duration-300 ease-in-out ${
                     screenSize === 'mobile' || screenSize === 'tablet' ? 'w-full' : 
-                    screenSize === 'desktop' ? 'w-[calc(55%-1px)]' : // Ajustar por el gap de 2px
-                    'w-[calc(60%-1px)]' // Ajustar por el gap de 2px
+                    screenSize === 'desktop' ? 'w-[calc(55%-1px)] mr-5' :
+                    'w-[calc(60%-1px)]'
                   } ${
-                    hoveredImageIndex === index ? 'scale-105' : 'scale-100'
+                    index === currentIndex && hoveredImageIndex === index ? 'scale-105' : 'scale-100'
                   }`}
                   onMouseEnter={() => setHoveredImageIndex(index)}
                   onMouseLeave={() => setHoveredImageIndex(null)}
@@ -111,7 +108,6 @@ export const Carousel = ({
                 </div>
               );
             }
-            // If not a valid ReactElement, just render as is
             return child;
           })}
         </div>
@@ -120,7 +116,7 @@ export const Carousel = ({
       <Button
         variant="secondary"
         size="lg"
-        className={`absolute top-1/2 transform -translate-y-1/2 w-[50px] h-[50px] md:w-[60px] md:h-[60px] z-10 left-2 transition-transform duration-300 ease-in-out ${
+        className={`absolute top-1/2 transform -translate-y-1/2 w-[50px] h-[50px] md:w-[60px] md:h-[60px] z-10 left-4 transition-transform duration-300 ease-in-out ${
           hoveredButton === 'prev' ? 'scale-110' : 'scale-100'
         }`}
         borderRadius="rounded-full"

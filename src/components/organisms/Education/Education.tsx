@@ -67,12 +67,12 @@ export const Education = () => {
 
       <div className="mt-16">
         {educationData.map((item, index) => (
-          <div key={index} className="w-full">
+          <div key={index} className="w-full mb-8 md:mb-4">
             <Separator className={`w-full h-px my-4 ${theme === 'dark' ? 'bg-white/20' : 'bg-gray-300'}`} />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
               <div className="md:col-span-1">
-                <p className={`font-normal text-xs font-['Lato',Helvetica] ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>
+                <p className={`font-semibold text-xs font-['Lato',Helvetica] mb-4 md:mb-0 ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>
                   {item.title}
                 </p>
               </div>

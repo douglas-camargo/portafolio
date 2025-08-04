@@ -17,6 +17,7 @@ interface ProjectCardProps {
   pageUrl?: string;
   isLeftPosition?: boolean;
   currentIndex?: number;
+  hasAnimation?: boolean;
 }
 
 export const ProjectCard = ({ 
@@ -28,7 +29,8 @@ export const ProjectCard = ({
   githubUrl,
   pageUrl,
   isLeftPosition = false,
-  currentIndex
+  currentIndex,
+  hasAnimation = false
 }: ProjectCardProps) => {
   const { t } = useTranslation();
   const [isHovered, setIsHovered] = useState(false);
@@ -41,7 +43,7 @@ export const ProjectCard = ({
         sm:aspect-[4/3]
         md:aspect-[5/4] md:max-w-[500px]
         lg:aspect-[600/386] lg:max-w-[600px]
-        xl:max-w-[700px]
+        xl:max-w-[690px]
         2xl:max-w-[700px]
         bg-[#292929] rounded-3xl relative overflow-hidden cursor-pointer mx-auto
       "
@@ -53,15 +55,15 @@ export const ProjectCard = ({
         alt={`Project ${id}`}
         loading="lazy"
         className={`w-full h-full object-cover transition-all duration-500 ease-in-out ${
-          isHovered ? 'scale-110' : 'scale-100'
+          hasAnimation && isHovered ? 'scale-110' : 'scale-100'
         }`}
       />
       
       <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" />
       
       {tags.length > 0 && (
-        <div className={`absolute top-3 left-3.5 flex flex-wrap gap-2 md:gap-3 transition-all duration-300 ${
-          isHovered ? 'opacity-100' : 'opacity-0'
+        <div className={`absolute top-3 left-3.5 flex flex-wrap gap-2 md:gap-3 transition-all duration-300 ml-1 lg:ml-2 ${
+          hasAnimation && isHovered ? 'opacity-100' : 'opacity-0'
         }`}>
           {tags.map((tag) => (
             <span key={tag.id}>
@@ -88,9 +90,7 @@ export const ProjectCard = ({
           onMouseEnter={() => setIsViewButtonHovered(true)}
           onMouseLeave={() => setIsViewButtonHovered(false)}
           onClick={() => {
-            if (githubUrl) {
-              window.open(githubUrl, '_blank');
-            } else if (pageUrl) {
+            if (pageUrl) {
               window.open(pageUrl, '_blank');
             }
           }}
@@ -103,7 +103,7 @@ export const ProjectCard = ({
 
       {/* Botones CODE y PAGE en la parte inferior derecha */}
       <div className={`absolute bottom-3 right-3.5 flex gap-2 transition-opacity duration-300 ${
-        isHovered ? 'opacity-100' : 'opacity-0'
+        hasAnimation && isHovered ? 'opacity-100' : 'opacity-0'
       }`}>
         {githubUrl && (
           <button 
