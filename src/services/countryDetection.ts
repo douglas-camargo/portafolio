@@ -1,5 +1,5 @@
 // Lista de países hispanohablantes
-const SPANISH_SPEAKING_COUNTRIES = [
+const SPANISH_SPEAKING_COUNTRIES = new Set([
   'ES', // España
   'MX', // México
   'AR', // Argentina
@@ -20,22 +20,31 @@ const SPANISH_SPEAKING_COUNTRIES = [
   'PA', // Panamá
   'UY', // Uruguay
   'GQ', // Guinea Ecuatorial
-  // Removido 'US' y 'CA' para que usen inglés por defecto
-];
+]);
 
 export interface CountryInfo {
   country: string;
   language: 'es' | 'en';
 }
 
+// Cache para evitar múltiples llamadas a la API
+let cachedCountryInfo: CountryInfo | null = null;
+
 /**
  * Detecta el país del usuario y determina el idioma por defecto
  * @returns Promise<CountryInfo> - Información del país e idioma recomendado
  */
 export const detectUserCountry = async (): Promise<CountryInfo> => {
+  // Retornar cache si existe
+  if (cachedCountryInfo) {
+    return cachedCountryInfo;
+  }
+
   try {
     // Usar una API que funcione tanto en desarrollo como en producción
-    const response = await fetch('https://api.ipify.org?format=json');
+    const response = await fetch('https://api.ipify.org?format=json', {
+      signal: AbortSignal.timeout(5000), // Timeout de 5 segundos
+    });
     
     if (!response.ok) {
       throw new Error('No se pudo obtener la IP');
@@ -45,7 +54,9 @@ export const detectUserCountry = async (): Promise<CountryInfo> => {
     const ip = ipData.ip;
 
     // Usar una segunda API para obtener información del país
-    const countryResponse = await fetch(`https://ipapi.co/${ip}/json/`);
+    const countryResponse = await fetch(`https://ipapi.co/${ip}/json/`, {
+      signal: AbortSignal.timeout(5000), // Timeout de 5 segundos
+    });
     
     if (!countryResponse.ok) {
       throw new Error('No se pudo obtener información del país');
@@ -55,19 +66,28 @@ export const detectUserCountry = async (): Promise<CountryInfo> => {
     const countryCode = data.country_code || 'US';
     
     // Determina el idioma basado en el país
-    const isSpanishCountry = SPANISH_SPEAKING_COUNTRIES.includes(countryCode);
-    const language = isSpanishCountry ? 'es' : 'en';
+    const language = SPANISH_SPEAKING_COUNTRIES.has(countryCode) ? 'es' : 'en';
     
-    return {
+    const result: CountryInfo = {
       country: countryCode,
-      language
+      language: language as 'es' | 'en'
     };
+
+    // Guardar en cache
+    cachedCountryInfo = result;
+    
+    return result;
   } catch (error) {
     // Fallback: usar inglés por defecto si hay error
-    return {
+    const fallback = {
       country: 'US',
-      language: 'en'
+      language: 'en' as const
     };
+    
+    // Guardar fallback en cache para evitar reintentos
+    cachedCountryInfo = fallback;
+    
+    return fallback;
   }
 };
 
@@ -83,16 +103,24 @@ export const getBrowserLanguage = (): 'es' | 'en' => {
 };
 
 /**
+ * Detecta si es un bot de Google para SEO
+ * @returns boolean
+ */
+const isGoogleBot = (): boolean => {
+  const userAgent = navigator.userAgent.toLowerCase();
+  return userAgent.includes('googlebot') || 
+         userAgent.includes('bot') ||
+         userAgent.includes('crawler') ||
+         userAgent.includes('spider');
+};
+
+/**
  * Función principal para determinar el idioma por defecto
  * @returns Promise<'es' | 'en'>
  */
 export const getDefaultLanguage = async (): Promise<'es' | 'en'> => {
   // Detectar si es un bot de Google para SEO
-  const isGoogleBot = navigator.userAgent.includes('Googlebot') || 
-                     navigator.userAgent.includes('bot') ||
-                     navigator.userAgent.includes('crawler');
-  
-  if (isGoogleBot) {
+  if (isGoogleBot()) {
     return 'en';
   }
   
@@ -100,7 +128,6 @@ export const getDefaultLanguage = async (): Promise<'es' | 'en'> => {
     const countryInfo = await detectUserCountry();
     return countryInfo.language;
   } catch (error) {
-    const browserLang = getBrowserLanguage();
-    return browserLang;
+    return getBrowserLanguage();
   }
 }; 

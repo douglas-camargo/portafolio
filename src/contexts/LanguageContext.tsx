@@ -1,6 +1,5 @@
-import React, { createContext, useContext, useState, ReactNode, useMemo, useCallback, useEffect } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { updateLanguageFromCountry } from '../i18n';
 
 interface LanguageContextType {
   currentLanguage: string;
@@ -26,24 +25,20 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   const [currentLanguage, setCurrentLanguage] = useState('en');
   const [hasDetected, setHasDetected] = useState(false);
 
-  // Detectar el idioma por defecto solo una vez al cargar
   useEffect(() => {
     const detectLanguage = async () => {
-      if (hasDetected) return; // Solo detectar una vez
+      if (hasDetected) return;
       
       try {
-        // Importar la función de detección de país
         const { detectUserCountry } = await import('../services/countryDetection');
         const countryInfo = await detectUserCountry();
         
-        // Cambiar el idioma directamente basado en el país detectado
         if (countryInfo.language !== currentLanguage) {
           i18n.changeLanguage(countryInfo.language);
           setCurrentLanguage(countryInfo.language);
         }
-        setHasDetected(true); // Marcar como detectado
+        setHasDetected(true);
       } catch (error) {
-        // Silenciosamente usar inglés por defecto
         setHasDetected(true);
       }
     };
@@ -56,13 +51,8 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     setCurrentLanguage(language);
   }, [i18n]);
 
-  const contextValue = useMemo(() => ({
-    currentLanguage,
-    changeLanguage
-  }), [currentLanguage, changeLanguage]);
-
   return (
-    <LanguageContext.Provider value={contextValue}>
+    <LanguageContext.Provider value={{ currentLanguage, changeLanguage }}>
       {children}
     </LanguageContext.Provider>
   );

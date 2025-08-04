@@ -7,12 +7,17 @@ import { Education } from '../../organisms/Education/Education';
 import { Skills } from '../../organisms/Skills/Skills';
 import { Contact } from '../../organisms/Contact/Contact';
 
+const TRANSITION_CLASSES = 'transition-colors duration-300';
+
 export const Portfolio = () => {
   const { theme } = useTheme();
   
+  const bgClass = theme === 'dark' ? 'bg-[#151515]' : 'bg-gray-50';
+  const themeClasses = `${bgClass} ${TRANSITION_CLASSES}`;
+  
   return (
-    <div className={`${theme === 'dark' ? 'bg-[#151515]' : 'bg-gray-50'} flex flex-row justify-center w-full min-h-screen transition-colors duration-300`}>
-      <div className={`${theme === 'dark' ? 'bg-[#151515]' : 'bg-gray-50'} overflow-hidden w-full max-w-[1366px] relative transition-colors duration-300`}>
+    <div className={`${themeClasses} flex flex-row justify-center w-full min-h-screen`}>
+      <div className={`${themeClasses} overflow-hidden w-full max-w-[1366px] relative`}>
         <Header />
         <Hero />
         <Projects />

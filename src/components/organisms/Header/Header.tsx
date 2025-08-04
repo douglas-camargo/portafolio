@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback, use } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Navigation } from '../../molecules/Navigation/Navigation';
 import { useLanguage } from '../../../contexts/LanguageContext';
@@ -12,12 +12,12 @@ export const Header = () => {
   const { currentLanguage, changeLanguage } = useLanguage();
   const { theme, toggleTheme } = useTheme();
   
-  const navItems = useMemo(() => [
+  const navItems = [
     { label: t('portfolio'), active: activeSection === 'portfolio', id: 'portfolio' },
     { label: t('education'), active: activeSection === 'education', id: 'education' },
     { label: t('skills'), active: activeSection === 'skills', id: 'skills' },
     { label: t('contacts'), active: activeSection === 'contacts', id: 'contacts' },
-  ], [t, activeSection]);
+  ];
 
   useEffect(() => {
     const sections = ['about', 'portfolio', 'education', 'skills', 'contacts'];
@@ -52,9 +52,7 @@ export const Header = () => {
     handleScroll();
   
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-  
-
+  }, [activeSection]);
 
   const handleLanguageChange = useCallback((language: string) => {
     changeLanguage(language);
@@ -76,22 +74,41 @@ export const Header = () => {
     setIsMenuOpen(false);
   }, []);
 
+  const headerClasses = `fixed top-0 left-0 right-0 z-50 flex w-full items-start justify-between py-4 px-4 md:px-20 ${theme === 'dark' ? 'bg-[#151515]/95' : 'bg-white/95'} backdrop-blur-sm border-b ${theme === 'dark' ? 'border-white/10' : 'border-gray-200'} transition-colors duration-300`;
+
+  const aboutButtonClasses = `relative mt-[-1.00px] font-['Lato',Helvetica] font-semibold text-xs tracking-[0] leading-[normal] cursor-pointer transition-colors bg-transparent border-none ${
+    activeSection === 'about' 
+      ? theme === 'dark' ? 'text-white' : 'text-gray-800'
+      : theme === 'dark' ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-800'
+  }`;
+
+  const mobileMenuButtonClasses = `md:hidden ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`;
+
+  const mobileMenuClasses = `absolute top-full left-0 right-0 p-4 md:hidden z-50 ${theme === 'dark' ? 'bg-[#151515]' : 'bg-white border-t border-gray-200'}`;
+
+  const themeToggleClasses = `rounded transition-colors hover:bg-opacity-20 ${theme === 'dark' ? 'text-white hover:bg-white' : 'text-gray-800 hover:bg-gray-200'}`;
+
+  const getLanguageButtonClasses = (language: string) => {
+    const isActive = currentLanguage === language;
+    return `px-2 rounded transition-colors ${
+      isActive 
+        ? theme === 'dark' ? 'text-white bg-white bg-opacity-20' : 'text-gray-800 bg-gray-200'
+        : theme === 'dark' ? 'text-[#6d6d6d] hover:text-white' : 'text-gray-600 hover:text-gray-800'
+    }`;
+  };
+
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 flex w-full items-start justify-between py-4 px-4 md:px-20 ${theme === 'dark' ? 'bg-[#151515]/95' : 'bg-white/95'} backdrop-blur-sm border-b ${theme === 'dark' ? 'border-white/10' : 'border-gray-200'} transition-colors duration-300`}>
+    <header className={headerClasses}>
         <button 
           onClick={() => scrollToSection('about')}
-          className={`relative mt-[-1.00px] font-['Lato',Helvetica] font-semibold text-xs tracking-[0] leading-[normal] cursor-pointer transition-colors bg-transparent border-none ${
-            activeSection === 'about' 
-              ? theme === 'dark' ? 'text-white' : 'text-gray-800'
-              : theme === 'dark' ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-800'
-          }`}
+          className={aboutButtonClasses}
         >
           {t('about')}
         </button>
 
       {/* Mobile menu button */}
       <button 
-        className={`md:hidden ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}
+        className={mobileMenuButtonClasses}
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
         <div className="w-6 h-6 flex flex-col justify-center items-center">
@@ -108,7 +125,7 @@ export const Header = () => {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className={`absolute top-full left-0 right-0 p-4 md:hidden z-50 ${theme === 'dark' ? 'bg-[#151515]' : 'bg-white border-t border-gray-200'}`}>
+        <div className={mobileMenuClasses}>
           <Navigation items={navItems} onItemClick={scrollToSection} />
         </div>
       )}
@@ -118,7 +135,7 @@ export const Header = () => {
         {/* Theme Toggle */}
         <button
           onClick={toggleTheme}
-          className={`rounded transition-colors hover:bg-opacity-20 ${theme === 'dark' ? 'text-white hover:bg-white' : 'text-gray-800 hover:bg-gray-200'}`}
+          className={themeToggleClasses}
           title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
         >
           {theme === 'dark' ? (
@@ -132,28 +149,18 @@ export const Header = () => {
         <div className="flex items-start space-x-1">
           <button
             onClick={() => handleLanguageChange('en')}
-            className={`px-2 rounded transition-colors ${
-              currentLanguage === 'en' 
-                ? theme === 'dark' ? 'text-white bg-white bg-opacity-20' : 'text-gray-800 bg-gray-200'
-                : theme === 'dark' ? 'text-[#6d6d6d] hover:text-white' : 'text-gray-600 hover:text-gray-800'
-            }`}
+            className={getLanguageButtonClasses('en')}
           >
             {t('language.en')}
           </button>
           <span className={theme === 'dark' ? 'text-[#6d6d6d]' : 'text-gray-600'}>/</span>
           <button
             onClick={() => handleLanguageChange('es')}
-            className={`px-2 rounded transition-colors ${
-              currentLanguage === 'es' 
-                ? theme === 'dark' ? 'text-white bg-white bg-opacity-20' : 'text-gray-800 bg-gray-200'
-                : theme === 'dark' ? 'text-[#6d6d6d] hover:text-white' : 'text-gray-600 hover:text-gray-800'
-            }`}
+            className={getLanguageButtonClasses('es')}
           >
             {t('language.es')}
           </button>
         </div>
-        
-
       </div>
     </header>
   );
