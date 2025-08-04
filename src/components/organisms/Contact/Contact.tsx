@@ -1,18 +1,25 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../../contexts/ThemeContext';
 import { Button } from '../../atoms/Button/Button';
 import { ArrowUp } from '../../icons';
 
+const CONTACT_INFO = {
+  email: 'DOUGLAS.CAMARGO.DEV@GMAIL.COM',
+  phone: '+58 424 1232755',
+};
+
+const SOCIAL_LINKS = [
+  { name: 'WHATSAPP' },
+  { name: 'GITHUB' },
+  { name: 'LINKEDIN' },
+  { name: 'GMAIL' },
+];
+
 export const Contact = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
   const [activeButton, setActiveButton] = useState<string | null>(null);
-  
-  const contactInfo = useMemo(() => ({
-    email: 'DOUGLAS.CAMARGO.DEV@GMAIL.COM',
-    phone: '+58 424 1232755',
-  }), []);
 
   const handleWhatsAppContact = useCallback(() => {
     const numero = '584241232755';
@@ -55,13 +62,6 @@ export const Contact = () => {
     }
   }, [handleWhatsAppContact]);
 
-  const socialLinks = useMemo(() => [
-    { name: 'WHATSAPP' },
-    { name: 'GITHUB' },
-    { name: 'LINKEDIN' },
-    { name: 'GMAIL' },
-  ], []);
-
   return (
     <section id="contacts" className="w-full py-16 px-4 md:px-20">
       <div className="flex flex-col items-center">
@@ -70,7 +70,7 @@ export const Contact = () => {
         </div>
 
         <h2 className={`font-['Oswald',Helvetica] font-medium text-2xl md:text-4xl lg:text-[64px] leading-tight md:leading-[120px] mb-8 md:mb-16 text-center ${theme === 'dark' ? 'text-[#555555]' : 'text-gray-700'}`}>
-          {contactInfo.email}
+          {CONTACT_INFO.email}
         </h2>
 
         <div className="flex flex-col md:flex-row justify-center md:justify-between items-center md:items-start w-full gap-8">
@@ -79,12 +79,12 @@ export const Contact = () => {
               {t('contact.phone')}
             </div>
             <div className={`font-['Lato',Helvetica] font-normal text-xs ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
-              {contactInfo.phone}
+              {CONTACT_INFO.phone}
             </div>
           </div>
 
           <div className="flex flex-col md:flex-row gap-3 md:gap-5">
-            {socialLinks.map((link, index) => (
+            {SOCIAL_LINKS.map((link, index) => (
               <div key={index}>
                 <Button
                   variant={activeButton === link.name ? 'secondary' : 'outline'}

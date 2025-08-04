@@ -2,7 +2,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../../contexts/ThemeContext';
 import { Button } from '../../atoms/Button/Button';
-import { Card, CardContent } from '../../atoms/Card/Card';
+import { Card } from '../../atoms/Card/Card';
+import { CardContent } from '../../atoms/CardContent/CardContent';
 
 export const Hero = () => {
   const { t, i18n } = useTranslation();

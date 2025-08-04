@@ -16,14 +16,13 @@ export default defineConfig({
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
-          i18n: ['react-i18next', 'i18next', 'i18next-browser-languagedetector'],
         },
       },
     },
     chunkSizeWarningLimit: 1000,
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-i18next'],
+    include: ['react', 'react-dom'],
   },
   esbuild: {
     jsx: 'automatic',

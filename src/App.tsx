@@ -4,7 +4,7 @@ import { LanguageProvider } from './contexts/LanguageContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { LanguageDetector } from './components/atoms/LanguageDetector/LanguageDetector';
 
-function App() {
+const App = () => {
   return (
     <ThemeProvider>
       <LanguageProvider>
@@ -14,6 +14,6 @@ function App() {
       </LanguageProvider>
     </ThemeProvider>
   );
-}
+};
 
 export default App;

@@ -12,6 +12,14 @@ interface ButtonProps {
   onMouseLeave?: () => void;
 }
 
+const BASE_CLASSES = 'font-semibold transition-colors duration-200 cursor-pointer inline-flex items-center justify-center';
+
+const SIZE_CLASSES = {
+  sm: 'px-4 py-2 text-sm h-[34px]',
+  md: 'px-6 py-3 text-base h-[46px]',
+  lg: 'px-8 py-4 text-lg h-[61px]'
+} as const;
+
 export const Button = ({
   children,
   variant = 'primary',
@@ -23,7 +31,6 @@ export const Button = ({
   onMouseLeave
 }: ButtonProps) => {
   const { theme } = useTheme();
-  const baseClasses = 'font-semibold transition-colors duration-200 cursor-pointer inline-flex items-center justify-center';
   
   const variantClasses = {
     primary: 'bg-[#d9d9d9] text-[#151515] hover:bg-[#c0c0c0]',
@@ -33,15 +40,11 @@ export const Button = ({
       : 'border-2 border-gray-800 text-gray-800 hover:bg-gray-800/10'
   };
   
-  const sizeClasses = {
-    sm: 'px-4 py-2 text-sm h-[34px]',
-    md: 'px-6 py-3 text-base h-[46px]',
-    lg: 'px-8 py-4 text-lg h-[61px]'
-  };
+  const buttonClasses = `${variantClasses[variant]} ${SIZE_CLASSES[size]} ${className} ${BASE_CLASSES} ${borderRadius || 'rounded-lg'}`;
   
   return (
     <button
-      className={`${variantClasses[variant]} ${sizeClasses[size]} ${className} ${baseClasses} ${borderRadius ? borderRadius : 'rounded-lg'}`}
+      className={buttonClasses}
       onClick={onClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}

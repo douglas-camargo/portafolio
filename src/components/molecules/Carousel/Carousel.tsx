@@ -19,31 +19,23 @@ export const Carousel = ({
   const childrenArray = React.Children.toArray(children);
   const totalItems = childrenArray.length;
 
-  const [internalIndex, setInternalIndex] = useState(totalItems); // inicio en el grupo del medio
-  const [isTransitioning, setIsTransitioning] = useState(false); // inicia sin transición en curso
+  const [internalIndex, setInternalIndex] = useState(totalItems);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [screenSize, setScreenSize] = useState('desktop');
-  const [hoveredImageIndex, setHoveredImageIndex] = useState<number | null>(null);
   const [hoveredButton, setHoveredButton] = useState<'prev' | 'next' | null>(null);
-  const [slideDirection, setSlideDirection] = useState<'left' | 'right' | null>(null);
 
   // Touch/swipe functionality
   const [touchStart, setTouchStart] = useState<number | null>(null);
-  const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
 
   const currentIndex = externalIndex !== undefined ? externalIndex : internalIndex;
-
   const duplicatedChildren = [...childrenArray, ...childrenArray, ...childrenArray];
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 500) {
-        setScreenSize('mobile-small');
-      } else if (window.innerWidth < 600) {
-        setScreenSize('mobile-medium');
-      } else if (window.innerWidth < 768) {
+      if (window.innerWidth < 768) {
         setScreenSize('mobile');
       } else if (window.innerWidth < 1024) {
         setScreenSize('tablet');
@@ -59,20 +51,18 @@ export const Carousel = ({
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const isMobile = ['mobile-small', 'mobile-medium', 'mobile', 'tablet'].includes(screenSize);
+  const isMobile = ['mobile', 'tablet'].includes(screenSize);
 
-  const updateIndex = (newIndex: number, direction: 'left' | 'right') => {
-    if (isTransitioning) return; // evitar múltiples clics rápidos
+  const updateIndex = (newIndex: number) => {
+    if (isTransitioning) return;
     
-    setSlideDirection(direction);
     setIsTransitioning(true);
     
-    // Asegurar que el índice esté dentro del rango válido
     let adjustedIndex = newIndex;
     if (newIndex < 0) {
-      adjustedIndex = totalItems * 2 - 1; // Ir al último del grupo anterior
+      adjustedIndex = totalItems * 2 - 1;
     } else if (newIndex >= totalItems * 3) {
-      adjustedIndex = totalItems; // Ir al primero del grupo medio
+      adjustedIndex = totalItems;
     }
     
     if (externalIndex !== undefined) {
@@ -80,22 +70,16 @@ export const Carousel = ({
     } else {
       setInternalIndex(adjustedIndex);
     }
-    onIndexChange?.(adjustedIndex % totalItems); // para los dots
+    onIndexChange?.(adjustedIndex % totalItems);
   };
 
-  const goToNext = () => {
-    updateIndex(currentIndex + 1, 'right');
-  };
-
-  const goToPrevious = () => {
-    updateIndex(currentIndex - 1, 'left');
-  };
+  const goToNext = () => updateIndex(currentIndex + 1);
+  const goToPrevious = () => updateIndex(currentIndex - 1);
 
   // Touch event handlers
   const handleTouchStart = (e: React.TouchEvent) => {
     if (!isMobile) return;
     setTouchStart(e.targetTouches[0].clientX);
-    setTouchEnd(null);
     setIsDragging(true);
     setDragOffset(0);
   };
@@ -106,27 +90,22 @@ export const Carousel = ({
     const currentTouch = e.targetTouches[0].clientX;
     const diff = touchStart - currentTouch;
     setDragOffset(diff);
-    
-    // Prevent default to avoid page scroll
     e.preventDefault();
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
     if (!isMobile || !touchStart) return;
     
-    setTouchEnd(e.changedTouches[0].clientX);
     setIsDragging(false);
     setDragOffset(0);
     
     const diff = touchStart - e.changedTouches[0].clientX;
-    const minSwipeDistance = 50; // Minimum distance for swipe
+    const minSwipeDistance = 50;
     
     if (Math.abs(diff) > minSwipeDistance) {
       if (diff > 0) {
-        // Swipe left - go to next
         goToNext();
       } else {
-        // Swipe right - go to previous
         goToPrevious();
       }
     }
@@ -139,7 +118,6 @@ export const Carousel = ({
       let timeoutId: NodeJS.Timeout;
       
       if (currentIndex >= totalItems * 2) {
-        // Reset al inicio cuando se va muy hacia adelante
         timeoutId = setTimeout(() => {
           setIsTransitioning(false);
           const resetIndex = totalItems;
@@ -151,7 +129,6 @@ export const Carousel = ({
           onIndexChange?.(resetIndex % totalItems);
         }, 700);
       } else if (currentIndex < totalItems) {
-        // Reset al final cuando se va muy hacia atrás
         timeoutId = setTimeout(() => {
           setIsTransitioning(false);
           const resetIndex = totalItems + (currentIndex % totalItems);
@@ -163,7 +140,6 @@ export const Carousel = ({
           onIndexChange?.(resetIndex % totalItems);
         }, 700);
       } else {
-        // Estado normal - solo habilitar clics
         timeoutId = setTimeout(() => {
           setIsTransitioning(false);
         }, 700);
@@ -179,18 +155,12 @@ export const Carousel = ({
     const percentage = isMobile ? 100 : (screenSize === '2xl' ? 60.05 : 57);
     const baseTransform = currentIndex * percentage;
     
-    // Add drag offset for mobile swipe feedback
     if (isMobile && isDragging && dragOffset !== 0) {
       const dragPercentage = (dragOffset / (carouselRef.current?.offsetWidth || 1)) * 100;
       return baseTransform + dragPercentage;
     }
     
     return baseTransform;
-  };
-
-  const getSlideAnimation = () => {
-    // Usar la misma curva de easing para ambas direcciones
-    return 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
   };
 
   return (
@@ -207,7 +177,7 @@ export const Carousel = ({
           className={`flex ${isMobile ? 'gap-0' : 'gap-0.5'}`}
           style={{ 
             transform: `translateX(-${getTransformValue()}%)`,
-            transition: isTransitioning && !isDragging ? getSlideAnimation() : 'none',
+            transition: isTransitioning && !isDragging ? 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)' : 'none',
             willChange: 'transform',
           }}
         >
@@ -227,25 +197,15 @@ export const Carousel = ({
                       : screenSize === 'desktop' 
                         ? 'w-[calc(55%-1px)] mr-5' 
                         : 'w-[calc(60%-1px)]'
-                  } ${
-                    isActive && hoveredImageIndex === index 
-                      ? 'scale-105' 
-                      : isActive
-                      ? 'scale-100'
-                      : isAdjacent
-                      ? 'scale-95 opacity-80'
-                      : 'scale-90 opacity-60'
                   }`}
-                  onMouseEnter={() => setHoveredImageIndex(index)}
-                  onMouseLeave={() => setHoveredImageIndex(null)}
                   style={{
                     transform: isActive 
-                      ? `scale(${hoveredImageIndex === index ? 1.05 : 1}) ${hoveredImageIndex === index ? 'translateY(-3px)' : 'translateY(0)'}`
+                      ? 'scale(1)'
                       : isAdjacent
-                      ? `scale(0.95)`
-                      : `scale(0.9)`,
+                      ? 'scale(0.95)'
+                      : 'scale(0.9)',
                     transition: isActive 
-                      ? `all 0.5s cubic-bezier(0.4, 0, 0.2, 1)`
+                      ? 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)'
                       : 'none',
                     filter: isActive ? 'none' : 'brightness(0.8)',
                     opacity: isActive ? 1 : isAdjacent ? 0.8 : 0.6,

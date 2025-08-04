@@ -5,9 +5,11 @@ interface BadgeProps {
   className?: string;
 }
 
+const BASE_CLASSES = 'inline-flex items-center px-3 py-1 rounded-full text-xs font-normal';
+
 export const Badge = ({ children, className = '' }: BadgeProps) => {
   return (
-    <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-normal ${className}`}>
+    <span className={`${BASE_CLASSES} ${className}`}>
       {children}
     </span>
   );
