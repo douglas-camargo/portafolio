@@ -116,7 +116,7 @@ export const Carousel = ({
       <Button
         variant="secondary"
         size="lg"
-        className={`absolute top-1/2 transform -translate-y-1/2 w-[50px] h-[50px] md:w-[60px] md:h-[60px] z-10 left-4 transition-transform duration-300 ease-in-out ${
+        className={`absolute top-1/2 transform -translate-y-1/2 w-[50px] h-[50px] md:w-[60px] md:h-[60px] z-10 left-2 2xl:left-4 transition-transform duration-300 ease-in-out ${
           hoveredButton === 'prev' ? 'scale-110' : 'scale-100'
         }`}
         borderRadius="rounded-full"
