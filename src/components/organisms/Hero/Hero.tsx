@@ -55,7 +55,7 @@ export const Hero = () => {
       <div className="w-full flex flex-col lg:flex-row items-start gap-8 mb-14">
         {/* Left side - Text content */}
         <div className="flex-1 max-w-full lg:max-w-[670px] text-center lg:text-left">
-          <div className={`font-['Lato',Helvetica] font-extralight text-lg sm:text-lg md:text-3xl lg:text-4xl tracking-[0] leading-normal mb-4 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
+          <div className={`font-['Lato',Helvetica] font-light text-lg sm:text-lg md:text-3xl lg:text-4xl tracking-[0] leading-normal mb-4 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
             {t('hero.title')}
           </div>
 

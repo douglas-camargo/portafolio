@@ -56,7 +56,7 @@ export const Skills = () => {
 
       <div className="flex flex-col space-y-8">
         <div className="flex flex-col space-y-4">
-          <h2 className={`mb-6 font-extralight text-2xl md:text-4xl font-['Lato',Helvetica] ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
+          <h2 className={`mb-6 font-light text-2xl md:text-4xl font-['Lato',Helvetica] ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
             {t('skillsContent.technologies')}
           </h2>
 
