@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback, use } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../../contexts/ThemeContext';
 import { Button } from '../../atoms/Button/Button';
@@ -73,8 +73,8 @@ export const Contact = () => {
           {contactInfo.email}
         </h2>
 
-        <div className="flex flex-col md:flex-row justify-between items-start w-full gap-8">
-          <div className="flex flex-col -mt-0.5">
+        <div className="flex flex-col md:flex-row justify-center md:justify-between items-center md:items-start w-full gap-8">
+          <div className="flex flex-col -mt-0.5 text-center md:text-left">
             <div className={`font-['Lato',Helvetica] font-semibold text-sm mb-2 ${theme === 'dark' ? 'text-[#555555]' : 'text-gray-700'}`}>
               {t('contact.phone')}
             </div>
@@ -110,7 +110,7 @@ export const Contact = () => {
                 });
               }
             }}
-            className="flex items-center cursor-pointer justify-center md:justify-start bg-transparent border-none -mt-0.5"
+            className="flex items-center cursor-pointer justify-center bg-transparent border-none -mt-0.5"
           >
             <span className={`font-['Lato',Helvetica] font-semibold text-sm mr-1 ${theme === 'dark' ? 'text-[#555555]' : 'text-gray-700'}`}>
               {t('contact.backToTop')}

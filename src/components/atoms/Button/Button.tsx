@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTheme } from '../../../contexts/ThemeContext';
 
 interface ButtonProps {
   children: React.ReactNode;
@@ -21,12 +22,15 @@ export const Button = ({
   onMouseEnter,
   onMouseLeave
 }: ButtonProps) => {
+  const { theme } = useTheme();
   const baseClasses = 'font-semibold transition-colors duration-200 cursor-pointer inline-flex items-center justify-center';
   
   const variantClasses = {
     primary: 'bg-[#d9d9d9] text-[#151515] hover:bg-[#c0c0c0]',
     secondary: 'bg-[#d9d9d9] text-black hover:bg-[#c9c9c9]',
-    outline: 'border-2 border-white text-white hover:bg-white/10'
+    outline: theme === 'dark' 
+      ? 'border-2 border-white text-white hover:bg-white/10'
+      : 'border-2 border-gray-800 text-gray-800 hover:bg-gray-800/10'
   };
   
   const sizeClasses = {

@@ -31,7 +31,7 @@ export const Projects = () => {
         { id: 2, name: 'TAILWINDCSS' },
       ],
       image: '/images/pokemon-explorer.webp',
-      showViewButton: true,
+      showViewButton: false,
       githubUrl: 'https://github.com/douglas-camargo/Pokemon-explorer',
       pageUrl: 'https://pokemon-explorer-seven.vercel.app/',
     },
@@ -43,7 +43,7 @@ export const Projects = () => {
         { id: 3, name: 'JAVASCRIPT' },
       ],
       image: '/images/hsectechnology.webp',
-      showViewButton: true,
+      showViewButton: false,
       githubUrl: '', // Sin botón CODE
       pageUrl: 'https://hsectechnology.com/index.html',
     },
@@ -55,7 +55,7 @@ export const Projects = () => {
         { id: 3, name: 'CSS' },
       ],
       image: '/images/proyecto-seguridad.webp',
-      showViewButton: true,
+      showViewButton: false,
       githubUrl: '', // Sin botón CODE
       pageUrl: 'https://quizzical-wozniak-484579.netlify.app/',
     },
@@ -83,15 +83,16 @@ export const Projects = () => {
         onIndexChange={handleCarouselIndexChange}
         onGoToIndex={goToSlide}
       >
-        {projects.map((project) => (
+        {projects.map((project, index) => (
           <ProjectCard
             key={project.id}
             id={project.id}
             tags={project.tags}
             image={project.image}
-            showViewButton={project.showViewButton}
+            showViewButton={index === currentCarouselIndex}
             githubUrl={project.githubUrl}
             pageUrl={project.pageUrl}
+            hasAnimation={index === currentCarouselIndex}
           />
         ))}
       </Carousel>

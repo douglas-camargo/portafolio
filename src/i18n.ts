@@ -35,9 +35,9 @@ const resources = {
       // Education Section
       educationSection: {
         title: 'EDUCATION',
-        university: 'University (2016-2024)',
-        completedCourses: 'Completed courses (2019-present)',
-        selfEducation: 'Self education (2020-present)',
+        university: 'UNIVERSITY (2016-2024)',
+        completedCourses: 'COMPLETED COURSES (2019-PRESENT)',
+        selfEducation: 'SELF EDUCATION (2020-PRESENT)',
         languages: 'LANGUAGES',
         languagesDetails: 'Spanish-native / English-basic',
         description: 'I am a Computer Engineer and have complemented my education with certified courses focused on frontend development, including HTML, CSS, React.js, and version control with Git, through platforms such as EDteam and Google. In addition, I have gained practical knowledge in technologies like Next.js, Tailwind CSS, Bootstrap, and TypeScript through self-learning and hands-on project experience.'
@@ -101,9 +101,9 @@ const resources = {
       // Education Section
       educationSection: {
         title: 'EDUCACIÓN',
-        university: 'Universidad (2016-2024)',
-        completedCourses: 'Cursos completados (2019-actualidad)',
-        selfEducation: 'Autoeducación (2020-actualidad)',
+        university: 'UNIVERSIDAD (2016-2024)',
+        completedCourses: 'CURSOS COMPLETADOS (2019-ACTUALIDAD)',
+        selfEducation: 'AUTOEDUCACIÓN (2020-ACTUALIDAD)',
         languages: 'IDIOMAS',
         languagesDetails: 'Español-nativo / Inglés-básico',
         description: 'Soy Ingeniero en Informática y he complementado mi formación con diversos cursos certificados enfocados en el desarrollo frontend, incluyendo HTML, CSS, React.js y control de versiones con Git, a través de plataformas como EDteam y Google. Además, he adquirido conocimientos prácticos en tecnologías como Next.js, Tailwind CSS, Bootstrap y TypeScript mediante aprendizaje autodidacta y experiencia en proyectos reales.'

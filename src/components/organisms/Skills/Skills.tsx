@@ -1,4 +1,4 @@
-import React, { useMemo, use } from 'react';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../../contexts/ThemeContext';
 import { Card, CardContent } from '../../atoms/Card/Card';
@@ -98,11 +98,11 @@ export const Skills = () => {
         <Card className="bg-transparent border-none">
           <CardContent className="p-0 bg-transparent">
             {skillCategories.map((category, index) => (
-              <div key={index} className="mb-8">
+              <div key={index} className="mb-8 md:mb-4">
                 <Separator className={`w-full mb-4 ${theme === 'dark' ? 'bg-white/20' : 'bg-gray-300'}`} />
                 <div className="flex flex-col md:flex-row">
-                  <div className="w-full md:w-1/2 mb-4 md:mb-0">
-                    <span className={`font-normal text-xs font-['Lato',Helvetica] ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>
+                  <div className="w-full md:w-1/2 mb-8 md:mb-0">
+                    <span className={`font-semibold text-xs font-['Lato',Helvetica] mb-4 md:mb-0 ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>
                       {category.title}
                     </span>
                   </div>

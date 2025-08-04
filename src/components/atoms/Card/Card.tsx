@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTheme } from '../../../contexts/ThemeContext';
 
 interface CardProps {
   children: React.ReactNode;
@@ -6,8 +7,10 @@ interface CardProps {
 }
 
 export const Card = ({ children, className = '' }: CardProps) => {
+  const { theme } = useTheme();
+  
   return (
-    <div className={`rounded-lg shadow-md ${className ? className : 'bg-white'}`}>
+    <div className={`rounded-lg ${className ? className : 'bg-white'}`}>
       {children}
     </div>
   );
