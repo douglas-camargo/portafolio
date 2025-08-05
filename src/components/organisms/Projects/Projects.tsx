@@ -1,89 +1,24 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../../contexts/ThemeContext';
 import { Carousel } from '../../molecules/Carousel/Carousel';
 import { ProjectCard } from '../../molecules/ProjectCard/ProjectCard';
-
-const PROJECTS_DATA = [
-  {
-    id: 1,
-    tags: [
-      { id: 1, name: 'REACT' },
-      { id: 2, name: 'JAVASCRIPT' },
-      { id: 3, name: 'TAILWINDCSS' },
-    ],
-    image: '/images/project-restaurant.webp',
-    showViewButton: true,
-    githubUrl: 'https://github.com/douglas-camargo/lading_restaurant',
-    pageUrl: 'https://restaurant-black-alpha.vercel.app/',
-  },
-  {
-    id: 2,
-    tags: [
-      { id: 1, name: 'NEXT.JS' },
-      { id: 3, name: 'JAVASCRIPT' },
-      { id: 2, name: 'TAILWINDCSS' },
-    ],
-    image: '/images/pokemon-explorer.webp',
-    showViewButton: false,
-    githubUrl: 'https://github.com/douglas-camargo/Pokemon-explorer',
-    pageUrl: 'https://pokemon-explorer-seven.vercel.app/',
-  },
-  {
-    id: 3,
-    tags: [
-      { id: 1, name: 'HTML' },
-      { id: 2, name: 'CSS' },
-      { id: 3, name: 'JAVASCRIPT' },
-    ],
-    image: '/images/hsectechnology.webp',
-    showViewButton: false,
-    githubUrl: '',
-    pageUrl: 'https://hsectechnology.com/index.html',
-  },
-  {
-    id: 4,
-    tags: [
-      { id: 1, name: 'NEXT.JS' },
-      { id: 2, name: 'JAVASCRIPT' },
-      { id: 3, name: 'CSS' },
-    ],
-    image: '/images/proyecto-seguridad.webp',
-    showViewButton: false,
-    githubUrl: '',
-    pageUrl: 'https://quizzical-wozniak-484579.netlify.app/',
-  },
-];
+import { useProjects } from '../../../hooks/useProjects';
 
 export const Projects = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const [currentCarouselIndex, setCurrentCarouselIndex] = useState(0);
   
-  const totalSlides = PROJECTS_DATA.length;
+  const {
+    PROJECTS_DATA,
+    currentCarouselIndex,
+    totalSlides,
+    handleCarouselIndexChange,
+    goToSlide,
+    getDotClasses
+  } = useProjects();
 
   const titleClasses = `font-['Lato',Helvetica] font-light text-2xl md:text-4xl tracking-[0] leading-[normal] whitespace-nowrap mb-8 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`;
-
-  const handleCarouselIndexChange = useCallback((index: number) => {
-    setCurrentCarouselIndex(index);
-  }, []);
-
-  const goToSlide = useCallback((index: number) => {
-    setCurrentCarouselIndex(index);
-  }, []);
-
-  const getDotClasses = useCallback((index: number) => {
-    const isActive = index === currentCarouselIndex;
-    const baseClasses = 'h-1.5 rounded-full transition-all duration-300';
-    
-    if (isActive) {
-      const bgColor = theme === 'dark' ? 'bg-white' : 'bg-gray-800';
-      return `${baseClasses} w-8 ${bgColor}`;
-    } else {
-      const bgColor = theme === 'dark' ? 'bg-white/50' : 'bg-gray-400';
-      return `${baseClasses} w-2 ${bgColor}`;
-    }
-  }, [currentCarouselIndex, theme]);
 
   return (
     <section id="portfolio" className="w-full py-12 relative px-4 md:px-20">
