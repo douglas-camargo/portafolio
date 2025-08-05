@@ -4,51 +4,12 @@ import { useTheme } from '../../../contexts/ThemeContext';
 import { Button } from '../../atoms/Button/Button';
 import { Card } from '../../atoms/Card/Card';
 import { CardContent } from '../../atoms/CardContent/CardContent';
+import { useHero } from '../../../hooks/useHero';
 
 export const Hero = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { theme } = useTheme();
-
-  const handleDownloadCV = () => {
-    const currentLanguage = i18n.language;
-    let downloadUrl = '';
-    
-    if (currentLanguage === 'es') {
-      downloadUrl = 'https://drive.google.com/uc?export=download&id=1M3zII4aGkgSoF9_a6x3TEx-FYViPnxgw';
-    } else {
-      downloadUrl = 'https://drive.google.com/uc?export=download&id=1mEQcgVAv3zH1OhNMAxS_SPzBR9Th1E4d';
-    }
-    
-    // Crear un enlace temporal y hacer clic en él para descargar
-    const link = document.createElement('a');
-    link.href = downloadUrl;
-    link.download = `CV_Alexander_Suarez_${currentLanguage === 'es' ? 'ES' : 'EN'}.pdf`;
-    // link.target = '_blank';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
-  const handleWhatsAppContact = () => {
-    const numero = '584241232755';
-    const mensaje = 'Hola!%20me%20interesa%20tu%20trabajo%20como%20desarrollador.';
-    
-    const versionPc = 'https://web.whatsapp.com/send?';
-    const versionMobile = 'https://api.whatsapp.com/send?';
-    
-    // Función simple para detectar si es móvil
-    const isMobile = () => {
-      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    };
-    
-    const url = isMobile() 
-      ? `${versionMobile}phone=${numero}&text=${mensaje}` 
-      : `${versionPc}phone=${numero}&text=${mensaje}`;
-    
-    window.open(url, '_blank');
-  };
-
-
+  const { handleDownloadCV, handleWhatsAppContact } = useHero();
 
   return (
     <section id="about" className="flex flex-col items-start px-4 md:px-20 py-8 md:py-16 w-full relative mt-20">
@@ -59,14 +20,14 @@ export const Hero = () => {
             {t('hero.title')}
           </div>
 
-          <h1 className={`font-['Oswald',Helvetica] font-medium text-5xl sm:text-7xl md:text-8xl lg:text-8xl xl:text-9xl tracking-[0] leading-tight md:leading-[120px] mb-6 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
+          <h1 className={`font-['Oswald',Helvetica] font-medium text-5xl sm:text-7xl md:text-8xl lg:text-8xl xl:text-9xl xl:-ml-[5px] tracking-[0] leading-tight md:leading-[120px] mb-6 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
             {t('hero.name').split(' ')[0]}
             <br />
             {t('hero.name').split(' ')[1]}
           </h1>
 
           <Card className="bg-transparent border-0 mb-8">
-            <CardContent className="p-0 md:p-3.5">
+            <CardContent className="p-0 md:py-3.5 md:px-0.5">
               <p className={`font-['Lato',Helvetica] font-semibold text-sm leading-normal ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>
                 {t('hero.description')}
               </p>

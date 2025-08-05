@@ -50,7 +50,7 @@ export const Skills = () => {
 
   return (
     <section id="skills" className="w-full py-16 px-4 md:px-20">
-      <h1 className={`font-medium text-4xl md:text-6xl lg:text-9xl font-['Oswald',Helvetica] leading-tight md:leading-[120px] mb-6 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
+      <h1 style={{ lineHeight: '150px' }} className={`font-medium xl:indent-[-5px] text-4xl md:text-6xl lg:text-9xl font-['Oswald',Helvetica] mb-3 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
         {t('skillsContent.title')}
       </h1>
 
@@ -97,17 +97,17 @@ export const Skills = () => {
         </div>
 
         <Card className="bg-transparent border-none">
-          <CardContent className="p-0 bg-transparent">
+          <CardContent className="bg-transparent" padding="px-0 py-6">
             {skillCategories.map((category, index) => (
               <div key={index} className="mb-8 md:mb-4">
                 <Separator className={`w-full mb-4 ${theme === 'dark' ? 'bg-white/20' : 'bg-gray-300'}`} />
-                <div className="flex flex-col md:flex-row">
-                  <div className="w-full md:w-1/2 mb-8 md:mb-0">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+                  <div className="md:col-span-1">
                     <span className={`font-semibold text-xs font-['Lato',Helvetica] mb-4 md:mb-0 ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>
                       {category.title}
                     </span>
                   </div>
-                  <div className="w-full md:w-1/2 flex flex-col space-y-4">
+                  <div className="md:col-span-1 flex flex-col space-y-4">
                     {category.skills.map((skill, skillIndex) => (
                       <React.Fragment key={skillIndex}>
                         <span className={`font-normal text-sm font-['Lato',Helvetica] ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>

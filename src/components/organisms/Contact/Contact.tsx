@@ -1,8 +1,9 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../../contexts/ThemeContext';
 import { Button } from '../../atoms/Button/Button';
 import { ArrowUp } from '../../icons';
+import { useContact } from '../../../hooks/useContact';
 
 const CONTACT_INFO = {
   email: 'DOUGLAS.CAMARGO.DEV@GMAIL.COM',
@@ -19,48 +20,7 @@ const SOCIAL_LINKS = [
 export const Contact = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const [activeButton, setActiveButton] = useState<string | null>(null);
-
-  const handleWhatsAppContact = useCallback(() => {
-    const numero = '584241232755';
-    const mensaje = 'Hola!%20me%20interesa%20tu%20trabajo%20como%20desarrollador.';
-    
-    const versionPc = 'https://web.whatsapp.com/send?';
-    const versionMobile = 'https://api.whatsapp.com/send?';
-    
-    // Función simple para detectar si es móvil
-    const isMobile = () => {
-      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    };
-    
-    const url = isMobile() 
-      ? `${versionMobile}phone=${numero}&text=${mensaje}` 
-      : `${versionPc}phone=${numero}&text=${mensaje}`;
-    
-    window.open(url, '_blank');
-  }, []);
-
-  const handleButtonClick = useCallback((buttonName: string) => {
-    setActiveButton(buttonName);
-    
-    // Ejecutar la función correspondiente según el botón
-    switch (buttonName) {
-      case 'WHATSAPP':
-        handleWhatsAppContact();
-        break;
-      case 'GITHUB':
-        window.open('https://github.com/douglas-camargo', '_blank');
-        break;
-      case 'LINKEDIN':
-        window.open('https://www.linkedin.com/in/douglas-camargo-4858a5178/', '_blank');
-        break;
-      case 'GMAIL':
-        window.open('mailto:douglas.camargo.dev@gmail.com', '_blank');
-        break;
-      default:
-        break;
-    }
-  }, [handleWhatsAppContact]);
+  const { activeButton, handleButtonClick, handleBackToTop } = useContact();
 
   return (
     <section id="contacts" className="w-full py-16 px-4 md:px-20">
@@ -99,17 +59,7 @@ export const Contact = () => {
           </div>
 
           <button 
-            onClick={() => {
-              const element = document.getElementById('portfolio');
-              if (element) {
-                const headerHeight = 80;
-                const elementPosition = element.offsetTop - headerHeight;
-                window.scrollTo({
-                  top: elementPosition,
-                  behavior: 'smooth'
-                });
-              }
-            }}
+            onClick={handleBackToTop}
             className="flex items-center cursor-pointer justify-center bg-transparent border-none -mt-0.5"
           >
             <span className={`font-['Lato',Helvetica] font-semibold text-sm mr-1 ${theme === 'dark' ? 'text-[#555555]' : 'text-gray-700'}`}>

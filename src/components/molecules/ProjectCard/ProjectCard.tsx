@@ -1,6 +1,7 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Badge } from '../../atoms/Badge/Badge';
+import { useProjectCard } from '../../../hooks/useProjectCard';
 
 interface Tag {
   id: number;
@@ -41,8 +42,18 @@ export const ProjectCard = ({
   hasAnimation = false
 }: ProjectCardProps) => {
   const { t } = useTranslation();
-  const [isHovered, setIsHovered] = useState(false);
-  const [isViewButtonHovered, setIsViewButtonHovered] = useState(false);
+  
+  const {
+    isHovered,
+    isViewButtonHovered,
+    handleViewClick,
+    handleCodeClick,
+    handlePageClick,
+    handleMouseEnter,
+    handleMouseLeave,
+    handleViewButtonMouseEnter,
+    handleViewButtonMouseLeave
+  } = useProjectCard({ pageUrl, githubUrl });
 
   const cardClasses = `${CARD_CLASSES} ${hasAnimation && isHovered ? 'cursor-pointer' : ''}`.trim();
   const imageClasses = `w-full h-full object-cover transition-all duration-500 ease-in-out ${hasAnimation && isHovered ? 'scale-110' : 'scale-100'}`;
@@ -50,29 +61,11 @@ export const ProjectCard = ({
   const buttonsClasses = `absolute bottom-3 right-3.5 flex gap-2 transition-opacity duration-300 ${hasAnimation && isHovered ? 'opacity-100' : 'opacity-0'}`;
   const viewButtonClasses = `absolute w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] md:w-[136px] md:h-[136px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#d9d9d9] rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer ${isViewButtonHovered ? 'scale-110 bg-[#c0c0c0]' : 'scale-100'}`;
 
-  const handleViewClick = useCallback(() => {
-    if (pageUrl) {
-      window.open(pageUrl, '_blank');
-    }
-  }, [pageUrl]);
-
-  const handleCodeClick = useCallback(() => {
-    if (githubUrl) {
-      window.open(githubUrl, '_blank');
-    }
-  }, [githubUrl]);
-
-  const handlePageClick = useCallback(() => {
-    if (pageUrl) {
-      window.open(pageUrl, '_blank');
-    }
-  }, [pageUrl]);
-
   return (
     <div 
       className={cardClasses}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       <img 
         src={image} 
@@ -99,8 +92,8 @@ export const ProjectCard = ({
       {showViewButton && isLeftPosition && (
         <div 
           className={viewButtonClasses}
-          onMouseEnter={() => setIsViewButtonHovered(true)}
-          onMouseLeave={() => setIsViewButtonHovered(false)}
+          onMouseEnter={handleViewButtonMouseEnter}
+          onMouseLeave={handleViewButtonMouseLeave}
           onClick={handleViewClick}
         >
           <div className="font-['Lato',Helvetica] font-normal text-[#151515] text-xs sm:text-sm">
