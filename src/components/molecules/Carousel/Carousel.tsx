@@ -86,7 +86,7 @@ export const Carousel = ({
               return (
                 <div 
                   key={`${originalIndex}-${index}`}
-                  className={`relative right-0 lg:right-1 xl:right-0 flex-shrink-0 scale-100 lg:scale-[0.97] 2xl:scale-100 ${
+                  className={`relative right-0 lg:right-[5px] xl:right-0 flex-shrink-0 scale-100 lg:scale-[0.97] 2xl:scale-100 ${
                     isMobile 
                       ? 'w-full' 
                       : screenSize === 'desktop' 
