@@ -26,7 +26,7 @@ const CARD_CLASSES = `
   lg:aspect-[600/386] lg:max-w-[600px]
   xl:max-w-[690px]
   2xl:max-w-[700px]
-  bg-[#292929] rounded-3xl relative overflow-hidden mx-auto
+  bg-[#292929] rounded-3xl relative overflow-hidden 
 `;
 
 const BUTTON_CLASSES = 'text-gray-800 bg-gray-200 text-xs px-2 py-1 sm:px-3 sm:py-1 rounded-lg hover:bg-gray-300 transition-colors duration-300 font-semibold';

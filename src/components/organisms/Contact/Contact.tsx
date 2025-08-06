@@ -23,7 +23,7 @@ export const Contact = () => {
   const { activeButton, handleButtonClick, handleBackToTop } = useContact();
 
   return (
-    <section id="contacts" className="w-full py-16 px-4 md:px-20">
+    <section id="contacts" className="w-full py-8 lg:py-16 px-4 md:px-20">
       <div className="flex flex-col items-center">
         <div className={`font-['Lato',Helvetica] font-normal text-xs mb-5 ${theme === 'dark' ? 'text-[#676767]' : 'text-gray-600'}`}>
           {t('contact.getInTouch')}
