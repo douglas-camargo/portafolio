@@ -17,6 +17,7 @@ export const useCarousel = ({
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [screenSize, setScreenSize] = useState('desktop');
   const [hoveredButton, setHoveredButton] = useState<'prev' | 'next' | null>(null);
+  const [infiniteIndex, setInfiniteIndex] = useState(totalItems);
 
   // Touch/swipe functionality
   const [touchStart, setTouchStart] = useState<number | null>(null);
@@ -51,23 +52,78 @@ export const useCarousel = ({
     
     setIsTransitioning(true);
     
-    let adjustedIndex = newIndex;
+    // Si el índice es negativo, calcular el equivalente positivo
     if (newIndex < 0) {
-      adjustedIndex = totalItems * 2 - 1;
-    } else if (newIndex >= totalItems * 3) {
-      adjustedIndex = totalItems;
+      // Calcular cuántos ciclos completos hacia atrás ha hecho
+      const cyclesBack = Math.ceil(Math.abs(newIndex) / totalItems);
+      
+      // Si ha completado 5 ciclos hacia atrás, reiniciar al último elemento
+      if (cyclesBack >= 6) {
+        const resetIndex = totalItems + totalItems - 1; // Último elemento
+        
+        setInfiniteIndex(resetIndex);
+        
+        if (externalIndex !== undefined) {
+          onGoToIndex?.(resetIndex);
+        } else {
+          setInternalIndex(resetIndex);
+        }
+        onIndexChange?.(totalItems - 1); // Último elemento
+      } else {
+        // Calcular el índice equivalente en el rango positivo
+        const adjustedIndex = totalItems * 5 + newIndex;
+        
+        setInfiniteIndex(adjustedIndex);
+        
+        const realIndex = ((newIndex % totalItems) + totalItems) % totalItems;
+        
+        if (externalIndex !== undefined) {
+          onGoToIndex?.(adjustedIndex);
+        } else {
+          setInternalIndex(adjustedIndex);
+        }
+        onIndexChange?.(realIndex);
+      }
+    } else {
+      // Calcular cuántos ciclos completos ha hecho hacia adelante
+      const cyclesCompleted = Math.floor(newIndex / totalItems);
+      
+      // Si ha completado 5 ciclos, reiniciar al primer elemento
+      if (cyclesCompleted >= 5) {
+        const resetIndex = totalItems; // Reiniciar al primer elemento
+        
+        setInfiniteIndex(resetIndex);
+        
+        if (externalIndex !== undefined) {
+          onGoToIndex?.(resetIndex);
+        } else {
+          setInternalIndex(resetIndex);
+        }
+        onIndexChange?.(0); // Primer elemento
+      } else {
+        // Usar el índice normal para los primeros 5 ciclos
+        setInfiniteIndex(newIndex);
+        
+        // Calcular el índice real para las callbacks
+        const realIndex = ((newIndex % totalItems) + totalItems) % totalItems;
+        
+        if (externalIndex !== undefined) {
+          onGoToIndex?.(newIndex);
+        } else {
+          setInternalIndex(newIndex);
+        }
+        onIndexChange?.(realIndex);
+      }
     }
     
-    if (externalIndex !== undefined) {
-      onGoToIndex?.(adjustedIndex);
-    } else {
-      setInternalIndex(adjustedIndex);
-    }
-    onIndexChange?.(adjustedIndex % totalItems);
+    // Limpiar la transición después de la animación
+    setTimeout(() => {
+      setIsTransitioning(false);
+    }, 700);
   }, [isTransitioning, totalItems, externalIndex, onGoToIndex, onIndexChange]);
 
-  const goToNext = useCallback(() => updateIndex(currentIndex + 1), [updateIndex, currentIndex]);
-  const goToPrevious = useCallback(() => updateIndex(currentIndex - 1), [updateIndex, currentIndex]);
+  const goToNext = useCallback(() => updateIndex(infiniteIndex + 1), [updateIndex, infiniteIndex]);
+  const goToPrevious = useCallback(() => updateIndex(infiniteIndex - 1), [updateIndex, infiniteIndex]);
 
   // Touch event handlers
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
@@ -106,55 +162,30 @@ export const useCarousel = ({
     setTouchStart(null);
   }, [isMobile, touchStart, goToNext, goToPrevious]);
 
-  useEffect(() => {
-    if (totalItems > 0) {
-      let timeoutId: NodeJS.Timeout;
-      
-      if (currentIndex >= totalItems * 2) {
-        timeoutId = setTimeout(() => {
-          setIsTransitioning(false);
-          const resetIndex = totalItems;
-          if (externalIndex !== undefined) {
-            onGoToIndex?.(resetIndex);
-          } else {
-            setInternalIndex(resetIndex);
-          }
-          onIndexChange?.(resetIndex % totalItems);
-        }, 700);
-      } else if (currentIndex < totalItems) {
-        timeoutId = setTimeout(() => {
-          setIsTransitioning(false);
-          const resetIndex = totalItems + (currentIndex % totalItems);
-          if (externalIndex !== undefined) {
-            onGoToIndex?.(resetIndex);
-          } else {
-            setInternalIndex(resetIndex);
-          }
-          onIndexChange?.(resetIndex % totalItems);
-        }, 700);
-      } else {
-        timeoutId = setTimeout(() => {
-          setIsTransitioning(false);
-        }, 700);
-      }
-
-      return () => clearTimeout(timeoutId);
-    } else {
-      setIsTransitioning(false);
-    }
-  }, [currentIndex, totalItems, externalIndex, onGoToIndex, onIndexChange]);
-
   const getTransformValue = useCallback(() => {
-    const percentage = isMobile ? 100 : (screenSize === '2xl' ? 60.05 : 57);
-    const baseTransform = currentIndex * percentage;
+    let percentage;
     
+    if (isMobile) {
+      percentage = 100;
+    } else if (screenSize === 'desktop') {
+      percentage = 55.2;
+    } else if (screenSize === '2xl') {
+      percentage = 60.15;
+    } else {
+      percentage = 60.08; // Default para otros casos
+    }
+    
+    const baseTransform = infiniteIndex * percentage;
+    let finalTransform = baseTransform;
+    
+    // Aplicar drag en móvil
     if (isMobile && isDragging && dragOffset !== 0) {
       const dragPercentage = (dragOffset / (carouselRef.current?.offsetWidth || 1)) * 100;
-      return baseTransform + dragPercentage;
+      finalTransform += dragPercentage;
     }
     
-    return baseTransform;
-  }, [isMobile, screenSize, currentIndex, isDragging, dragOffset]);
+    return finalTransform;
+  }, [isMobile, screenSize, infiniteIndex, isDragging, dragOffset]);
 
   return {
     currentIndex,
@@ -172,4 +203,4 @@ export const useCarousel = ({
     getTransformValue,
     isDragging
   };
-}; 
+};
