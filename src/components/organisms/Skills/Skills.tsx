@@ -49,7 +49,7 @@ export const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="w-full py-16 px-4 md:px-20">
+    <section id="skills" className="w-full py-8 lg:py-16 px-4 md:px-20">
       <h1 className={`leading-tight lg:!leading-[150px] font-medium xl:indent-[-5px] text-4xl md:text-6xl lg:text-9xl font-['Oswald',Helvetica] mb-3 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
         {t('skillsContent.title')}
       </h1>

@@ -53,8 +53,8 @@ export const Education = () => {
   ];
 
   return (
-    <section id="education" className="w-full py-12 px-4 md:px-20">
-      <h2 className={`font-light text-2xl md:text-4xl mb-8 md:mb-6 font-['Lato',Helvetica] ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>{t('educationSection.title')}</h2>
+    <section id="education" className="w-full py-8 lg:py-12 px-4 md:px-20">
+      <h2 className={`font-light text-2xl md:text-4xl mb-4 md:mb-6 font-['Lato',Helvetica] ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>{t('educationSection.title')}</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
         <div className="md:col-span-1"></div>
