@@ -42,7 +42,16 @@ export const Carousel = ({
     onGoToIndex
   });
 
-  const duplicatedChildren = [...childrenArray, ...childrenArray, ...childrenArray];
+  // const duplicatedChildren = React.useMemo(() => {
+  //   // Crear más copias para asegurar que siempre haya elementos visibles
+  //   return [...childrenArray, ...childrenArray, ...childrenArray, ...childrenArray, ...childrenArray];
+  // }, [childrenArray]);
+
+  const duplicatedChildren = React.useMemo(() => {
+    const copies = 7; // Número de veces que quieres duplicar el array
+    return Array.from({ length: copies }, () => childrenArray).flat();
+  }, [childrenArray]);
+  
 
   return (
     <div className={`relative ${className}`}>
@@ -58,29 +67,33 @@ export const Carousel = ({
           className={`flex ${isMobile ? 'gap-0' : 'gap-0.5'}`}
           style={{ 
             transform: `translateX(-${getTransformValue()}%)`,
-            transition: isTransitioning && !isDragging ? 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)' : 'none',
+            transition: isTransitioning && !isDragging 
+              ? 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)' 
+              : 'none',
             willChange: 'transform',
           }}
         >
           {duplicatedChildren.map((child, index) => {
             const originalIndex = index % totalItems;
-            const isLeftPosition = originalIndex === currentIndex % totalItems;
-            const isActive = originalIndex === currentIndex % totalItems;
-            const isAdjacent = Math.abs(originalIndex - (currentIndex % totalItems)) === 1;
+            const realIndex = ((currentIndex % totalItems) + totalItems) % totalItems;
+            const isLeftPosition = originalIndex === realIndex;
+            const isActive = originalIndex === realIndex;
+            const isAdjacent = Math.abs(originalIndex - realIndex) === 1 || 
+                              (originalIndex === 0 && realIndex === totalItems - 1) ||
+                              (originalIndex === totalItems - 1 && realIndex === 0);
 
             if (React.isValidElement(child)) {
               return (
                 <div 
-                  key={index}
-                  className={`flex-shrink-0 ${
+                  key={`${originalIndex}-${index}`}
+                  className={`relative right-0 lg:right-1 xl:right-0 flex-shrink-0 scale-100 lg:scale-[0.97] 2xl:scale-100 ${
                     isMobile 
                       ? 'w-full' 
                       : screenSize === 'desktop' 
-                        ? 'w-[calc(55%-1px)] mr-5' 
-                        : 'w-[calc(60%-1px)]'
+                        ? 'w-[calc(55%)]' 
+                        : 'w-[calc(60%)]'
                   }`}
                   style={{
-                    transform: 'scale(1)',
                     transition: isActive 
                       ? 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)'
                       : 'none',
@@ -89,7 +102,7 @@ export const Carousel = ({
                   }}
                 >
                   {React.cloneElement(child, { 
-                    ...(child.props && typeof child.type !== 'string' ? { isLeftPosition, currentIndex } : {})
+                    ...(child.props && typeof child.type !== 'string' ? { isLeftPosition, currentIndex: realIndex } : {})
                   })}
                 </div>
               );
