@@ -6,7 +6,6 @@ Portfolio profesional de Douglas Camargo, desarrollador Front-end especializado 
 
 - **Frontend**: React, TypeScript, Tailwind CSS
 - **Herramientas**: Vite, i18next (Internacionalización)
-- **Despliegue**: Vercel
 - **SEO**: Meta tags optimizados, Open Graph, Twitter Cards, Structured Data
 
 ## 📋 Características
@@ -36,11 +35,6 @@ npm run dev
 npm run build
 ```
 
-## 📱 Proyectos Destacados
-
-- **Restaurante Landing**: React, JavaScript, Tailwind CSS
-- **Pokémon Explorer**: Next.js, Tailwind CSS, JavaScript
-
 ## 🔧 Scripts Disponibles
 
 - `npm run dev` - Servidor de desarrollo
@@ -51,11 +45,8 @@ npm run build
 
 - Meta tags optimizados
 - Open Graph para redes sociales
-- Twitter Cards
-- Structured Data (Schema.org)
 - Sitemap.xml
 - Robots.txt
-- Canonical URLs
 - Preconnect para fuentes externas
 
 ## 📄 Licencia
