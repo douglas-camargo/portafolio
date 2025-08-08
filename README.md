@@ -6,7 +6,6 @@ Portfolio profesional de Douglas Camargo, desarrollador Front-end especializado 
 
 - **Frontend**: React, TypeScript, Tailwind CSS
 - **Herramientas**: Vite, i18next (Internacionalización)
-- **Despliegue**: Vercel
 - **SEO**: Meta tags optimizados, Open Graph, Twitter Cards, Structured Data
 
 ## 📋 Características
