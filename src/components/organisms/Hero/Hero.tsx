@@ -41,7 +41,7 @@ export const Hero = () => {
             <img
               className="absolute w-full h-full object-cover object-[center_28%] rounded-[20px]"
               alt="Douglas Camargo"
-              src="/images/fotoDouglas.webp"
+              src="/images/photo-Douglas.webp"
             />
             <div className="w-full rounded-[20px] bg-gradient-to-r from-[#151515] via-[#313131]/50 to-transparent absolute h-full top-0 left-0" />
           </div>
