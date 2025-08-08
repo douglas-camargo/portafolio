@@ -15,8 +15,10 @@ interface ProjectCardProps {
   image?: string;
   githubUrl?: string;
   pageUrl?: string;
+  backendUrl?: string;
   isLeftPosition?: boolean;
   hasAnimation?: boolean;
+  showFrontendBackendLabels?: boolean;
 }
 
 const CARD_CLASSES = `
@@ -38,8 +40,10 @@ export const ProjectCard = ({
   image,
   githubUrl,
   pageUrl,
+  backendUrl,
   isLeftPosition = false,
-  hasAnimation = false
+  hasAnimation = false,
+  showFrontendBackendLabels = false
 }: ProjectCardProps) => {
   const { t } = useTranslation();
   
@@ -49,11 +53,12 @@ export const ProjectCard = ({
     handleViewClick,
     handleCodeClick,
     handlePageClick,
+    handleBackendClick,
     handleMouseEnter,
     handleMouseLeave,
     handleViewButtonMouseEnter,
     handleViewButtonMouseLeave
-  } = useProjectCard({ pageUrl, githubUrl });
+  } = useProjectCard({ pageUrl, githubUrl, backendUrl });
 
   const cardClasses = `${CARD_CLASSES} ${hasAnimation && isHovered ? 'cursor-pointer' : ''}`.trim();
   const imageClasses = `w-full h-full object-cover transition-all duration-500 ease-in-out ${hasAnimation && isHovered ? 'scale-110' : 'scale-100'}`;
@@ -108,7 +113,15 @@ export const ProjectCard = ({
             className={BUTTON_CLASSES}
             onClick={handleCodeClick}
           >
-            CODE
+            {showFrontendBackendLabels ? 'CODE FRONTEND' : 'CODE'}
+          </button>
+        )}
+        {backendUrl && (
+          <button 
+            className={BUTTON_CLASSES}
+            onClick={handleBackendClick}
+          >
+            {showFrontendBackendLabels ? 'CODE BACKEND' : 'BACKEND'}
           </button>
         )}
         <button 

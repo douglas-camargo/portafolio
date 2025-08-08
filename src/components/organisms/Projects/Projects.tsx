@@ -41,6 +41,8 @@ export const Projects = () => {
             showViewButton={index === currentCarouselIndex}
             githubUrl={project.githubUrl}
             pageUrl={project.pageUrl}
+            backendUrl={project.backendUrl}
+            showFrontendBackendLabels={project.showFrontendBackendLabels}
             hasAnimation={index === currentCarouselIndex}
           />
         ))}

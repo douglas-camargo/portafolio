@@ -17,9 +17,26 @@ export const useProjects = () => {
       showViewButton: true,
       githubUrl: 'https://github.com/douglas-camargo/lading_restaurant',
       pageUrl: 'https://restaurant-black-alpha.vercel.app/',
+      backendUrl: '',
+      showFrontendBackendLabels: false,
     },
     {
       id: 2,
+      tags: [
+        { id: 1, name: 'REACT' },
+        { id: 2, name: 'TYPESCRIPT' },
+        { id: 3, name: 'TAILWINDCSS' },
+        { id: 4, name: 'EXPRESS' },
+      ],
+      image: '/images/proyecto_clinica.webp',
+      showViewButton: true,
+      githubUrl: 'https://github.com/douglas-camargo/landing_clinica',
+      pageUrl: 'https://landing-clinica-six.vercel.app/',
+      backendUrl: 'https://github.com/douglas-camargo/backend_landing_clinica',
+      showFrontendBackendLabels: true,
+    },
+    {
+      id: 3,
       tags: [
         { id: 1, name: 'NEXT.JS' },
         { id: 3, name: 'JAVASCRIPT' },
@@ -29,9 +46,11 @@ export const useProjects = () => {
       showViewButton: false,
       githubUrl: 'https://github.com/douglas-camargo/Pokemon-explorer',
       pageUrl: 'https://pokemon-explorer-seven.vercel.app/',
+      backendUrl: '',
+      showFrontendBackendLabels: false,
     },
     {
-      id: 3,
+      id: 4,
       tags: [
         { id: 1, name: 'HTML' },
         { id: 2, name: 'CSS' },
@@ -41,9 +60,11 @@ export const useProjects = () => {
       showViewButton: false,
       githubUrl: '',
       pageUrl: 'https://hsectechnology.com/index.html',
+      backendUrl: '',
+      showFrontendBackendLabels: false,
     },
     {
-      id: 4,
+      id: 5,
       tags: [
         { id: 1, name: 'NEXT.JS' },
         { id: 2, name: 'JAVASCRIPT' },
@@ -53,6 +74,8 @@ export const useProjects = () => {
       showViewButton: false,
       githubUrl: '',
       pageUrl: 'https://quizzical-wozniak-484579.netlify.app/',
+      backendUrl: '',
+      showFrontendBackendLabels: false,
     },
   ];
   

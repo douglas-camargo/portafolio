@@ -3,9 +3,10 @@ import { useState, useCallback } from 'react';
 interface UseProjectCardProps {
   pageUrl?: string;
   githubUrl?: string;
+  backendUrl?: string;
 }
 
-export const useProjectCard = ({ pageUrl, githubUrl }: UseProjectCardProps) => {
+export const useProjectCard = ({ pageUrl, githubUrl, backendUrl }: UseProjectCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isViewButtonHovered, setIsViewButtonHovered] = useState(false);
 
@@ -26,6 +27,12 @@ export const useProjectCard = ({ pageUrl, githubUrl }: UseProjectCardProps) => {
       window.open(pageUrl, '_blank');
     }
   }, [pageUrl]);
+
+  const handleBackendClick = useCallback(() => {
+    if (backendUrl) {
+      window.open(backendUrl, '_blank');
+    }
+  }, [backendUrl]);
 
   const handleMouseEnter = useCallback(() => {
     setIsHovered(true);
@@ -49,6 +56,7 @@ export const useProjectCard = ({ pageUrl, githubUrl }: UseProjectCardProps) => {
     handleViewClick,
     handleCodeClick,
     handlePageClick,
+    handleBackendClick,
     handleMouseEnter,
     handleMouseLeave,
     handleViewButtonMouseEnter,
