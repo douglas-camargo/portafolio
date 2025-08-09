@@ -2,8 +2,9 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../../contexts/ThemeContext';
 import { Separator } from '../../atoms/Separator/Separator';
+import { AnimationProps } from '../../../hooks/useAnimations';
 
-export const Education = () => {
+export const Education: React.FC<AnimationProps> = ({ isLoaded = false }) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
   
@@ -54,18 +55,24 @@ export const Education = () => {
 
   return (
     <section id="education" className="w-full py-8 lg:py-12 px-4 md:px-20">
-      <h2 className={`font-light text-2xl md:text-4xl mb-4 md:mb-6 font-['Lato',Helvetica] ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>{t('educationSection.title')}</h2>
+      <div className={isLoaded ? 'animate-slide-in-left' : 'slide-in-left-initial'}>
+        <h2 className={`font-light text-2xl md:text-4xl mb-4 md:mb-6 font-['Lato',Helvetica] ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
+          {t('educationSection.title')}
+        </h2>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-        <div className="md:col-span-1"></div>
-        <div className="md:col-span-1">
-          <p className={`font-medium text-lg md:text-2xl font-['Lato',Helvetica] ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>
-            {t('educationSection.description')}
-          </p>
+      <div className={`mb-16 ${isLoaded ? 'animate-slide-in-up' : 'slide-in-up-initial'}`}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+          <div className="md:col-span-1"></div>
+          <div className="md:col-span-1">
+            <p className={`font-medium text-lg md:text-2xl font-['Lato',Helvetica] ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>
+              {t('educationSection.description')}
+            </p>
+          </div>
         </div>
       </div>
 
-      <div className="mt-16">
+      <div className={`mt-16 ${isLoaded ? 'animate-slide-in-up' : 'slide-in-up-initial'}`}>
         {educationData.map((item, index) => (
           <div key={index} className="w-full mb-8 md:mb-4">
             <Separator className={`w-full h-px my-4 ${theme === 'dark' ? 'bg-white/20' : 'bg-gray-300'}`} />

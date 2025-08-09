@@ -102,3 +102,109 @@
     --foreground: 213 31% 91%;
   }
 }
+
+/* Animaciones de entrada */
+@layer utilities {
+  /* Animación de entrada desde la izquierda */
+  .animate-slide-in-left {
+    animation: slideInLeft 0.8s ease-out forwards;
+  }
+
+  /* Animación de entrada desde la derecha */
+  .animate-slide-in-right {
+    animation: slideInRight 0.8s ease-out forwards;
+  }
+
+  /* Animación de entrada desde abajo */
+  .animate-slide-in-up {
+    animation: slideInUp 0.8s ease-out forwards;
+  }
+
+  /* Animación de fade in */
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+
+  /* Estado inicial para las animaciones */
+  .slide-in-left-initial {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  .slide-in-right-initial {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  .slide-in-up-initial {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  .fade-in-initial {
+    opacity: 0;
+  }
+
+  /* Respetar las preferencias de movimiento del usuario */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-slide-in-left,
+    .animate-slide-in-right,
+    .animate-slide-in-up,
+    .animate-fade-in {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+    
+    .slide-in-left-initial,
+    .slide-in-right-initial,
+    .slide-in-up-initial,
+    .fade-in-initial {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+/* Keyframes para las animaciones */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

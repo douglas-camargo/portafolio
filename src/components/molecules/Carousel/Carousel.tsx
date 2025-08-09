@@ -42,11 +42,6 @@ export const Carousel = ({
     onGoToIndex
   });
 
-  // const duplicatedChildren = React.useMemo(() => {
-  //   // Crear más copias para asegurar que siempre haya elementos visibles
-  //   return [...childrenArray, ...childrenArray, ...childrenArray, ...childrenArray, ...childrenArray];
-  // }, [childrenArray]);
-
   const duplicatedChildren = React.useMemo(() => {
     const copies = 7; // Número de veces que quieres duplicar el array
     return Array.from({ length: copies }, () => childrenArray).flat();

@@ -4,6 +4,7 @@ import { useTheme } from '../../../contexts/ThemeContext';
 import { Card } from '../../atoms/Card/Card';
 import { CardContent } from '../../atoms/CardContent/CardContent';
 import { Separator } from '../../atoms/Separator/Separator';
+import { AnimationProps } from '../../../hooks/useAnimations';
 
 const TECH_ICONS = [
   { name: 'HTML5', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
@@ -18,7 +19,7 @@ const TECH_ICONS = [
   { name: 'Bootstrap', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg' },
 ];
 
-export const Skills = () => {
+export const Skills: React.FC<AnimationProps> = ({ isLoaded = false }) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
 
@@ -50,11 +51,13 @@ export const Skills = () => {
 
   return (
     <section id="skills" className="w-full py-8 lg:py-16 px-4 md:px-20">
-      <h1 className={`leading-tight lg:!leading-[150px] font-medium xl:indent-[-5px] text-4xl md:text-6xl lg:text-9xl font-['Oswald',Helvetica] mb-3 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
-        {t('skillsContent.title')}
-      </h1>
+      <div className={isLoaded ? 'animate-slide-in-left' : 'slide-in-left-initial'}>
+        <h1 className={`leading-tight lg:!leading-[150px] font-medium xl:indent-[-5px] text-4xl md:text-6xl lg:text-9xl font-['Oswald',Helvetica] mb-3 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
+          {t('skillsContent.title')}
+        </h1>
+      </div>
 
-      <div className="flex flex-col space-y-8">
+      <div className={`flex flex-col space-y-8 ${isLoaded ? 'animate-slide-in-up' : 'slide-in-up-initial'}`}>
         <div className="flex flex-col space-y-4">
           <h2 className={`mb-6 font-light text-2xl md:text-4xl font-['Lato',Helvetica] ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
             {t('skillsContent.technologies')}

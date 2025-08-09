@@ -4,8 +4,9 @@ import { useTheme } from '../../../contexts/ThemeContext';
 import { Carousel } from '../../molecules/Carousel/Carousel';
 import { ProjectCard } from '../../molecules/ProjectCard/ProjectCard';
 import { useProjects } from '../../../hooks/useProjects';
+import { AnimationProps } from '../../../hooks/useAnimations';
 
-export const Projects = () => {
+export const Projects: React.FC<AnimationProps> = ({ isLoaded = false }) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
   
@@ -22,41 +23,45 @@ export const Projects = () => {
 
   return (
     <section id="portfolio" className="w-full py-8 lg:py-12 relative px-4 md:px-20">
-      <div className={titleClasses}>
+      <div className={`${titleClasses} ${isLoaded ? 'animate-slide-in-left' : 'slide-in-left-initial'}`}>
         {t('projects.title')}
       </div>
 
-      <Carousel 
-        className="w-full"
-        currentIndex={currentCarouselIndex}
-        onIndexChange={handleCarouselIndexChange}
-        onGoToIndex={goToSlide}
-      >
-        {PROJECTS_DATA.map((project, index) => (
-          <ProjectCard
-            key={project.id}
-            id={project.id}
-            tags={project.tags}
-            image={project.image}
-            showViewButton={index === currentCarouselIndex}
-            githubUrl={project.githubUrl}
-            pageUrl={project.pageUrl}
-            backendUrl={project.backendUrl}
-            showFrontendBackendLabels={project.showFrontendBackendLabels}
-            hasAnimation={index === currentCarouselIndex}
-          />
-        ))}
-      </Carousel>
-
-      <div className="flex justify-center mt-8">
-        <div className="flex space-x-2">
-          {Array.from({ length: totalSlides }, (_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={getDotClasses(index)}
+      <div className={isLoaded ? 'animate-slide-in-up' : 'slide-in-up-initial'}>
+        <Carousel 
+          className="w-full"
+          currentIndex={currentCarouselIndex}
+          onIndexChange={handleCarouselIndexChange}
+          onGoToIndex={goToSlide}
+        >
+          {PROJECTS_DATA.map((project, index) => (
+            <ProjectCard
+              key={project.id}
+              id={project.id}
+              tags={project.tags}
+              image={project.image}
+              showViewButton={index === currentCarouselIndex}
+              githubUrl={project.githubUrl}
+              pageUrl={project.pageUrl}
+              backendUrl={project.backendUrl}
+              showFrontendBackendLabels={project.showFrontendBackendLabels}
+              hasAnimation={index === currentCarouselIndex}
             />
           ))}
+        </Carousel>
+
+        <div className="flex justify-center mt-8">
+          <div className="flex space-x-2">
+            {Array.from({ length: totalSlides }, (_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={getDotClasses(index)}
+              >
+                {/* Dot */}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </section>
