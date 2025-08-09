@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react'
 import { useFontLoading } from './useFontLoading';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export interface AnimationProps {
   isLoaded?: boolean;
 }
 
-export const useAnimations = (minDelay = 300) => {
+export const useAnimations = (minDelay = 500) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const { fontsLoaded } = useFontLoading();
+  const { hasDetected } = useLanguage();
 
   useEffect(() => {
     if (window.scrollY > 0) window.scrollTo(0, 0);
@@ -53,10 +55,26 @@ export const useAnimations = (minDelay = 300) => {
         }
       });
 
+    const waitForLanguageDetection = () =>
+      new Promise<void>(resolve => {
+        if (hasDetected) {
+          resolve();
+        } else {
+          const checkLanguage = () => {
+            if (hasDetected) {
+              resolve();
+            } else {
+              setTimeout(checkLanguage, 50);
+            }
+          };
+          checkLanguage();
+        }
+      });
+
     (async () => {
       try {
-        // Esperar fuentes primero (más rápido)
-        await waitForFonts();
+        // Esperar fuentes y detección de idioma primero (más rápido)
+        await Promise.all([waitForFonts(), waitForLanguageDetection()]);
         
         // Luego esperar el resto en paralelo
         await Promise.all([checkCriticalImages(), waitMinimumTime()]);
@@ -64,7 +82,7 @@ export const useAnimations = (minDelay = 300) => {
         setIsLoaded(true);
       }
     })();
-  }, [minDelay, fontsLoaded]);
+  }, [minDelay, fontsLoaded, hasDetected]);
 
   return { isLoaded };
 };
