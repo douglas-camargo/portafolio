@@ -12,13 +12,6 @@ export const useHeader = ({ onIndexChange }: UseHeaderProps) => {
   const { currentLanguage, changeLanguage } = useLanguage();
   const { t } = useTranslation();
 
-  const navItems = [
-    { label: t('portfolio'), active: activeSection === 'portfolio', id: 'portfolio' },
-    { label: t('education'), active: activeSection === 'education', id: 'education' },
-    { label: t('skills'), active: activeSection === 'skills', id: 'skills' },
-    { label: t('contacts'), active: activeSection === 'contacts', id: 'contacts' },
-  ];
-
   useEffect(() => {
     const sections = ['about', 'portfolio', 'education', 'skills', 'contacts'];
   
@@ -82,7 +75,6 @@ export const useHeader = ({ onIndexChange }: UseHeaderProps) => {
     isMenuOpen,
     activeSection,
     currentLanguage,
-    navItems,
     handleLanguageChange,
     scrollToSection,
     toggleMenu

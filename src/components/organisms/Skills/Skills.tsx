@@ -5,59 +5,23 @@ import { Card } from '../../atoms/Card/Card';
 import { CardContent } from '../../atoms/CardContent/CardContent';
 import { Separator } from '../../atoms/Separator/Separator';
 import { AnimationProps } from '../../../hooks/useAnimations';
+import { TECH_ICONS, getSkillCategories } from './skillsData';
 
-const TECH_ICONS = [
-  { name: 'HTML5', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
-  { name: 'CSS3', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
-  { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
-  { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
-  { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
-  { name: 'Next.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg' },
-  { name: 'Git', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
-  { name: 'GitHub', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg' },
-  { name: 'Tailwind CSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg' },
-  { name: 'Bootstrap', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg' },
-];
-
-export const Skills: React.FC<AnimationProps> = ({ isLoaded = false }) => {
+export const Skills: React.FC<Partial<AnimationProps>> = ({ isLoaded }) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
 
-  const skillCategories = [
-    {
-      title: t('skillsContent.tools'),
-      skills: [{ name: t('skillsContent.gitHubGit') }],
-    },
-    {
-      title: t('skillsContent.language'),
-      skills: [
-        { name: t('skillsContent.html') },
-        { name: t('skillsContent.css') },
-        { name: t('skillsContent.javascriptES6') },
-        { name: t('skillsContent.typescript') },
-      ],
-    },
-    {
-      title: t('skillsContent.frameworks'),
-      skills: [
-        { name: t('skillsContent.reactJS') },
-        { name: t('skillsContent.redux') },
-        { name: t('skillsContent.nextJS') },
-        { name: t('skillsContent.bootstrap') },
-        { name: t('skillsContent.tailwindCSS') },
-      ],
-    },
-  ];
+  const skillCategories = getSkillCategories(t);
 
   return (
     <section id="skills" className="w-full py-8 lg:py-16 px-4 md:px-20">
-      <div className={isLoaded ? 'animate-slide-in-left' : 'slide-in-left-initial'}>
+      <div>
         <h1 className={`leading-tight lg:!leading-[150px] font-medium xl:indent-[-5px] text-4xl md:text-6xl lg:text-9xl font-['Oswald',Helvetica] mb-3 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
           {t('skillsContent.title')}
         </h1>
       </div>
 
-      <div className={`flex flex-col space-y-8 ${isLoaded ? 'animate-slide-in-up' : 'slide-in-up-initial'}`}>
+      <div className="flex flex-col space-y-8">
         <div className="flex flex-col space-y-4">
           <h2 className={`mb-6 font-light text-2xl md:text-4xl font-['Lato',Helvetica] ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
             {t('skillsContent.technologies')}

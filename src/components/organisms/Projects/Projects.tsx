@@ -5,13 +5,13 @@ import { Carousel } from '../../molecules/Carousel/Carousel';
 import { ProjectCard } from '../../molecules/ProjectCard/ProjectCard';
 import { useProjects } from '../../../hooks/useProjects';
 import { AnimationProps } from '../../../hooks/useAnimations';
+import { PROJECTS_DATA } from './projectsData';
 
-export const Projects: React.FC<AnimationProps> = ({ isLoaded = false }) => {
+export const Projects: React.FC<Partial<AnimationProps>> = ({ isLoaded }) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
   
   const {
-    PROJECTS_DATA,
     currentCarouselIndex,
     totalSlides,
     handleCarouselIndexChange,
@@ -23,11 +23,11 @@ export const Projects: React.FC<AnimationProps> = ({ isLoaded = false }) => {
 
   return (
     <section id="portfolio" className="w-full py-8 lg:py-12 relative px-4 md:px-20">
-      <div className={`${titleClasses} ${isLoaded ? 'animate-slide-in-left' : 'slide-in-left-initial'}`}>
+      <div className={titleClasses}>
         {t('projects.title')}
       </div>
 
-      <div className={isLoaded ? 'animate-slide-in-up' : 'slide-in-up-initial'}>
+      <div>
         <Carousel 
           className="w-full"
           currentIndex={currentCarouselIndex}

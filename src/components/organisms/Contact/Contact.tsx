@@ -5,20 +5,9 @@ import { Button } from '../../atoms/Button/Button';
 import { ArrowUp } from '../../icons';
 import { useContact } from '../../../hooks/useContact';
 import { AnimationProps } from '../../../hooks/useAnimations';
+import { CONTACT_INFO, SOCIAL_LINKS } from './contactData';
 
-const CONTACT_INFO = {
-  email: 'DOUGLAS.CAMARGO.DEV@GMAIL.COM',
-  phone: '+58 424 1232755',
-};
-
-const SOCIAL_LINKS = [
-  { name: 'WHATSAPP' },
-  { name: 'GITHUB' },
-  { name: 'LINKEDIN' },
-  { name: 'GMAIL' },
-];
-
-export const Contact: React.FC<AnimationProps> = ({ isLoaded = false }) => {
+export const Contact: React.FC<Partial<AnimationProps>> = ({ isLoaded }) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
   const { activeButton, handleButtonClick, handleBackToTop } = useContact();
@@ -26,15 +15,15 @@ export const Contact: React.FC<AnimationProps> = ({ isLoaded = false }) => {
   return (
     <section id="contacts" className="w-full py-8 lg:py-16 px-4 md:px-20">
       <div className="flex flex-col items-center">
-        <div className={`font-['Lato',Helvetica] font-normal text-xs mb-5 ${theme === 'dark' ? 'text-[#676767]' : 'text-gray-600'} ${isLoaded ? 'animate-slide-in-left' : 'slide-in-left-initial'}`}>
+        <div className={`font-['Lato',Helvetica] font-normal text-xs mb-5 ${theme === 'dark' ? 'text-[#676767]' : 'text-gray-600'}`}>
           {t('contact.getInTouch')}
         </div>
 
-        <h2 className={`font-['Oswald',Helvetica] font-medium text-2xl md:text-4xl lg:text-[64px] leading-tight md:leading-[120px] mb-8 md:mb-16 text-center ${theme === 'dark' ? 'text-[#555555]' : 'text-gray-700'} ${isLoaded ? 'animate-slide-in-right' : 'slide-in-right-initial'}`}>
+        <h2 className={`font-['Oswald',Helvetica] font-medium text-2xl md:text-4xl lg:text-[64px] leading-tight md:leading-[120px] mb-8 md:mb-16 text-center ${theme === 'dark' ? 'text-[#555555]' : 'text-gray-700'}`}>
           {CONTACT_INFO.email}
         </h2>
 
-        <div className={`flex flex-col md:flex-row justify-center md:justify-between items-center md:items-start w-full gap-8 ${isLoaded ? 'animate-slide-in-up' : 'slide-in-up-initial'}`}>
+        <div className="flex flex-col md:flex-row justify-center md:justify-between items-center md:items-start w-full gap-8">
           <div className="flex flex-col -mt-0.5 text-center md:text-left">
             <div className={`font-['Lato',Helvetica] font-semibold text-sm mb-2 ${theme === 'dark' ? 'text-[#555555]' : 'text-gray-700'}`}>
               {t('contact.phone')}

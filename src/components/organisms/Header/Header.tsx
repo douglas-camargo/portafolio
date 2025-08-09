@@ -4,6 +4,7 @@ import { Navigation } from '../../molecules/Navigation/Navigation';
 import { useTheme } from '../../../contexts/ThemeContext';
 import { Moon, Sun } from '../../icons';
 import { useHeader } from '../../../hooks/useHeader';
+import { getNavItems } from './headerData';
 
 export const Header = () => {
   const { t } = useTranslation();
@@ -13,11 +14,15 @@ export const Header = () => {
     isMenuOpen,
     activeSection,
     currentLanguage,
-    navItems,
     handleLanguageChange,
     scrollToSection,
     toggleMenu
   } = useHeader({});
+
+  const navItems = getNavItems(t).map(item => ({
+    ...item,
+    active: activeSection === item.id
+  }));
 
   const headerClasses = `fixed top-0 left-0 right-0 z-50 flex w-full items-start justify-between py-4 px-4 md:px-20 ${theme === 'dark' ? 'bg-[#151515]/95' : 'bg-white/95'} backdrop-blur-sm border-b ${theme === 'dark' ? 'border-white/10' : 'border-gray-200'} transition-colors duration-300`;
 
@@ -98,7 +103,6 @@ export const Header = () => {
           >
             {t('language.en')}
           </button>
-          <span className={theme === 'dark' ? 'text-[#6d6d6d]' : 'text-gray-600'}>/</span>
           <button
             onClick={() => handleLanguageChange('es')}
             className={getLanguageButtonClasses('es')}

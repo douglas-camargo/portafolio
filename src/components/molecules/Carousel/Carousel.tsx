@@ -46,7 +46,6 @@ export const Carousel = ({
     const copies = 7; // Número de veces que quieres duplicar el array
     return Array.from({ length: copies }, () => childrenArray).flat();
   }, [childrenArray]);
-  
 
   return (
     <div className={`relative ${className}`}>
