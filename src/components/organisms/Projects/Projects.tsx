@@ -19,11 +19,9 @@ export const Projects: React.FC<Partial<AnimationProps>> = ({ isLoaded }) => {
     getDotClasses
   } = useProjects();
 
-  const titleClasses = `font-['Lato',Helvetica] font-light text-2xl md:text-4xl tracking-[0] leading-[normal] whitespace-nowrap mb-8 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`;
-
   return (
     <section id="portfolio" className="w-full py-8 lg:py-12 relative px-4 md:px-20">
-      <div className={titleClasses}>
+      <div className={`font-['Lato',Helvetica] font-light text-2xl md:text-4xl tracking-[0] leading-[normal] whitespace-nowrap mb-8 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
         {t('projects.title')}
       </div>
 

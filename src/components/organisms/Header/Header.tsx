@@ -4,6 +4,7 @@ import { Navigation } from '../../molecules/Navigation/Navigation';
 import { useTheme } from '../../../contexts/ThemeContext';
 import { Moon, Sun } from '../../icons';
 import { useHeader } from '../../../hooks/useHeader';
+import { useHeaderClasses } from '../../../hooks/useHeaderClasses';
 import { getNavItems } from './headerData';
 
 export const Header = () => {
@@ -24,28 +25,15 @@ export const Header = () => {
     active: activeSection === item.id
   }));
 
-  const headerClasses = `fixed top-0 left-0 right-0 z-50 flex w-full items-start justify-between py-4 px-4 md:px-20 ${theme === 'dark' ? 'bg-[#151515]/95' : 'bg-white/95'} backdrop-blur-sm border-b ${theme === 'dark' ? 'border-white/10' : 'border-gray-200'} transition-colors duration-300`;
-
-  const aboutButtonClasses = `relative mt-[-1.00px] font-['Lato',Helvetica] font-semibold text-xs tracking-[0] leading-[normal] cursor-pointer transition-colors bg-transparent border-none ${
-    activeSection === 'about' 
-      ? theme === 'dark' ? 'text-white' : 'text-gray-800'
-      : theme === 'dark' ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-800'
-  }`;
-
-  const mobileMenuButtonClasses = `md:hidden ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`;
-
-  const mobileMenuClasses = `absolute top-full left-0 right-0 p-4 md:hidden z-50 ${theme === 'dark' ? 'bg-[#151515]' : 'bg-white border-t border-gray-200'}`;
-
-  const themeToggleClasses = `rounded transition-colors hover:bg-opacity-20 ${theme === 'dark' ? 'text-white hover:bg-white' : 'text-gray-800 hover:bg-gray-200'}`;
-
-  const getLanguageButtonClasses = (language: string) => {
-    const isActive = currentLanguage === language;
-    return `px-2 rounded transition-colors ${
-      isActive 
-        ? theme === 'dark' ? 'text-white bg-white bg-opacity-20' : 'text-gray-800 bg-gray-200'
-        : theme === 'dark' ? 'text-[#6d6d6d] hover:text-white' : 'text-gray-600 hover:text-gray-800'
-    }`;
-  };
+  const {
+    headerClasses,
+    aboutButtonClasses,
+    mobileMenuButtonClasses,
+    mobileMenuClasses,
+    themeToggleClasses,
+    getLanguageButtonClasses,
+    mobileMenuButtonSpanClasses
+  } = useHeaderClasses({ theme, activeSection, currentLanguage, isMenuOpen });
 
   return (
     <header className={headerClasses}>
@@ -62,9 +50,9 @@ export const Header = () => {
         onClick={toggleMenu}
       >
         <div className="w-6 h-6 flex flex-col justify-center items-center">
-          <span className={`bg-white block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${isMenuOpen ? 'rotate-45 translate-y-1' : '-translate-y-0.5'}`}></span>
-          <span className={`bg-white block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm my-0.5 ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}></span>
-          <span className={`bg-white block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${isMenuOpen ? '-rotate-45 -translate-y-1' : 'translate-y-0.5'}`}></span>
+          <span className={mobileMenuButtonSpanClasses.top}></span>
+          <span className={mobileMenuButtonSpanClasses.middle}></span>
+          <span className={mobileMenuButtonSpanClasses.bottom}></span>
         </div>
       </button>
 
