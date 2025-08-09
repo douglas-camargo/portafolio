@@ -34,24 +34,15 @@ export const Carousel = ({
     handleTouchMove,
     handleTouchEnd,
     getTransformValue,
-    isDragging
+    isDragging,
+    duplicatedChildren
   } = useCarousel({
     totalItems,
     onIndexChange,
     currentIndex: externalIndex,
-    onGoToIndex
+    onGoToIndex,
+    childrenArray
   });
-
-  // const duplicatedChildren = React.useMemo(() => {
-  //   // Crear más copias para asegurar que siempre haya elementos visibles
-  //   return [...childrenArray, ...childrenArray, ...childrenArray, ...childrenArray, ...childrenArray];
-  // }, [childrenArray]);
-
-  const duplicatedChildren = React.useMemo(() => {
-    const copies = 7; // Número de veces que quieres duplicar el array
-    return Array.from({ length: copies }, () => childrenArray).flat();
-  }, [childrenArray]);
-  
 
   return (
     <div className={`relative ${className}`}>

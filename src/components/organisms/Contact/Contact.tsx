@@ -4,20 +4,10 @@ import { useTheme } from '../../../contexts/ThemeContext';
 import { Button } from '../../atoms/Button/Button';
 import { ArrowUp } from '../../icons';
 import { useContact } from '../../../hooks/useContact';
+import { AnimationProps } from '../../../hooks/useAnimations';
+import { CONTACT_INFO, SOCIAL_LINKS } from './contactData';
 
-const CONTACT_INFO = {
-  email: 'DOUGLAS.CAMARGO.DEV@GMAIL.COM',
-  phone: '+58 424 1232755',
-};
-
-const SOCIAL_LINKS = [
-  { name: 'WHATSAPP' },
-  { name: 'GITHUB' },
-  { name: 'LINKEDIN' },
-  { name: 'GMAIL' },
-];
-
-export const Contact = () => {
+export const Contact: React.FC<Partial<AnimationProps>> = ({ isLoaded }) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
   const { activeButton, handleButtonClick, handleBackToTop } = useContact();

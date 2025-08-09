@@ -5,8 +5,9 @@ import { Button } from '../../atoms/Button/Button';
 import { Card } from '../../atoms/Card/Card';
 import { CardContent } from '../../atoms/CardContent/CardContent';
 import { useHero } from '../../../hooks/useHero';
+import { AnimationProps } from '../../../hooks/useAnimations';
 
-export const Hero = () => {
+export const Hero: React.FC<AnimationProps> = ({ isLoaded = false }) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
   const { handleDownloadCV, handleWhatsAppContact } = useHero();
@@ -15,7 +16,7 @@ export const Hero = () => {
     <section id="about" className="flex flex-col items-start px-4 md:px-20 py-8 lg:py-16 w-full relative mt-20">
       <div className="w-full flex flex-col lg:flex-row items-start gap-8 mb-5 lg:mb-14">
         {/* Left side - Text content */}
-        <div className="flex-1 max-w-full lg:max-w-[670px] text-center lg:text-left">
+        <div className={`flex-1 max-w-full lg:max-w-[670px] text-center lg:text-left ${isLoaded ? 'animate-slide-in-left' : 'slide-in-left-initial'}`}>
           <div className={`font-['Lato',Helvetica] font-light text-lg sm:text-lg md:text-3xl lg:text-4xl tracking-[0] leading-normal mb-4 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
             {t('hero.title')}
           </div>
@@ -36,7 +37,7 @@ export const Hero = () => {
         </div>
 
         {/* Right side - Image */}
-        <div className="flex-shrink-0 w-full lg:w-[514px] h-[300px] sm:h-[400px] md:h-[500px] relative order-first lg:order-last">
+        <div className={`flex-shrink-0 w-full lg:w-[514px] h-[300px] sm:h-[400px] md:h-[500px] relative order-first lg:order-last ${isLoaded ? 'animate-slide-in-right' : 'slide-in-right-initial'}`}>
           <div className="relative h-full rounded-[20px] overflow-hidden">
             <img
               className="absolute w-full h-full object-cover object-[center_28%] rounded-[20px]"
@@ -49,7 +50,7 @@ export const Hero = () => {
       </div>
 
       {/* Buttons - moved outside the flex container */}
-      <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto px-4 md:px-0 sm:self-center lg:self-start">
+      <div className={`flex flex-col sm:flex-row gap-4 w-full sm:w-auto px-4 md:px-0 sm:self-center lg:self-start ${isLoaded ? 'animate-slide-in-up' : 'slide-in-up-initial'}`}>
         <Button className="w-full sm:w-52" onClick={handleWhatsAppContact}>
           {t('hero.contactMe')}
         </Button>

@@ -1,17 +1,19 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 
 interface UseCarouselProps {
   totalItems: number;
   onIndexChange?: (index: number) => void;
   currentIndex?: number;
   onGoToIndex?: (index: number) => void;
+  childrenArray?: React.ReactNode[];
 }
 
 export const useCarousel = ({ 
   totalItems, 
   onIndexChange, 
   currentIndex: externalIndex, 
-  onGoToIndex 
+  onGoToIndex,
+  childrenArray = []
 }: UseCarouselProps) => {
   const [internalIndex, setInternalIndex] = useState(totalItems);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -26,6 +28,12 @@ export const useCarousel = ({
   const carouselRef = useRef<HTMLDivElement>(null);
 
   const currentIndex = externalIndex !== undefined ? externalIndex : internalIndex;
+
+  // Función para duplicar los children del carousel
+  const duplicatedChildren = useMemo(() => {
+    const copies = 7; // Número de veces que quieres duplicar el array
+    return Array.from({ length: copies }, () => childrenArray).flat();
+  }, [childrenArray]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -201,6 +209,7 @@ export const useCarousel = ({
     handleTouchMove,
     handleTouchEnd,
     getTransformValue,
-    isDragging
+    isDragging,
+    duplicatedChildren
   };
 };
