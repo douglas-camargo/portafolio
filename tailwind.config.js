@@ -56,8 +56,8 @@ module.exports = {
           '"Segoe UI Symbol"',
           '"Noto Color Emoji"',
         ],
-        lato: ['Lato', 'sans-serif'],
-        oswald: ['Oswald', 'sans-serif'],
+        lato: ['Lato', 'Helvetica', 'Arial', 'sans-serif'],
+        oswald: ['Oswald', 'Arial', 'sans-serif'],
       },
       fontWeight: {
         'extralight': '200',

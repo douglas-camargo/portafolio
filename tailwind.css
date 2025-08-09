@@ -81,6 +81,53 @@
     scroll-behavior: smooth;
   }
 
+  /* Font loading optimization */
+  .font-lato {
+    font-family: 'Lato', Helvetica, Arial, sans-serif;
+    font-display: swap;
+  }
+
+  .font-oswald {
+    font-family: 'Oswald', Arial, sans-serif;
+    font-display: swap;
+  }
+
+  /* Prevent FOUT (Flash of Unstyled Text) */
+  .font-loading {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .font-loaded {
+    opacity: 1;
+  }
+
+  /* Global font loading state */
+  html:not(.fonts-loaded) {
+    visibility: hidden;
+  }
+
+  html.fonts-loaded {
+    visibility: visible;
+  }
+
+  /* Smooth font transition */
+  * {
+    font-display: swap;
+  }
+
+  /* Optimización adicional para fuentes */
+  body {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Asegurar que las fuentes se carguen antes de mostrar el contenido */
+  .font-lato, .font-oswald {
+    font-display: swap;
+  }
+
   /* Light mode styles */
   .light {
     --background: 0 0% 100%;
