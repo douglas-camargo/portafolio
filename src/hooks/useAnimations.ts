@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react'
+import { useFontLoading } from './useFontLoading';
+
 export interface AnimationProps {
   isLoaded?: boolean;
 }
 
-export const useAnimations = (minDelay = 400) => {
+export const useAnimations = (minDelay = 300) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const { fontsLoaded } = useFontLoading();
 
   useEffect(() => {
     if (window.scrollY > 0) window.scrollTo(0, 0);
@@ -34,14 +37,34 @@ export const useAnimations = (minDelay = 400) => {
     const waitMinimumTime = () =>
       new Promise(resolve => setTimeout(resolve, minDelay));
 
+    const waitForFonts = () =>
+      new Promise<void>(resolve => {
+        if (fontsLoaded) {
+          resolve();
+        } else {
+          const checkFonts = () => {
+            if (fontsLoaded) {
+              resolve();
+            } else {
+              setTimeout(checkFonts, 50);
+            }
+          };
+          checkFonts();
+        }
+      });
+
     (async () => {
       try {
+        // Esperar fuentes primero (más rápido)
+        await waitForFonts();
+        
+        // Luego esperar el resto en paralelo
         await Promise.all([checkCriticalImages(), waitMinimumTime()]);
       } finally {
         setIsLoaded(true);
       }
     })();
-  }, [minDelay]);
+  }, [minDelay, fontsLoaded]);
 
   return { isLoaded };
 };
