@@ -3,7 +3,7 @@ export interface AnimationProps {
   isLoaded?: boolean;
 }
 
-export const useAnimations = (minDelay = 200) => {
+export const useAnimations = (minDelay = 400) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
