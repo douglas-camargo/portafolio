@@ -73,11 +73,13 @@ export const useAnimations = (minDelay = 500) => {
 
     (async () => {
       try {
-        // Esperar fuentes y detección de idioma primero (más rápido)
-        await Promise.all([waitForFonts(), waitForLanguageDetection()]);
-        
-        // Luego esperar el resto en paralelo
-        await Promise.all([checkCriticalImages(), waitMinimumTime()]);
+        // Esperar todo en paralelo para máxima eficiencia
+        await Promise.all([
+          waitForFonts(),
+          waitForLanguageDetection(),
+          checkCriticalImages(),
+          waitMinimumTime()
+        ]);
       } finally {
         setIsLoaded(true);
       }
