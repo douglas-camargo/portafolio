@@ -1,9 +1,11 @@
 import React from 'react';
 import { useTheme } from '../../../contexts/ThemeContext';
+import { useLanguage } from '../../../contexts/LanguageContext';
 import { Skeleton } from './Skeleton';
 
 export const HeroSkeleton: React.FC = () => {
   const { theme } = useTheme();
+  const { currentLanguage } = useLanguage();
   
   const bgClass = theme === 'dark' ? 'bg-[#151515]' : 'bg-gray-50';
 

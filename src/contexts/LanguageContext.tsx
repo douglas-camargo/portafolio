@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 interface LanguageContextType {
   currentLanguage: string;
   changeLanguage: (language: string) => void;
+  hasDetected: boolean;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -52,7 +53,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   }, [i18n]);
 
   return (
-    <LanguageContext.Provider value={{ currentLanguage, changeLanguage }}>
+    <LanguageContext.Provider value={{ currentLanguage, changeLanguage, hasDetected }}>
       {children}
     </LanguageContext.Provider>
   );
