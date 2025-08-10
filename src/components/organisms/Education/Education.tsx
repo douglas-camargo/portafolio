@@ -44,15 +44,15 @@ export const Education: React.FC<Partial<AnimationProps>> = ({ isLoaded }) => {
 
               <div className="md:col-span-1">
                 {Array.isArray(item.details) ? (
-                  <div className="space-y-4">
+                  <div className="flex flex-col space-y-4">
                     {item.details.map((detail, detailIndex) => (
                       <React.Fragment key={detailIndex}>
                         {typeof detail === 'string' ? (
-                          <p className={`font-normal text-xs font-['Lato',Helvetica] ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>
+                          <span className={`font-normal text-sm font-['Lato',Helvetica] ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>
                             {detail}
-                          </p>
+                          </span>
                         ) : (
-                          <button
+                          <span
                             onClick={() => {
                               const link = document.createElement('a');
                               link.href = detail.url;
@@ -60,16 +60,19 @@ export const Education: React.FC<Partial<AnimationProps>> = ({ isLoaded }) => {
                               link.rel = 'noopener noreferrer';
                               link.click();
                             }}
-                            className={`font-normal text-xs font-['Lato',Helvetica] text-blue-500 hover:text-blue-600 underline ${theme === 'dark' ? 'hover:text-blue-400' : ''}`}
+                            className={`font-normal text-sm font-['Lato',Helvetica] ${theme === 'dark' ? 'text-white' : 'text-gray-700'} cursor-pointer hover:opacity-80 transition-opacity`}
                           >
                             {detail.name}
-                          </button>
+                          </span>
+                        )}
+                        {detailIndex < item.details.length - 1 && (
+                          <Separator className={`w-full ${theme === 'dark' ? 'bg-white/20' : 'bg-gray-300'}`} />
                         )}
                       </React.Fragment>
                     ))}
                   </div>
                 ) : (
-                  <p className={`font-normal text-xs font-['Lato',Helvetica] ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>
+                  <p className={`font-normal text-sm font-['Lato',Helvetica] ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>
                     {item.details}
                   </p>
                 )}
