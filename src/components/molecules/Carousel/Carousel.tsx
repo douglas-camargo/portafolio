@@ -8,6 +8,7 @@ interface CarouselProps {
   onIndexChange?: (index: number) => void;
   currentIndex?: number;
   onGoToIndex?: (index: number) => void;
+  onGoToSpecificIndex?: (index: number) => void;
 }
 
 export const Carousel = ({ 
@@ -15,7 +16,8 @@ export const Carousel = ({
   className = '', 
   onIndexChange,
   currentIndex: externalIndex,
-  onGoToIndex 
+  onGoToIndex,
+  onGoToSpecificIndex
 }: CarouselProps) => {
   const childrenArray = React.Children.toArray(children);
   const totalItems = childrenArray.length;
@@ -30,6 +32,7 @@ export const Carousel = ({
     carouselRef,
     goToNext,
     goToPrevious,
+    goToSpecificIndex: carouselGoToSpecificIndex,
     handleTouchStart,
     handleTouchMove,
     handleTouchEnd,
@@ -43,6 +46,13 @@ export const Carousel = ({
     onGoToIndex,
     childrenArray
   });
+
+  // Exponer la función goToSpecificIndex al componente padre
+  React.useEffect(() => {
+    if (onGoToSpecificIndex) {
+      onGoToSpecificIndex(carouselGoToSpecificIndex);
+    }
+  }, [carouselGoToSpecificIndex, onGoToSpecificIndex]);
 
   return (
     <div className={`relative ${className}`}>
