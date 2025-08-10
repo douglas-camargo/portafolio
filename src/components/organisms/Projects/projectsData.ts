@@ -22,6 +22,20 @@ export const PROJECTS_DATA: Project[] = [
       { id: 2, name: 'JAVASCRIPT' },
       { id: 3, name: 'TAILWINDCSS' },
     ],
+    image: '/images/project-project-restaurant-casa-del-sabor.webp',
+    showViewButton: true,
+    githubUrl: 'https://github.com/douglas-camargo/restaurante_casa_del_sabor',
+    pageUrl: 'https://restaurante-casa-del-sabor.vercel.app/',
+    backendUrl: '',
+    showFrontendBackendLabels: false,
+  },
+  {
+    id: 2,
+    tags: [
+      { id: 1, name: 'REACT' },
+      { id: 2, name: 'JAVASCRIPT' },
+      { id: 3, name: 'TAILWINDCSS' },
+    ],
     image: '/images/project-restaurant.webp',
     showViewButton: true,
     githubUrl: 'https://github.com/douglas-camargo/lading_restaurant',
@@ -30,7 +44,7 @@ export const PROJECTS_DATA: Project[] = [
     showFrontendBackendLabels: false,
   },
   {
-    id: 2,
+    id: 3,
     tags: [
       { id: 1, name: 'REACT' },
       { id: 2, name: 'TYPESCRIPT' },
@@ -45,7 +59,7 @@ export const PROJECTS_DATA: Project[] = [
     showFrontendBackendLabels: true,
   },
   {
-    id: 3,
+    id: 4,
     tags: [
       { id: 1, name: 'NEXT.JS' },
       { id: 3, name: 'JAVASCRIPT' },
@@ -59,7 +73,7 @@ export const PROJECTS_DATA: Project[] = [
     showFrontendBackendLabels: false,
   },
   {
-    id: 4,
+    id: 5,
     tags: [
       { id: 1, name: 'REACT' },
       { id: 2, name: 'JAVASCRIPT' },
@@ -73,7 +87,7 @@ export const PROJECTS_DATA: Project[] = [
     showFrontendBackendLabels: false,
   },
   {
-    id: 5,
+    id: 6,
     tags: [
       { id: 1, name: 'HTML' },
       { id: 2, name: 'CSS' },
@@ -87,7 +101,7 @@ export const PROJECTS_DATA: Project[] = [
     showFrontendBackendLabels: false,
   },
   {
-    id: 6,
+    id: 7,
     tags: [
       { id: 1, name: 'NEXT.JS' },
       { id: 2, name: 'JAVASCRIPT' },
