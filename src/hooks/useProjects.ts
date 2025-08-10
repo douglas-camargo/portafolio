@@ -13,12 +13,19 @@ export const useProjects = () => {
   }, []);
 
   const goToSlide = useCallback((index: number) => {
+    // Convertir el índice simple (0, 1, 2, etc.) al índice del carrusel infinito
+    // El carrusel comienza en el índice totalSlides (que es el primer elemento real)
+    const carouselIndex = totalSlides + index;
     setCurrentCarouselIndex(index);
-  }, []);
+    
+    // Llamar a la función onGoToIndex del carrusel con el índice correcto
+    // Esta función será pasada desde el componente Projects
+    return carouselIndex;
+  }, [totalSlides]);
 
   const getDotClasses = useCallback((index: number) => {
     const isActive = index === currentCarouselIndex;
-    const baseClasses = 'w-3 h-3 rounded-full transition-all duration-300';
+    const baseClasses = 'w-3 h-3 rounded-full transition-all duration-300 cursor-pointer';
     const activeClasses = theme === 'dark' ? 'bg-white' : 'bg-gray-800';
     const inactiveClasses = theme === 'dark' ? 'bg-white/30 hover:bg-white/50' : 'bg-gray-300 hover:bg-gray-400';
     

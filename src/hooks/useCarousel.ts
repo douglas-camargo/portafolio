@@ -130,6 +130,15 @@ export const useCarousel = ({
     }, 700);
   }, [isTransitioning, totalItems, externalIndex, onGoToIndex, onIndexChange]);
 
+  // Función para ir a un índice específico (para los puntos de navegación)
+  const goToSpecificIndex = useCallback((targetIndex: number) => {
+    if (isTransitioning) return;
+    
+    // Convertir el índice simple (0, 1, 2, etc.) al índice del carrusel infinito
+    const carouselIndex = totalItems + targetIndex;
+    updateIndex(carouselIndex);
+  }, [isTransitioning, totalItems, updateIndex]);
+
   const goToNext = useCallback(() => updateIndex(infiniteIndex + 1), [updateIndex, infiniteIndex]);
   const goToPrevious = useCallback(() => updateIndex(infiniteIndex - 1), [updateIndex, infiniteIndex]);
 
@@ -205,6 +214,7 @@ export const useCarousel = ({
     carouselRef,
     goToNext,
     goToPrevious,
+    goToSpecificIndex,
     handleTouchStart,
     handleTouchMove,
     handleTouchEnd,
