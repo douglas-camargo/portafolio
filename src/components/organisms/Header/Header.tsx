@@ -45,17 +45,25 @@ export const Header = () => {
 
   return (
     <header className={headerClasses}>
-      <Button
-        variant="outline"
-        size="sm"
-        className="rounded-[23px] w-[106px]"
-        onClick={() => window.open('https://github.com/douglas-camargo/portafolio', '_blank')}
-      >
-        {t('code')}
-      </Button>
+      {/* Left side */}
+      <div className="flex items-center">
+        <Button
+          variant="outline"
+          size="sm"
+          className="rounded-[23px] w-[106px]"
+          onClick={() => window.open('https://github.com/douglas-camargo/portafolio', '_blank')}
+        >
+          {t('code')}
+        </Button>
+      </div>
 
-      {/* Mobile menu button and navigation container */}
-      <div className="relative">
+      {/* Center - Desktop Navigation / Mobile menu button */}
+      <div className="hidden md:flex items-center justify-center flex-1">
+        <Navigation items={navItems} onItemClick={scrollToSection} />
+      </div>
+
+      {/* Mobile menu button - centered */}
+      <div className="relative md:hidden flex items-center justify-center flex-1">
         <button 
           className={mobileMenuButtonClasses}
           onClick={toggleMenu}
@@ -75,12 +83,7 @@ export const Header = () => {
         )}
       </div>
 
-      {/* Desktop Navigation */}
-      <div className="hidden md:block">
-        <Navigation items={navItems} onItemClick={scrollToSection} />
-      </div>
-
-      {/* Theme and Language Switcher */}
+      {/* Right side */}
       <div className="flex items-center space-x-3 font-['Lato',Helvetica] font-semibold text-xs tracking-[0] leading-[normal]">
         {/* Theme Toggle */}
         <button
