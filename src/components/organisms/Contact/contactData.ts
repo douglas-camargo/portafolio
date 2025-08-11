@@ -8,7 +8,7 @@ export interface SocialLink {
 }
 
 export const CONTACT_INFO: ContactInfo = {
-  email: 'DOUGLAS.CAMARGO.DEV@GMAIL.COM',
+  email: 'DOUGLAS.CA.DEV@GMAIL.COM',
   phone: '+58 424 1232755',
 };
 

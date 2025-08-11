@@ -37,7 +37,7 @@ export const useContact = () => {
         window.open('https://www.linkedin.com/in/douglas-camargo-4858a5178/', '_blank');
         break;
       case 'GMAIL':
-        window.open('mailto:douglas.camargo.dev@gmail.com', '_blank');
+        window.open('mailto:douglas.ca.dev@gmail.com', '_blank');
         break;
       default:
         break;
