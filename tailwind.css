@@ -335,7 +335,7 @@
 }
 
 .language-button-base {
-  @apply px-2 rounded transition-colors relative;
+  @apply px-0.5 rounded transition-colors relative;
 }
 
 .language-button-active-dark {

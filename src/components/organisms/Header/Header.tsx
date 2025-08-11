@@ -100,6 +100,7 @@ export const Header = () => {
             {t('language.en')}
             <div className={getLanguageIndicatorClasses('en')} />
           </button>
+          <span className="text-gray-500 font-extrabold scale-x-150">/</span>
           <button
             onClick={() => handleLanguageChange('es')}
             className={getLanguageButtonClasses('es')}
