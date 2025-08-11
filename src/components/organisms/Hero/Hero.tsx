@@ -34,6 +34,17 @@ export const Hero: React.FC<AnimationProps> = ({ isLoaded = false }) => {
               </p>
             </CardContent>
           </Card>
+
+          {/* Buttons */}
+          <div className={`flex flex-col sm:flex-row gap-4 w-full sm:w-auto ${isLoaded ? 'animate-slide-in-up' : 'slide-in-up-initial'}`}>
+            <Button className="w-full sm:w-52" onClick={handleWhatsAppContact}>
+              {t('hero.contactMe')}
+            </Button>
+
+            <Button variant="outline" className="w-full sm:w-52" onClick={handleDownloadCV}>
+              {t('hero.downloadCV')}
+            </Button>
+          </div>
         </div>
 
         {/* Right side - Image */}
@@ -47,17 +58,6 @@ export const Hero: React.FC<AnimationProps> = ({ isLoaded = false }) => {
             <div className="w-full rounded-[20px] bg-gradient-to-r from-[#151515] via-[#313131]/50 to-transparent absolute h-full top-0 left-0" />
           </div>
         </div>
-      </div>
-
-      {/* Buttons - moved outside the flex container */}
-      <div className={`flex flex-col sm:flex-row gap-4 w-full sm:w-auto px-4 md:px-0 sm:self-center lg:self-start ${isLoaded ? 'animate-slide-in-up' : 'slide-in-up-initial'}`}>
-        <Button className="w-full sm:w-52" onClick={handleWhatsAppContact}>
-          {t('hero.contactMe')}
-        </Button>
-
-        <Button variant="outline" className="w-full sm:w-52" onClick={handleDownloadCV}>
-          {t('hero.downloadCV')}
-        </Button>
       </div>
     </section>
   );
