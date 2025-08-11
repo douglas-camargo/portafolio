@@ -20,23 +20,23 @@ export const getEducationData = (t: TFunction): EducationItem[] => [
     details: [
       {
         name: 'HTML',
-        url: 'https://drive.google.com/uc?export=download&id=1G09EVEgH5BuWSwhB_jXobm9mWWrVYlwt'
+        url: 'https://drive.google.com/file/d/1G09EVEgH5BuWSwhB_jXobm9mWWrVYlwt/preview'
       },
       {
         name: 'CSS',
-        url: 'https://drive.google.com/uc?export=download&id=1axLMsaHMJcLTirp28rt_eXtqwaKtEz4h'
+        url: 'https://drive.google.com/file/d/1axLMsaHMJcLTirp28rt_eXtqwaKtEz4h/preview'
       },
       {
         name: 'JavaScript',
-        url: 'https://drive.google.com/uc?export=download&id=1bhfojPhLedd2nsir8hFpQbHpPg0xHvUu'
+        url: 'https://drive.google.com/file/d/1bhfojPhLedd2nsir8hFpQbHpPg0xHvUu/preview'
       },
       {
         name: 'React.js',
-        url: 'https://drive.google.com/uc?export=download&id=1OKRXfgaB1FHof9wvzKnMwZRuCiOdZwcJ'
+        url: 'https://drive.google.com/file/d/1OKRXfgaB1FHof9wvzKnMwZRuCiOdZwcJ/preview'
       },
       {
         name: 'Git',
-        url: 'https://drive.google.com/uc?export=download&id=1s2jUfC3QAXWHAgkPiw_aSnqde4g1dAza'
+        url: 'https://drive.google.com/file/d/1s2jUfC3QAXWHAgkPiw_aSnqde4g1dAza/preview'
       },
     ],
   },

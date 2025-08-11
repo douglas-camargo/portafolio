@@ -52,18 +52,27 @@ export const Education: React.FC<Partial<AnimationProps>> = ({ isLoaded }) => {
                             {detail}
                           </span>
                         ) : (
-                          <span
-                            onClick={() => {
-                              const link = document.createElement('a');
-                              link.href = detail.url;
-                              link.target = '_blank';
-                              link.rel = 'noopener noreferrer';
-                              link.click();
-                            }}
-                            className={`font-normal text-sm font-['Lato',Helvetica] ${theme === 'dark' ? 'text-white' : 'text-gray-700'} cursor-pointer hover:opacity-80 transition-opacity`}
-                          >
-                            {detail.name}
-                          </span>
+                          <div className="flex items-center justify-between">
+                            <span className={`font-normal text-sm font-['Lato',Helvetica] ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>
+                              {detail.name}
+                            </span>
+                            <button
+                              onClick={() => {
+                                const link = document.createElement('a');
+                                link.href = detail.url;
+                                link.target = '_blank';
+                                link.rel = 'noopener noreferrer';
+                                link.click();
+                              }}
+                              className={`px-3 py-1 text-xs font-semibold rounded-md transition-colors duration-200 ${
+                                theme === 'dark' 
+                                  ? 'bg-white/10 text-white hover:bg-white/20 border border-white/20' 
+                                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-300'
+                              }`}
+                            >
+                              {t('educationSection.viewCertificate')}
+                            </button>
+                          </div>
                         )}
                         {detailIndex < item.details.length - 1 && (
                           <Separator className={`w-full ${theme === 'dark' ? 'bg-white/20' : 'bg-gray-300'}`} />

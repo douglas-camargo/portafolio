@@ -13,8 +13,21 @@ export const HeroSkeleton: React.FC = () => {
     <div className={`${bgClass} flex flex-row justify-center w-full min-h-screen transition-colors duration-300`}>
       <div className={`${bgClass} overflow-hidden w-full max-w-[1366px] relative`}>
         {/* Header Skeleton */}
-        <header className="fixed top-0 left-0 right-0 z-50 flex w-full items-start justify-between py-4 px-4 md:px-20 backdrop-blur-sm border-b border-gray-200 dark:border-white/10 bg-white/95 dark:bg-[#151515]/95">
-          <Skeleton width="w-16" height="h-4" />
+        <header className="fixed top-0 left-1/2 transform -translate-x-1/2 z-50 flex items-center justify-between py-4 px-4 md:px-20 backdrop-blur-sm border-b transition-colors duration-300 w-full max-w-[1366px] bg-white/95 dark:bg-[#151515]/95 border-gray-200 dark:border-white/10">
+          {/* Code Button Skeleton */}
+          {/* <div className="w-[106px] h-[34px] rounded-[23px] border-2 border-gray-800 dark:border-white bg-transparent flex items-center justify-center"> */}
+          <div className="w-[106px] h-[34px] rounded-[8px] border-2 border-gray-800 dark:border-white bg-transparent flex items-center justify-center">
+            <Skeleton width="w-12" height="h-4" rounded="none" />
+          </div>
+          
+          {/* Mobile menu button and navigation container skeleton */}
+          <div className="relative">
+            <div className="md:hidden">
+              <Skeleton width="w-6" height="h-6" />
+            </div>
+          </div>
+          
+          {/* Desktop Navigation Skeleton */}
           <div className="hidden md:flex space-x-6">
             <Skeleton width="w-20" height="h-4" />
             <Skeleton width="w-24" height="h-4" />
@@ -22,10 +35,13 @@ export const HeroSkeleton: React.FC = () => {
             <Skeleton width="w-16" height="h-4" />
             <Skeleton width="w-20" height="h-4" />
           </div>
-          <div className="flex space-x-3">
+          
+          {/* Theme and Language Switcher Skeleton */}
+          <div className="flex items-center space-x-3">
             <Skeleton width="w-4" height="h-4" rounded="full" />
-            <div className="flex space-x-1">
+            <div className="flex items-center space-x-1">
               <Skeleton width="w-8" height="h-4" />
+              <span className="text-gray-500 font-extrabold scale-x-150">/</span>
               <Skeleton width="w-8" height="h-4" />
             </div>
           </div>

@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Navigation } from '../../molecules/Navigation/Navigation';
 import { useTheme } from '../../../contexts/ThemeContext';
 import { Moon, Sun } from '../../icons';
+import { Button } from '../../atoms/Button/Button';
 import { useHeader } from '../../../hooks/useHeader';
 import { useHeaderClasses } from '../../../hooks/useHeaderClasses';
 import { getNavItems } from './headerData';
@@ -27,7 +28,6 @@ export const Header = () => {
 
   const {
     headerClasses,
-    aboutButtonClasses,
     mobileMenuButtonClasses,
     mobileMenuClasses,
     themeToggleClasses,
@@ -45,39 +45,43 @@ export const Header = () => {
 
   return (
     <header className={headerClasses}>
-      <button 
-        onClick={() => scrollToSection('about')}
-        className={aboutButtonClasses}
+      <Button
+        variant="outline"
+        size="sm"
+        className="rounded-[23px] w-[106px]"
+        onClick={() => window.open('https://github.com/douglas-camargo/portafolio', '_blank')}
       >
-        {t('about')}
-      </button>
+        {t('code')}
+      </Button>
 
-      {/* Mobile menu button */}
-      <button 
-        className={mobileMenuButtonClasses}
-        onClick={toggleMenu}
-      >
-        <div className="w-6 h-6 flex flex-col justify-center items-center">
-          <span className={mobileMenuButtonSpanClasses.top}></span>
-          <span className={mobileMenuButtonSpanClasses.middle}></span>
-          <span className={mobileMenuButtonSpanClasses.bottom}></span>
-        </div>
-      </button>
+      {/* Mobile menu button and navigation container */}
+      <div className="relative">
+        <button 
+          className={mobileMenuButtonClasses}
+          onClick={toggleMenu}
+        >
+          <div className="w-6 h-6 flex flex-col justify-center items-center">
+            <span className={mobileMenuButtonSpanClasses.top}></span>
+            <span className={mobileMenuButtonSpanClasses.middle}></span>
+            <span className={mobileMenuButtonSpanClasses.bottom}></span>
+          </div>
+        </button>
+
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <div className={mobileMenuClasses}>
+            <Navigation items={navItems} onItemClick={scrollToSection} />
+          </div>
+        )}
+      </div>
 
       {/* Desktop Navigation */}
       <div className="hidden md:block">
         <Navigation items={navItems} onItemClick={scrollToSection} />
       </div>
 
-      {/* Mobile Navigation */}
-      {isMenuOpen && (
-        <div className={mobileMenuClasses}>
-          <Navigation items={navItems} onItemClick={scrollToSection} />
-        </div>
-      )}
-
       {/* Theme and Language Switcher */}
-      <div className="flex items-start space-x-3 font-['Lato',Helvetica] font-semibold text-xs tracking-[0] leading-[normal]">
+      <div className="flex items-center space-x-3 font-['Lato',Helvetica] font-semibold text-xs tracking-[0] leading-[normal]">
         {/* Theme Toggle */}
         <button
           onClick={toggleTheme}
@@ -92,7 +96,7 @@ export const Header = () => {
         </button>
         
         {/* Language Switcher */}
-        <div className="flex items-start space-x-1">
+        <div className="flex items-center space-x-1">
           <button
             onClick={() => handleLanguageChange('en')}
             className={getLanguageButtonClasses('en')}
