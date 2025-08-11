@@ -335,15 +335,15 @@
 }
 
 .language-button-base {
-  @apply px-2 rounded transition-colors;
+  @apply px-2 rounded transition-colors relative;
 }
 
 .language-button-active-dark {
-  @apply text-white bg-white bg-opacity-20;
+  @apply text-white;
 }
 
 .language-button-active-light {
-  @apply text-gray-800 bg-gray-200;
+  @apply text-gray-800;
 }
 
 .language-button-inactive-dark {

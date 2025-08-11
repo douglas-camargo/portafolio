@@ -35,6 +35,14 @@ export const Header = () => {
     mobileMenuButtonSpanClasses
   } = useHeaderClasses({ theme, activeSection, currentLanguage, isMenuOpen });
 
+  const getLanguageIndicatorClasses = (language: string) => {
+    const isActive = currentLanguage === language;
+    const baseClasses = 'absolute -bottom-1 left-0 w-full h-0.5 rounded-full transition-all duration-300';
+    return isActive 
+      ? `${baseClasses} ${theme === 'dark' ? 'bg-white' : 'bg-gray-800'}`
+      : `${baseClasses} opacity-0`;
+  };
+
   return (
     <header className={headerClasses}>
       <button 
@@ -90,12 +98,14 @@ export const Header = () => {
             className={getLanguageButtonClasses('en')}
           >
             {t('language.en')}
+            <div className={getLanguageIndicatorClasses('en')} />
           </button>
           <button
             onClick={() => handleLanguageChange('es')}
             className={getLanguageButtonClasses('es')}
           >
             {t('language.es')}
+            <div className={getLanguageIndicatorClasses('es')} />
           </button>
         </div>
       </div>
