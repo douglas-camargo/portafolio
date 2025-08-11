@@ -23,7 +23,7 @@ export const Education: React.FC<Partial<AnimationProps>> = ({ isLoaded }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
           <div className="md:col-span-1"></div>
           <div className="md:col-span-1">
-            <p className={`font-medium text-lg md:text-2xl font-['Lato',Helvetica] ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>
+            <p className={`font-medium text-lg md:text-2xl justify-paragraph font-['Lato',Helvetica] ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>
               {t('educationSection.description')}
             </p>
           </div>

@@ -29,7 +29,7 @@ export const Hero: React.FC<AnimationProps> = ({ isLoaded = false }) => {
 
           <Card className="bg-transparent border-0 mb-8">
             <CardContent className="p-0 md:py-3.5 md:px-0.5">
-              <p className={`font-['Lato',Helvetica] font-semibold text-sm leading-normal ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>
+              <p className={`font-['Lato',Helvetica] font-semibold text-sm leading-normal justify-paragraph ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>
                 {t('hero.description')}
               </p>
             </CardContent>

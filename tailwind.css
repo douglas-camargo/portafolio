@@ -381,3 +381,10 @@
 .mobile-menu-span-bottom-closed {
   @apply translate-y-0.5;
 }
+
+.justify-paragraph {
+  hyphenate-limit-chars: 7;
+  hyphens: auto;
+  text-align: justify;
+  text-wrap: pretty;
+}
