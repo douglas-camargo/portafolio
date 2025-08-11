@@ -12,7 +12,7 @@ interface NavigationProps {
   onItemClick?: (sectionId: string) => void;
 }
 
-const NAV_CLASSES = 'flex flex-col md:flex-row items-start md:items-center gap-1.5 md:gap-6';
+const NAV_CLASSES = 'flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6 md:h-[34px]';
 const BUTTON_BASE_CLASSES = 'relative w-fit font-[\'Lato\',Helvetica] font-semibold text-xs tracking-[0] leading-[normal] whitespace-nowrap cursor-pointer transition-all duration-300 bg-transparent border-none';
 
 export const Navigation = memo(({ items, onItemClick }: NavigationProps) => {

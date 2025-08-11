@@ -12,14 +12,7 @@ export const useHeaderClasses = ({ theme, activeSection, currentLanguage, isMenu
     return `header-base ${theme === 'dark' ? 'header-dark' : 'header-light'}`;
   }, [theme]);
 
-  const aboutButtonClasses = useMemo(() => {
-    const baseClasses = 'about-button-base';
-    const activeClasses = activeSection === 'about' 
-      ? (theme === 'dark' ? 'about-button-active-dark' : 'about-button-active-light')
-      : (theme === 'dark' ? 'about-button-inactive-dark' : 'about-button-inactive-light');
-    
-    return `${baseClasses} ${activeClasses}`;
-  }, [theme, activeSection]);
+
 
   const mobileMenuButtonClasses = useMemo(() => {
     return `mobile-menu-button-base ${theme === 'dark' ? 'mobile-menu-button-dark' : 'mobile-menu-button-light'}`;
@@ -56,7 +49,6 @@ export const useHeaderClasses = ({ theme, activeSection, currentLanguage, isMenu
 
   return {
     headerClasses,
-    aboutButtonClasses,
     mobileMenuButtonClasses,
     mobileMenuClasses,
     themeToggleClasses,

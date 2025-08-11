@@ -6,6 +6,7 @@ import { getDefaultLanguage } from './services/countryDetection';
 // Separar las traducciones para mejor mantenimiento
 const enTranslations = {
   // Header
+  code: 'CODE',
   about: 'ABOUT',
   portfolio: 'PORTFOLIO',
   education: 'EDUCATION',
@@ -20,7 +21,7 @@ const enTranslations = {
   hero: {
     title: 'WEB DEVELOPER-FRONTEND',
     name: 'DOUGLAS CAMARGO',
-    description: 'Programmer with over 4 years of experience in software and web application development. I have worked in the tech industry solving complex problems and improving efficiency through teamwork. My achievements include the creation and implementation of complex, large-scale systems. I seek technological challenges and projects that have a positive impact on society.',
+    description: 'Programmer with over 4 years of experience in software and web application development. Specialized in solving complex problems and optimizing processes in collaborative environments. Experience in creating and implementing large-scale systems, with interest in high-impact social technology projects.',
     contactMe: 'CONTACT ME',
     downloadCV: 'DOWNLOAD CV'
   },
@@ -39,6 +40,7 @@ const enTranslations = {
     selfEducation: 'SELF EDUCATION (2020-PRESENT)',
     languages: 'LANGUAGES',
     languagesDetails: 'Spanish-native / English-basic',
+    viewCertificate: 'VIEW CERTIFICATE',
     description: 'I am a Computer Engineer and have complemented my education with certified courses focused on frontend development, including HTML, CSS, React.js, and version control with Git, through platforms such as EDteam and Google. In addition, I have gained practical knowledge in technologies like Next.js, Tailwind CSS, Bootstrap, and TypeScript through self-learning and hands-on project experience.'
   },
   
@@ -71,6 +73,7 @@ const enTranslations = {
 
 const esTranslations = {
   // Header
+  code: 'CÓDIGO',
   about: 'ACERCA DE',
   portfolio: 'PORTAFOLIO',
   education: 'EDUCACIÓN',
@@ -85,7 +88,7 @@ const esTranslations = {
   hero: {
     title: 'DESARROLLADOR WEB-FRONTEND',
     name: 'DOUGLAS CAMARGO',
-    description: 'Programador con más de 4 años de experiencia en desarrollo de software y aplicaciones web. He trabajado en la industria tecnológica resolviendo problemas complejos y mejorando la eficiencia mediante el trabajo en equipo. Mis logros incluyen la creación e implementación de sistemas complejos y a gran escala. Busco desafíos tecnológicos y proyectos con impacto positivo en la sociedad.',
+    description: 'Programador con más de 4 años de experiencia en desarrollo de software y aplicaciones web. Especializado en resolver problemas complejos y optimizar procesos en entornos colaborativos. Experiencia en la creación e implementación de sistemas de gran escala, con interés en proyectos tecnológicos de alto impacto social.',
     contactMe: 'CONTACTARME',
     downloadCV: 'DESCARGAR CV'
   },
@@ -104,6 +107,7 @@ const esTranslations = {
     selfEducation: 'AUTOEDUCACIÓN (2020-ACTUALIDAD)',
     languages: 'IDIOMAS',
     languagesDetails: 'Español-nativo / Inglés-básico',
+    viewCertificate: 'VER CERTIFICADO',
     description: 'Soy Ingeniero en Informática y he complementado mi formación con diversos cursos certificados enfocados en el desarrollo frontend, incluyendo HTML, CSS, React.js y control de versiones con Git, a través de plataformas como EDteam y Google. Además, he adquirido conocimientos prácticos en tecnologías como Next.js, Tailwind CSS, Bootstrap y TypeScript mediante aprendizaje autodidacta y experiencia en proyectos reales.'
   },
   

@@ -267,7 +267,7 @@
 
 /* Componentes de estilo reutilizables */
 .header-base {
-  @apply fixed top-0 left-0 right-0 z-50 flex w-full items-start justify-between py-4 px-4 md:px-20 backdrop-blur-sm border-b transition-colors duration-300;
+  @apply fixed top-0 left-1/2 transform -translate-x-1/2 z-50 flex items-center justify-between py-4 px-4 md:px-20 backdrop-blur-sm border-b transition-colors duration-300 w-full max-w-[1366px];
 }
 
 .header-dark {
@@ -278,25 +278,7 @@
   @apply bg-white/95 border-gray-200;
 }
 
-.about-button-base {
-  @apply relative mt-[-1.00px] font-['Lato',Helvetica] font-semibold text-xs tracking-[0] leading-[normal] cursor-pointer transition-colors bg-transparent border-none;
-}
 
-.about-button-active-dark {
-  @apply text-white;
-}
-
-.about-button-active-light {
-  @apply text-gray-800;
-}
-
-.about-button-inactive-dark {
-  @apply text-gray-400 hover:text-white;
-}
-
-.about-button-inactive-light {
-  @apply text-gray-600 hover:text-gray-800;
-}
 
 .mobile-menu-button-base {
   @apply md:hidden;
@@ -311,7 +293,7 @@
 }
 
 .mobile-menu-base {
-  @apply absolute top-full left-0 right-0 p-4 md:hidden z-50;
+  @apply absolute top-full left-1/2 transform -translate-x-1/2 p-4 md:hidden z-50 min-w-[200px];
 }
 
 .mobile-menu-dark {
@@ -335,15 +317,15 @@
 }
 
 .language-button-base {
-  @apply px-2 rounded transition-colors;
+  @apply px-0.5 rounded transition-colors relative;
 }
 
 .language-button-active-dark {
-  @apply text-white bg-white bg-opacity-20;
+  @apply text-white;
 }
 
 .language-button-active-light {
-  @apply text-gray-800 bg-gray-200;
+  @apply text-gray-800;
 }
 
 .language-button-inactive-dark {
@@ -380,4 +362,11 @@
 
 .mobile-menu-span-bottom-closed {
   @apply translate-y-0.5;
+}
+
+.justify-paragraph {
+  hyphenate-limit-chars: 7;
+  hyphens: auto;
+  text-align: justify;
+  text-wrap: pretty;
 }

@@ -25,8 +25,8 @@ export const useProjects = () => {
 
   const getDotClasses = useCallback((index: number) => {
     const isActive = index === currentCarouselIndex;
-    const baseClasses = 'w-3 h-3 rounded-full transition-all duration-300 cursor-pointer';
-    const activeClasses = theme === 'dark' ? 'bg-white' : 'bg-gray-800';
+    const baseClasses = 'w-2 h-2 rounded-full transition-all duration-300 cursor-pointer';
+    const activeClasses = theme === 'dark' ? 'bg-white w-[35px]' : 'bg-gray-800 w-[35px]';
     const inactiveClasses = theme === 'dark' ? 'bg-white/30 hover:bg-white/50' : 'bg-gray-300 hover:bg-gray-400';
     
     return `${baseClasses} ${isActive ? activeClasses : inactiveClasses}`;

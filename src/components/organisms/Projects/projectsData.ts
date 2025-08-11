@@ -100,18 +100,4 @@ export const PROJECTS_DATA: Project[] = [
     backendUrl: '',
     showFrontendBackendLabels: false,
   },
-  {
-    id: 7,
-    tags: [
-      { id: 1, name: 'NEXT.JS' },
-      { id: 2, name: 'JAVASCRIPT' },
-      { id: 3, name: 'CSS' },
-    ],
-    image: '/images/project-security.webp',
-    showViewButton: false,
-    githubUrl: '',
-    pageUrl: 'https://quizzical-wozniak-484579.netlify.app/',
-    backendUrl: '',
-    showFrontendBackendLabels: false,
-  },
 ];

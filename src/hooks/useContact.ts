@@ -23,8 +23,6 @@ export const useContact = () => {
   }, []);
 
   const handleButtonClick = useCallback((buttonName: string) => {
-    setActiveButton(buttonName);
-    
     // Ejecutar la función correspondiente según el botón
     switch (buttonName) {
       case 'WHATSAPP':
@@ -44,6 +42,18 @@ export const useContact = () => {
     }
   }, [handleWhatsAppContact]);
 
+  const handleButtonMouseDown = useCallback((buttonName: string) => {
+    setActiveButton(buttonName);
+  }, []);
+
+  const handleButtonMouseUp = useCallback(() => {
+    setActiveButton(null);
+  }, []);
+
+  const handleButtonMouseLeave = useCallback(() => {
+    setActiveButton(null);
+  }, []);
+
   const handleBackToTop = useCallback(() => {
     const element = document.getElementById('about');
     if (element) {
@@ -59,6 +69,9 @@ export const useContact = () => {
   return {
     activeButton,
     handleButtonClick,
+    handleButtonMouseDown,
+    handleButtonMouseUp,
+    handleButtonMouseLeave,
     handleBackToTop
   };
 }; 
