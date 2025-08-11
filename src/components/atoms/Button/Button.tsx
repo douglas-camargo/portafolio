@@ -10,6 +10,8 @@ interface ButtonProps {
   onClick?: () => void;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
+  onMouseDown?: () => void;
+  onMouseUp?: () => void;
 }
 
 const BASE_CLASSES = 'font-semibold transition-colors duration-200 cursor-pointer inline-flex items-center justify-center';
@@ -28,7 +30,9 @@ export const Button = ({
   borderRadius = '',
   onClick,
   onMouseEnter,
-  onMouseLeave
+  onMouseLeave,
+  onMouseDown,
+  onMouseUp
 }: ButtonProps) => {
   const { theme } = useTheme();
   
@@ -48,6 +52,8 @@ export const Button = ({
       onClick={onClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      onMouseDown={onMouseDown}
+      onMouseUp={onMouseUp}
     >
       {children}
     </button>

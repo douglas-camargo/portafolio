@@ -10,7 +10,14 @@ import { CONTACT_INFO, SOCIAL_LINKS } from './contactData';
 export const Contact: React.FC<Partial<AnimationProps>> = ({ isLoaded }) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const { activeButton, handleButtonClick, handleBackToTop } = useContact();
+  const { 
+    activeButton, 
+    handleButtonClick, 
+    handleButtonMouseDown,
+    handleButtonMouseUp,
+    handleButtonMouseLeave,
+    handleBackToTop 
+  } = useContact();
 
   return (
     <section id="contacts" className="w-full py-8 lg:py-16 px-4 md:px-20">
@@ -41,6 +48,9 @@ export const Contact: React.FC<Partial<AnimationProps>> = ({ isLoaded }) => {
                   size="sm"
                   className="rounded-[23px] w-full md:w-[106px]"
                   onClick={() => handleButtonClick(link.name)}
+                  onMouseDown={() => handleButtonMouseDown(link.name)}
+                  onMouseUp={handleButtonMouseUp}
+                  onMouseLeave={handleButtonMouseLeave}
                 >
                   {link.name}
                 </Button>
