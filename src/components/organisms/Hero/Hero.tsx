@@ -14,7 +14,7 @@ export const Hero: React.FC<AnimationProps> = ({ isLoaded = false }) => {
 
   return (
     <section id="about" className="flex flex-col items-start px-4 md:px-20 py-8 lg:py-16 w-full relative mt-20">
-      <div className="w-full flex flex-col lg:flex-row items-start gap-8 mb-5 lg:mb-14">
+      <div className="w-full flex flex-col lg:flex-row items-start gap-8 mb-5 lg:mb-0">
         {/* Left side - Text content */}
         <div className={`flex-1 max-w-full lg:max-w-[670px] text-center lg:text-left ${isLoaded ? 'animate-slide-in-left' : 'slide-in-left-initial'}`}>
           <div className={`font-['Lato',Helvetica] font-light text-lg sm:text-lg md:text-3xl lg:text-4xl tracking-[0] leading-normal mb-4 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>

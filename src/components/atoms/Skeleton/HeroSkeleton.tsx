@@ -33,7 +33,7 @@ export const HeroSkeleton: React.FC = () => {
 
         {/* Hero Section Skeleton */}
         <section className="flex flex-col items-start px-4 md:px-20 py-8 lg:py-16 w-full relative mt-20">
-          <div className="w-full flex flex-col lg:flex-row items-start gap-8 mb-5 lg:mb-14">
+          <div className="w-full flex flex-col lg:flex-row items-start gap-8 mb-5 lg:mb-0">
             {/* Right side - Image (order-first lg:order-last) */}
             <div className="flex-shrink-0 w-full lg:w-[514px] h-[300px] sm:h-[400px] md:h-[500px] relative order-first lg:order-last">
               <Skeleton width="w-full" height="h-full" rounded="xl" />

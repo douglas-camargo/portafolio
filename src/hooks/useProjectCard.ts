@@ -22,12 +22,6 @@ export const useProjectCard = ({ pageUrl, githubUrl, backendUrl }: UseProjectCar
     }
   }, [githubUrl]);
 
-  const handlePageClick = useCallback(() => {
-    if (pageUrl) {
-      window.open(pageUrl, '_blank');
-    }
-  }, [pageUrl]);
-
   const handleBackendClick = useCallback(() => {
     if (backendUrl) {
       window.open(backendUrl, '_blank');
@@ -55,7 +49,6 @@ export const useProjectCard = ({ pageUrl, githubUrl, backendUrl }: UseProjectCar
     isViewButtonHovered,
     handleViewClick,
     handleCodeClick,
-    handlePageClick,
     handleBackendClick,
     handleMouseEnter,
     handleMouseLeave,

@@ -52,7 +52,6 @@ export const ProjectCard = ({
     isViewButtonHovered,
     handleViewClick,
     handleCodeClick,
-    handlePageClick,
     handleBackendClick,
     handleMouseEnter,
     handleMouseLeave,
@@ -124,12 +123,6 @@ export const ProjectCard = ({
             {showFrontendBackendLabels ? 'CODE BACKEND' : 'BACKEND'}
           </button>
         )}
-        <button 
-          className={BUTTON_CLASSES}
-          onClick={handlePageClick}
-        >
-          PAGE
-        </button>
       </div>
     </div>
   );
