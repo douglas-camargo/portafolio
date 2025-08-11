@@ -13,7 +13,7 @@ export const HeroSkeleton: React.FC = () => {
     <div className={`${bgClass} flex flex-row justify-center w-full min-h-screen transition-colors duration-300`}>
       <div className={`${bgClass} overflow-hidden w-full max-w-[1366px] relative`}>
         {/* Header Skeleton */}
-        <header className="fixed top-0 left-1/2 transform -translate-x-1/2 z-50 flex items-center justify-between py-4 px-4 md:px-20 backdrop-blur-sm border-b transition-colors duration-300 w-full max-w-[1366px] bg-white/95 dark:bg-[#151515]/95 border-gray-200 dark:border-white/10">
+        <header className="fixed top-0 left-1/2 transform -translate-x-1/2 z-50 flex items-center justify-between py-4 px-4 md:px-20 w-full max-w-[1366px]">
           {/* Code Button Skeleton */}
           {/* <div className="w-[106px] h-[34px] rounded-[23px] border-2 border-gray-800 dark:border-white bg-transparent flex items-center justify-center"> */}
           <div className="w-[106px] h-[34px] rounded-[8px] border-2 border-gray-800 dark:border-white bg-transparent flex items-center justify-center">
