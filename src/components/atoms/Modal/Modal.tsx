@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useTheme } from '../../../contexts/ThemeContext';
+import React from 'react';
+import { useModal } from '../../../hooks/useModal';
 
 interface ModalProps {
   isOpen: boolean;
@@ -9,25 +9,12 @@ interface ModalProps {
 }
 
 export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title }) => {
-  const { theme } = useTheme();
-
-  useEffect(() => {
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        onClose();
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'hidden';
-    }
-
-    return () => {
-      document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'unset';
-    };
-  }, [isOpen, onClose]);
+  const {
+    getModalClasses,
+    getHeaderClasses,
+    getTitleClasses,
+    getCloseButtonClasses
+  } = useModal({ isOpen, onClose });
 
   if (!isOpen) return null;
 
@@ -40,26 +27,16 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title }
       />
       
       {/* Modal */}
-      <div className={`relative w-full max-w-2xl max-h-[90vh] sm:max-h-[85vh] rounded-xl shadow-2xl transition-all duration-300 flex flex-col ${
-        theme === 'dark' ? 'bg-gray-900' : 'bg-white'
-      }`}>
+      <div className={getModalClasses()}>
         {/* Header */}
         {title && (
-          <div className={`flex items-center justify-between p-4 sm:p-6 border-b flex-shrink-0 ${
-            theme === 'dark' ? 'border-gray-700' : 'border-gray-200'
-          }`}>
-            <h2 className={`text-lg sm:text-xl md:text-2xl font-semibold ${
-              theme === 'dark' ? 'text-white' : 'text-gray-900'
-            }`}>
+          <div className={getHeaderClasses()}>
+            <h2 className={getTitleClasses()}>
               {title}
             </h2>
             <button
               onClick={onClose}
-              className={`p-2 rounded-lg hover:bg-opacity-10 transition-colors ${
-                theme === 'dark' 
-                  ? 'text-gray-400 hover:bg-gray-400' 
-                  : 'text-gray-500 hover:bg-gray-500'
-              }`}
+              className={getCloseButtonClasses()}
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />

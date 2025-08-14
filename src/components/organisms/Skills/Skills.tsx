@@ -1,29 +1,38 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useTheme } from '../../../contexts/ThemeContext';
 import { Card } from '../../atoms/Card/Card';
 import { CardContent } from '../../atoms/CardContent/CardContent';
 import { Separator } from '../../atoms/Separator/Separator';
 import { AnimationProps } from '../../../hooks/useAnimations';
 import { TECH_ICONS, getSkillCategories } from './skillsData';
+import { useSkills } from '../../../hooks/useSkills';
 
 export const Skills: React.FC<Partial<AnimationProps>> = ({ isLoaded }) => {
   const { t } = useTranslation();
-  const { theme } = useTheme();
+  
+  const {
+    getTitleClasses,
+    getSubtitleClasses,
+    getTechIconClasses,
+    getTechNameClasses,
+    getSeparatorClasses,
+    getCategoryTitleClasses,
+    getSkillNameClasses
+  } = useSkills();
 
   const skillCategories = getSkillCategories(t);
 
   return (
     <section id="skills" className="w-full py-8 lg:py-16 px-4 md:px-20">
       <div>
-        <h1 className={`leading-tight lg:!leading-[150px] font-medium xl:indent-[-5px] text-4xl md:text-6xl lg:text-9xl font-['Oswald',Helvetica] mb-3 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
+        <h1 className={getTitleClasses()}>
           {t('skillsContent.title')}
         </h1>
       </div>
 
       <div className="flex flex-col space-y-8">
         <div className="flex flex-col space-y-4">
-          <h2 className={`mb-6 font-light text-2xl md:text-4xl font-['Lato',Helvetica] ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
+          <h2 className={getSubtitleClasses()}>
             {t('skillsContent.technologies')}
           </h2>
 
@@ -41,20 +50,12 @@ export const Skills: React.FC<Partial<AnimationProps>> = ({ isLoaded }) => {
                   className="flex flex-col items-center justify-center space-y-2 flex-shrink-0 px-10"
                 >
                   <img
-                    className={`w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-16 ${
-                      tech.name === 'GitHub' && theme === 'dark'
-                        ? 'bg-white rounded p-1'
-                        : ''
-                    }`}
+                    className={getTechIconClasses(tech.name)}
                     alt={tech.name}
                     src={tech.icon}
                     loading="lazy"
                   />
-                  <span
-                    className={`text-xs text-center font-['Lato',Helvetica] ${
-                      theme === 'dark' ? 'text-white' : 'text-gray-700'
-                    }`}
-                  >
+                  <span className={getTechNameClasses()}>
                     {tech.name}
                   </span>
                 </div>
@@ -67,21 +68,21 @@ export const Skills: React.FC<Partial<AnimationProps>> = ({ isLoaded }) => {
           <CardContent className="bg-transparent" padding="px-0 py-6">
             {skillCategories.map((category, index) => (
               <div key={index} className="mb-8 md:mb-4">
-                <Separator className={`w-full mb-4 ${theme === 'dark' ? 'bg-white/20' : 'bg-gray-300'}`} />
+                <Separator className={`w-full mb-4 ${getSeparatorClasses()}`} />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
                   <div className="md:col-span-1">
-                    <span className={`font-semibold text-xs font-['Lato',Helvetica] mb-4 md:mb-0 ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>
+                    <span className={getCategoryTitleClasses()}>
                       {category.title}
                     </span>
                   </div>
                   <div className="md:col-span-1 flex flex-col space-y-4">
                     {category.skills.map((skill, skillIndex) => (
                       <React.Fragment key={skillIndex}>
-                        <span className={`font-normal text-sm font-['Lato',Helvetica] ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>
+                        <span className={getSkillNameClasses()}>
                           {skill.name}
                         </span>
                         {skillIndex < category.skills.length - 1 && (
-                          <Separator className={`w-full ${theme === 'dark' ? 'bg-white/20' : 'bg-gray-300'}`} />
+                          <Separator className={getSeparatorClasses()} />
                         )}
                       </React.Fragment>
                     ))}
