@@ -87,6 +87,11 @@ const enTranslations = {
     cancel: 'Cancel',
     successMessage: 'Message sent successfully!',
     errorMessage: 'Error sending message. Please try again.'
+  },
+  
+  // WhatsApp
+  whatsapp: {
+    message: 'Hello! I am interested in your work as a developer.'
   }
 };
 
@@ -173,6 +178,11 @@ const esTranslations = {
     cancel: 'Cancelar',
     successMessage: '¡Mensaje enviado exitosamente!',
     errorMessage: 'Error al enviar el mensaje. Por favor intenta de nuevo.'
+  },
+  
+  // WhatsApp
+  whatsapp: {
+    message: '¡Hola! Me interesa tu trabajo como desarrollador.'
   }
 };
 
