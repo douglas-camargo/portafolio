@@ -34,17 +34,42 @@ export const ContactForm: React.FC<ContactFormProps> = ({
     message: ''
   });
 
+  const [errors, setErrors] = useState<Partial<ContactFormData>>({});
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
+    
+    // Limpiar error del campo cuando el usuario empiece a escribir
+    if (errors[name as keyof ContactFormData]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: undefined
+      }));
+    }
+  };
+
+  const validateForm = (): boolean => {
+    const newErrors: Partial<ContactFormData> = {};
+    
+    // Validar mensaje mínimo 10 caracteres
+    if (formData.message.trim().length < 10) {
+      newErrors.message = t('contactForm.messageMinLength');
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(formData);
+    
+    if (validateForm()) {
+      onSubmit(formData);
+    }
   };
 
   const inputClasses = `w-full px-4 py-3 rounded-lg border transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 ${
@@ -119,10 +144,17 @@ export const ContactForm: React.FC<ContactFormProps> = ({
           value={formData.message}
           onChange={handleInputChange}
           rows={3}
-          className={`${inputClasses} sm:rows-4`}
+          className={`${inputClasses} sm:rows-4 ${
+            errors.message ? 'border-red-500 focus:ring-red-500' : ''
+          }`}
           placeholder={t('contactForm.messagePlaceholder')}
           required
         />
+        {errors.message && (
+          <p className="mt-1 text-sm text-red-600 dark:text-red-400">
+            {errors.message}
+          </p>
+        )}
       </div>
 
       <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 sm:pt-6">
