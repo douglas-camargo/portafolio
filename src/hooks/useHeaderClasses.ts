@@ -12,8 +12,6 @@ export const useHeaderClasses = ({ theme, activeSection, currentLanguage, isMenu
     return `header-base ${theme === 'dark' ? 'header-dark' : 'header-light'}`;
   }, [theme]);
 
-
-
   const mobileMenuButtonClasses = useMemo(() => {
     return `mobile-menu-button-base ${theme === 'dark' ? 'mobile-menu-button-dark' : 'mobile-menu-button-light'}`;
   }, [theme]);
@@ -38,6 +36,16 @@ export const useHeaderClasses = ({ theme, activeSection, currentLanguage, isMenu
     };
   }, [theme, currentLanguage]);
 
+  const getLanguageIndicatorClasses = useMemo(() => {
+    return (language: string) => {
+      const isActive = currentLanguage === language;
+      const baseClasses = 'absolute -bottom-1 left-0 w-full h-0.5 rounded-full transition-all duration-300';
+      return isActive 
+        ? `${baseClasses} ${theme === 'dark' ? 'bg-white' : 'bg-gray-800'}`
+        : `${baseClasses} opacity-0`;
+    };
+  }, [theme, currentLanguage]);
+
   const mobileMenuButtonSpanClasses = useMemo(() => {
     const baseClasses = 'mobile-menu-span-base';
     return {
@@ -53,6 +61,7 @@ export const useHeaderClasses = ({ theme, activeSection, currentLanguage, isMenu
     mobileMenuClasses,
     themeToggleClasses,
     getLanguageButtonClasses,
+    getLanguageIndicatorClasses,
     mobileMenuButtonSpanClasses
   };
 };

@@ -4,10 +4,17 @@ import { useTheme } from '../../../contexts/ThemeContext';
 import { Separator } from '../../atoms/Separator/Separator';
 import { AnimationProps } from '../../../hooks/useAnimations';
 import { getEducationData } from './educationData';
+import { useEducation } from '../../../hooks/useEducation';
 
 export const Education: React.FC<Partial<AnimationProps>> = ({ isLoaded }) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
+  
+  const {
+    handleCertificateClick,
+    getCertificateButtonClasses,
+    getSeparatorClasses
+  } = useEducation();
   
   const educationData = getEducationData(t);
 
@@ -33,7 +40,7 @@ export const Education: React.FC<Partial<AnimationProps>> = ({ isLoaded }) => {
       <div className="mt-16">
         {educationData.map((item, index) => (
           <div key={index} className="w-full mb-8 md:mb-4">
-            <Separator className={`w-full h-px my-4 ${theme === 'dark' ? 'bg-white/20' : 'bg-gray-300'}`} />
+            <Separator className={`w-full h-px my-4 ${getSeparatorClasses()}`} />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
               <div className="md:col-span-1">
@@ -57,25 +64,15 @@ export const Education: React.FC<Partial<AnimationProps>> = ({ isLoaded }) => {
                               {detail.name}
                             </span>
                             <button
-                              onClick={() => {
-                                const link = document.createElement('a');
-                                link.href = detail.url;
-                                link.target = '_blank';
-                                link.rel = 'noopener noreferrer';
-                                link.click();
-                              }}
-                              className={`px-3 py-1 text-xs font-semibold rounded-md transition-colors duration-200 ${
-                                theme === 'dark' 
-                                  ? 'bg-white/10 text-white hover:bg-white/20 border border-white/20' 
-                                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-300'
-                              }`}
+                              onClick={() => handleCertificateClick(detail.url)}
+                              className={getCertificateButtonClasses()}
                             >
                               {t('educationSection.viewCertificate')}
                             </button>
                           </div>
                         )}
                         {detailIndex < item.details.length - 1 && (
-                          <Separator className={`w-full ${theme === 'dark' ? 'bg-white/20' : 'bg-gray-300'}`} />
+                          <Separator className={getSeparatorClasses()} />
                         )}
                       </React.Fragment>
                     ))}

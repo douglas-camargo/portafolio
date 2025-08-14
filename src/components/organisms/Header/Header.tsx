@@ -32,16 +32,9 @@ export const Header = () => {
     mobileMenuClasses,
     themeToggleClasses,
     getLanguageButtonClasses,
+    getLanguageIndicatorClasses,
     mobileMenuButtonSpanClasses
   } = useHeaderClasses({ theme, activeSection, currentLanguage, isMenuOpen });
-
-  const getLanguageIndicatorClasses = (language: string) => {
-    const isActive = currentLanguage === language;
-    const baseClasses = 'absolute -bottom-1 left-0 w-full h-0.5 rounded-full transition-all duration-300';
-    return isActive 
-      ? `${baseClasses} ${theme === 'dark' ? 'bg-white' : 'bg-gray-800'}`
-      : `${baseClasses} opacity-0`;
-  };
 
   return (
     <header className={headerClasses}>

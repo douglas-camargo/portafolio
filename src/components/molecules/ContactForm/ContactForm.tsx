@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useTheme } from '../../../contexts/ThemeContext';
 import { Button } from '../../atoms/Button/Button';
+import { useContactForm } from '../../../hooks/useContactForm';
 
 interface ContactFormData {
   name: string;
@@ -26,61 +26,24 @@ export const ContactForm: React.FC<ContactFormProps> = ({
   errorMessage = ''
 }) => {
   const { t } = useTranslation();
-  const { theme } = useTheme();
-  const [formData, setFormData] = useState<ContactFormData>({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
+  
+  const {
+    formData,
+    errors,
+    handleInputChange,
+    handleSubmit,
+    inputClasses,
+    labelClasses,
+    getMessageInputClasses,
+    getSuccessMessageClasses,
+    getErrorMessageClasses
+  } = useContactForm({
+    onSubmit,
+    onCancel,
+    isLoading,
+    submitStatus,
+    errorMessage
   });
-
-  const [errors, setErrors] = useState<Partial<ContactFormData>>({});
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-    
-    // Limpiar error del campo cuando el usuario empiece a escribir
-    if (errors[name as keyof ContactFormData]) {
-      setErrors(prev => ({
-        ...prev,
-        [name]: undefined
-      }));
-    }
-  };
-
-  const validateForm = (): boolean => {
-    const newErrors: Partial<ContactFormData> = {};
-    
-    // Validar mensaje mínimo 10 caracteres
-    if (formData.message.trim().length < 10) {
-      newErrors.message = t('contactForm.messageMinLength');
-    }
-    
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (validateForm()) {
-      onSubmit(formData);
-    }
-  };
-
-  const inputClasses = `w-full px-4 py-3 rounded-lg border transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-    theme === 'dark' 
-      ? 'bg-gray-800 border-gray-600 text-white placeholder-gray-400' 
-      : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
-  }`;
-
-  const labelClasses = `block text-sm font-medium mb-2 ${
-    theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-  }`;
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
@@ -144,9 +107,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
           value={formData.message}
           onChange={handleInputChange}
           rows={3}
-          className={`${inputClasses} sm:rows-4 ${
-            errors.message ? 'border-red-500 focus:ring-red-500' : ''
-          }`}
+          className={getMessageInputClasses()}
           placeholder={t('contactForm.messagePlaceholder')}
           required
         />
@@ -178,11 +139,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
 
       {/* Mensajes de estado */}
       {submitStatus === 'success' && (
-        <div className={`mt-4 p-3 sm:p-4 rounded-lg border ${
-          theme === 'dark' 
-            ? 'bg-green-900/20 border-green-500 text-green-400' 
-            : 'bg-green-100 border-green-400 text-green-700'
-        }`}>
+        <div className={getSuccessMessageClasses()}>
           <div className="flex items-center">
             <svg className="w-5 h-5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
@@ -193,11 +150,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
       )}
 
       {submitStatus === 'error' && errorMessage && (
-        <div className={`mt-4 p-3 sm:p-4 rounded-lg border ${
-          theme === 'dark' 
-            ? 'bg-red-900/20 border-red-500 text-red-400' 
-            : 'bg-red-100 border-red-400 text-red-700'
-        }`}>
+        <div className={getErrorMessageClasses()}>
           <div className="flex items-start">
             <svg className="w-5 h-5 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
