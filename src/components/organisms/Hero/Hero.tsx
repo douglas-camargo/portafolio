@@ -4,13 +4,25 @@ import { useTheme } from '../../../contexts/ThemeContext';
 import { Button } from '../../atoms/Button/Button';
 import { Card } from '../../atoms/Card/Card';
 import { CardContent } from '../../atoms/CardContent/CardContent';
+import { Modal } from '../../atoms/Modal/Modal';
+import { ContactForm } from '../../molecules/ContactForm/ContactForm';
 import { useHero } from '../../../hooks/useHero';
+import { useContactModal } from '../../../hooks/useContactModal';
 import { AnimationProps } from '../../../hooks/useAnimations';
 
 export const Hero: React.FC<AnimationProps> = ({ isLoaded = false }) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const { handleDownloadCV, handleWhatsAppContact } = useHero();
+  const { handleDownloadCV } = useHero();
+  const { 
+    isModalOpen, 
+    isLoading, 
+    submitStatus,
+    errorMessage,
+    openModal, 
+    closeModal, 
+    handleSubmitContact 
+  } = useContactModal();
 
   return (
     <section id="about" className="flex flex-col items-start px-4 md:px-20 py-8 lg:py-16 w-full relative mt-20">
@@ -37,7 +49,7 @@ export const Hero: React.FC<AnimationProps> = ({ isLoaded = false }) => {
 
           {/* Buttons */}
           <div className={`flex flex-col sm:flex-row gap-4 w-full sm:w-auto ${isLoaded ? 'animate-slide-in-up' : 'slide-in-up-initial'}`}>
-            <Button className="w-full sm:w-52" onClick={handleWhatsAppContact}>
+            <Button className="w-full sm:w-52" onClick={openModal}>
               {t('hero.contactMe')}
             </Button>
 
@@ -59,6 +71,21 @@ export const Hero: React.FC<AnimationProps> = ({ isLoaded = false }) => {
           </div>
         </div>
       </div>
+
+      {/* Contact Modal */}
+      <Modal 
+        isOpen={isModalOpen} 
+        onClose={closeModal}
+        title={t('contactForm.title')}
+      >
+        <ContactForm
+          onSubmit={handleSubmitContact}
+          onCancel={closeModal}
+          isLoading={isLoading}
+          submitStatus={submitStatus}
+          errorMessage={errorMessage}
+        />
+      </Modal>
     </section>
   );
 };

@@ -7,6 +7,8 @@ interface ButtonProps {
   size?: 'sm' | 'md' | 'lg';
   className?: string;
   borderRadius?: string;
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
   onClick?: () => void;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
@@ -28,6 +30,8 @@ export const Button = ({
   size = 'md',
   className = '',
   borderRadius = '',
+  type = 'button',
+  disabled = false,
   onClick,
   onMouseEnter,
   onMouseLeave,
@@ -44,10 +48,12 @@ export const Button = ({
       : 'border-2 border-gray-800 text-gray-800 hover:bg-gray-800/10'
   };
   
-  const buttonClasses = `${variantClasses[variant]} ${SIZE_CLASSES[size]} ${className} ${BASE_CLASSES} ${borderRadius || 'rounded-lg'}`;
+  const buttonClasses = `${variantClasses[variant]} ${SIZE_CLASSES[size]} ${className} ${BASE_CLASSES} ${borderRadius || 'rounded-lg'} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`;
   
   return (
     <button
+      type={type}
+      disabled={disabled}
       className={buttonClasses}
       onClick={onClick}
       onMouseEnter={onMouseEnter}

@@ -68,6 +68,24 @@ const enTranslations = {
     getInTouch: 'GET IN TOUCH',
     phone: 'PHONE',
     backToTop: 'Back to top'
+  },
+  
+  // Contact Form
+  contactForm: {
+    title: 'Contact Me',
+    name: 'Name',
+    namePlaceholder: 'Enter your name',
+    email: 'Email',
+    emailPlaceholder: 'Enter your email',
+    subject: 'Subject',
+    subjectPlaceholder: 'Enter the subject',
+    message: 'Message',
+    messagePlaceholder: 'Enter your message',
+    send: 'Send Message',
+    sending: 'Sending...',
+    cancel: 'Cancel',
+    successMessage: 'Message sent successfully!',
+    errorMessage: 'Error sending message. Please try again.'
   }
 };
 
@@ -135,6 +153,24 @@ const esTranslations = {
     getInTouch: 'PONTE EN CONTACTO',
     phone: 'TELÉFONO',
     backToTop: 'Volver arriba'
+  },
+  
+  // Contact Form
+  contactForm: {
+    title: 'Contáctame',
+    name: 'Nombre',
+    namePlaceholder: 'Ingresa tu nombre',
+    email: 'Correo electrónico',
+    emailPlaceholder: 'Ingresa tu correo electrónico',
+    subject: 'Asunto',
+    subjectPlaceholder: 'Ingresa el asunto',
+    message: 'Mensaje',
+    messagePlaceholder: 'Ingresa tu mensaje',
+    send: 'Enviar Mensaje',
+    sending: 'Enviando...',
+    cancel: 'Cancelar',
+    successMessage: '¡Mensaje enviado exitosamente!',
+    errorMessage: 'Error al enviar el mensaje. Por favor intenta de nuevo.'
   }
 };
 

@@ -10,6 +10,7 @@
     "svg": "node scripts/svg-to-components.cjs"
   },
   "dependencies": {
+    "crypto-js": "^4.2.0",
     "i18next": "^25.3.2",
     "i18next-browser-languagedetector": "^8.2.0",
     "react": "^19.0.0",
@@ -19,6 +20,7 @@
   "devDependencies": {
     "@svgr/cli": "^8.1.0",
     "@svgr/core": "^8.1.0",
+    "@types/crypto-js": "^4.2.2",
     "@types/react": "^19.1.9",
     "@vitejs/plugin-react": "^4.3.4",
     "esbuild": "0.24.0",
