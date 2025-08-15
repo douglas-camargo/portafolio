@@ -266,16 +266,71 @@
 }
 
 /* Componentes de estilo reutilizables */
-.header-base {
-  @apply fixed top-0 left-1/2 transform -translate-x-1/2 z-50 flex items-center justify-between py-4 px-4 md:px-20 backdrop-blur-sm border-b transition-colors duration-300 w-full max-w-[1366px];
+header.header-base {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  backdrop-filter: blur(4px);
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 1366px;
+}
+
+@media (min-width: 768px) {
+  header.header-base {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
 }
 
 .header-dark {
-  @apply bg-[#151515]/95 border-white/10;
+  @apply bg-[#151515]/95;
+  position: relative;
+}
+
+.header-dark::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 1rem;
+  right: 1rem;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+@media (min-width: 768px) {
+  .header-dark::after {
+    left: 5rem;
+    right: 5rem;
+  }
 }
 
 .header-light {
-  @apply bg-white/95 border-gray-200;
+  @apply bg-white/95;
+  position: relative;
+}
+
+.header-light::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 1rem;
+  right: 1rem;
+  height: 1px;
+  background-color: rgb(229, 231, 235);
+}
+
+@media (min-width: 768px) {
+  .header-light::after {
+    left: 5rem;
+    right: 5rem;
+  }
 }
 
 

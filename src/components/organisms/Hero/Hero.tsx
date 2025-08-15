@@ -5,6 +5,7 @@ import { Button } from '../../atoms/Button/Button';
 import { Card } from '../../atoms/Card/Card';
 import { CardContent } from '../../atoms/CardContent/CardContent';
 import { Modal } from '../../atoms/Modal/Modal';
+import { AlertModal } from '../../atoms/AlertModal/AlertModal';
 import { ContactForm } from '../../molecules/ContactForm/ContactForm';
 import { useHero } from '../../../hooks/useHero';
 import { useContactModal } from '../../../hooks/useContactModal';
@@ -21,7 +22,12 @@ export const Hero: React.FC<AnimationProps> = ({ isLoaded = false }) => {
     errorMessage,
     openModal, 
     closeModal, 
-    handleSubmitContact 
+    handleSubmitContact,
+    // Estados del modal de alerta
+    isAlertOpen,
+    alertType,
+    alertMessage,
+    closeAlert
   } = useContactModal();
 
   return (
@@ -86,6 +92,15 @@ export const Hero: React.FC<AnimationProps> = ({ isLoaded = false }) => {
           errorMessage={errorMessage}
         />
       </Modal>
+
+      {/* Alert Modal */}
+      <AlertModal
+        isOpen={isAlertOpen}
+        onClose={closeAlert}
+        type={alertType}
+        message={alertMessage}
+        duration={3000}
+      />
     </section>
   );
 };

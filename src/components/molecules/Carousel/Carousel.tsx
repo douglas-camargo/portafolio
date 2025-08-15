@@ -8,7 +8,7 @@ interface CarouselProps {
   onIndexChange?: (index: number) => void;
   currentIndex?: number;
   onGoToIndex?: (index: number) => void;
-  onGoToSpecificIndex?: (index: number) => void;
+  onGoToSpecificIndex?: (goToSpecificIndex: (targetIndex: number) => void) => void;
 }
 
 export const Carousel = ({ 
