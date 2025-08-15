@@ -22,7 +22,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title }
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
       {/* Overlay */}
       <div 
-        className="absolute inset-0 bg-black bg-opacity-50 transition-opacity"
+        className="absolute inset-0 bg-background/80 backdrop-blur-sm transition-opacity"
         onClick={onClose}
       />
       
@@ -46,7 +46,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title }
         )}
         
         {/* Content */}
-        <div className="p-4 sm:p-6 overflow-y-auto flex-1">
+        <div className="p-4 sm:p-6 overflow-y-auto flex-1 text-popover-foreground">
           {children}
         </div>
       </div>

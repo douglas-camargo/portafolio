@@ -86,7 +86,7 @@ const enTranslations = {
     sending: 'Sending...',
     cancel: 'Cancel',
     successMessage: 'Message sent successfully!',
-    errorMessage: 'Error sending message. Please try again.'
+    errorMessage: 'Unable to process your request. Please try again.'
   },
   
   // WhatsApp
@@ -177,7 +177,7 @@ const esTranslations = {
     sending: 'Enviando...',
     cancel: 'Cancelar',
     successMessage: '¡Mensaje enviado exitosamente!',
-    errorMessage: 'Error al enviar el mensaje. Por favor intenta de nuevo.'
+    errorMessage: 'No se pudo procesar tu solicitud. Por favor inténtalo de nuevo.'
   },
   
   // WhatsApp

@@ -4,7 +4,6 @@ import { LanguageProvider } from './contexts/LanguageContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { LanguageDetector } from './components/atoms/LanguageDetector/LanguageDetector';
 import { FontPreloader } from './components/atoms/FontPreloader/FontPreloader';
-import { WhatsAppButton } from './components/atoms/WhatsAppButton/WhatsAppButton';
 
 const App = () => {
   return (
@@ -13,7 +12,6 @@ const App = () => {
         <LanguageDetector>
           <FontPreloader />
           <Portfolio />
-          <WhatsAppButton />
         </LanguageDetector>
       </LanguageProvider>
     </ThemeProvider>
