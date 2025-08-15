@@ -31,7 +31,7 @@ export const AlertModal: React.FC<AlertModalProps> = ({
   if (!isOpen) return null;
 
   const getAlertClasses = () => {
-    const baseClasses = 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[60] max-w-sm w-full mx-4 rounded-lg shadow-lg border p-4 transition-all duration-300';
+    const baseClasses = 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[60] max-w-sm w-[calc(100%-2rem)] sm:w-full sm:max-w-sm rounded-lg shadow-lg border p-4 transition-all duration-300';
     
     if (type === 'success') {
       return `${baseClasses} ${
