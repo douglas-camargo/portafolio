@@ -82,26 +82,13 @@ module.exports = {
           '0%': { transform: 'translateX(0)' },
           '100%': { transform: 'translateX(-50%)' },
         },
-        "whatsapp-pulse": {
-          '0%': { 
-            transform: 'scale(1)',
-            opacity: '1'
-          },
-          '50%': { 
-            transform: 'scale(1.1)',
-            opacity: '0.5'
-          },
-          '100%': { 
-            transform: 'scale(1.2)',
-            opacity: '0'
-          },
-        },
+
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "scrollTechnologies": "scrollTechnologies 30s linear infinite",
-        "whatsapp-pulse": "whatsapp-pulse 2s ease-in-out infinite",
+
       },
     },
     container: {
