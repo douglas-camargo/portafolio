@@ -21,7 +21,7 @@ export const useAnimations = (minDelay = 500) => {
       '/images/project-hsectechnology.webp',
       '/images/project-lawyers.webp',
       '/images/project-restaurant.webp',
-      '/images/project-security.webp'
+      '/images/project-project-restaurant-casa-del-sabor.webp'
     ];
 
     const checkCriticalImages = () =>

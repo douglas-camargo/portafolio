@@ -1,18 +1,13 @@
 import { useState, useCallback } from 'react';
-import { whatsappService } from '../services/whatsappService';
 
 export const useContact = () => {
   const [activeButton, setActiveButton] = useState<string | null>(null);
-
-  const handleWhatsAppContact = useCallback(() => {
-    whatsappService.openWhatsApp();
-  }, []);
 
   const handleButtonClick = useCallback((buttonName: string) => {
     // Ejecutar la función correspondiente según el botón
     switch (buttonName) {
       case 'WHATSAPP':
-        handleWhatsAppContact();
+        window.open('https://api.whatsapp.com/send?phone=584241232755&text=¡Hola! Me interesa tu trabajo como desarrollador.', '_blank');
         break;
       case 'GITHUB':
         window.open('https://github.com/douglas-camargo', '_blank');
@@ -26,7 +21,7 @@ export const useContact = () => {
       default:
         break;
     }
-  }, [handleWhatsAppContact]);
+  }, []);
 
   const handleButtonMouseDown = useCallback((buttonName: string) => {
     setActiveButton(buttonName);

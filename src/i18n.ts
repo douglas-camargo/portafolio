@@ -89,10 +89,7 @@ const enTranslations = {
     errorMessage: 'Unable to process your request. Please try again.'
   },
   
-  // WhatsApp
-  whatsapp: {
-    message: 'Hello! I am interested in your work as a developer.'
-  }
+
 };
 
 const esTranslations = {
@@ -180,10 +177,7 @@ const esTranslations = {
     errorMessage: 'No se pudo procesar tu solicitud. Por favor inténtalo de nuevo.'
   },
   
-  // WhatsApp
-  whatsapp: {
-    message: '¡Hola! Me interesa tu trabajo como desarrollador.'
-  }
+
 };
 
 const resources = {
