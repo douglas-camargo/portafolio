@@ -418,3 +418,37 @@ header.header-base > div {
   text-align: justify;
   text-wrap: pretty;
 }
+
+/* Modal styles for dark mode */
+.modal-dark {
+  @apply bg-[#151515] border-gray-700;
+}
+
+.modal-dark .modal-content {
+  @apply text-white;
+}
+
+.modal-dark .modal-input {
+  @apply bg-white/10 border-gray-600 text-white placeholder-gray-400;
+}
+
+.modal-dark .modal-label {
+  @apply text-white;
+}
+
+/* Modal styles for light mode */
+.modal-light {
+  @apply bg-popover border-border;
+}
+
+.modal-light .modal-content {
+  @apply text-popover-foreground;
+}
+
+.modal-light .modal-input {
+  @apply bg-input border-input text-foreground placeholder-muted-foreground;
+}
+
+.modal-light .modal-label {
+  @apply text-foreground;
+}

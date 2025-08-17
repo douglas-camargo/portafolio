@@ -46,7 +46,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title }
         )}
         
         {/* Content */}
-        <div className="p-4 sm:p-6 overflow-y-auto flex-1 text-popover-foreground">
+        <div className="p-4 sm:p-6 overflow-y-auto flex-1">
           {children}
         </div>
       </div>

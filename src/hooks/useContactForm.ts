@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface ContactFormData {
   name: string;
@@ -24,6 +25,7 @@ export const useContactForm = ({
   errorMessage = ''
 }: UseContactFormProps) => {
   const { t } = useTranslation();
+  const { theme } = useTheme();
   
   const [formData, setFormData] = useState<ContactFormData>({
     name: '',
@@ -70,12 +72,29 @@ export const useContactForm = ({
     }
   }, [validateForm, onSubmit, formData]);
 
-  const inputClasses = `w-full px-4 py-3 rounded-lg border transition-colors focus:outline-none focus:ring-2 focus:ring-ring bg-input border-input text-foreground placeholder-muted-foreground`;
+  const inputClasses = useCallback(() => {
+    const baseClasses = 'w-full px-4 py-3 rounded-lg border transition-colors focus:outline-none focus:ring-2 focus:ring-ring';
+    
+    if (theme === 'dark') {
+      return `${baseClasses} bg-white/10 border-gray-600 text-white placeholder-gray-400`;
+    } else {
+      return `${baseClasses} bg-input border-input text-foreground placeholder-muted-foreground`;
+    }
+  }, [theme]);
 
-  const labelClasses = `block text-sm font-medium mb-2 text-foreground`;
+  const labelClasses = useCallback(() => {
+    const baseClasses = 'block text-sm font-medium mb-2';
+    
+    if (theme === 'dark') {
+      return `${baseClasses} text-white`;
+    } else {
+      return `${baseClasses} text-foreground`;
+    }
+  }, [theme]);
 
   const getMessageInputClasses = useCallback(() => {
-    return `${inputClasses} sm:rows-4 resize-none ${
+    const baseInputClasses = inputClasses();
+    return `${baseInputClasses} sm:rows-4 resize-none ${
       errors.message ? 'border-destructive focus:ring-destructive' : ''
     }`;
   }, [inputClasses, errors.message]);
