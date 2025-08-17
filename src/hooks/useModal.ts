@@ -1,4 +1,5 @@
 import { useEffect, useCallback } from 'react';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface UseModalProps {
   isOpen: boolean;
@@ -6,6 +7,7 @@ interface UseModalProps {
 }
 
 export const useModal = ({ isOpen, onClose }: UseModalProps) => {
+  const { theme } = useTheme();
 
   const handleEscape = useCallback((event: KeyboardEvent) => {
     if (event.key === 'Escape') {
@@ -26,20 +28,44 @@ export const useModal = ({ isOpen, onClose }: UseModalProps) => {
   }, [isOpen, handleEscape]);
 
   const getModalClasses = useCallback(() => {
-    return `relative w-full max-w-2xl max-h-[90vh] sm:max-h-[85vh] rounded-xl shadow-2xl transition-all duration-300 flex flex-col bg-popover border border-border`;
-  }, []);
+    const baseClasses = 'relative w-full max-w-2xl max-h-[90vh] sm:max-h-[85vh] rounded-xl shadow-2xl transition-all duration-300 flex flex-col border';
+    
+    if (theme === 'dark') {
+      return `${baseClasses} bg-[#151515] border-white/20`;
+    } else {
+      return `${baseClasses} bg-popover border-border`;
+    }
+  }, [theme]);
 
   const getHeaderClasses = useCallback(() => {
-    return `flex items-center justify-between p-4 sm:p-6 border-b border-border flex-shrink-0`;
-  }, []);
+    const baseClasses = 'flex items-center justify-between p-4 sm:p-6 border-b flex-shrink-0';
+    
+    if (theme === 'dark') {
+      return `${baseClasses} border-white/20`;
+    } else {
+      return `${baseClasses} border-border`;
+    }
+  }, [theme]);
 
   const getTitleClasses = useCallback(() => {
-    return `text-lg sm:text-xl md:text-2xl font-semibold text-popover-foreground`;
-  }, []);
+    const baseClasses = 'text-lg sm:text-xl md:text-2xl font-semibold';
+    
+    if (theme === 'dark') {
+      return `${baseClasses} text-white`;
+    } else {
+      return `${baseClasses} text-popover-foreground`;
+    }
+  }, [theme]);
 
   const getCloseButtonClasses = useCallback(() => {
-    return `p-2 rounded-lg hover:bg-muted transition-colors text-muted-foreground hover:text-foreground`;
-  }, []);
+    const baseClasses = 'p-2 rounded-lg transition-colors';
+    
+    if (theme === 'dark') {
+      return `${baseClasses} text-gray-400 hover:text-white hover:bg-white/10`;
+    } else {
+      return `${baseClasses} text-muted-foreground hover:text-foreground hover:bg-muted`;
+    }
+  }, [theme]);
 
   return {
     getModalClasses,

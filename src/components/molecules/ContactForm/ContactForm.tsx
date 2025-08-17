@@ -47,7 +47,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
     <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         <div>
-          <label htmlFor="name" className={labelClasses}>
+          <label htmlFor="name" className={labelClasses()}>
             {t('contactForm.name')}
           </label>
           <input
@@ -56,14 +56,14 @@ export const ContactForm: React.FC<ContactFormProps> = ({
             name="name"
             value={formData.name}
             onChange={handleInputChange}
-            className={inputClasses}
+            className={inputClasses()}
             placeholder={t('contactForm.namePlaceholder')}
             required
           />
         </div>
 
         <div>
-          <label htmlFor="email" className={labelClasses}>
+          <label htmlFor="email" className={labelClasses()}>
             {t('contactForm.email')}
           </label>
           <input
@@ -72,7 +72,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
             name="email"
             value={formData.email}
             onChange={handleInputChange}
-            className={inputClasses}
+            className={inputClasses()}
             placeholder={t('contactForm.emailPlaceholder')}
             required
           />
@@ -80,7 +80,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
       </div>
 
       <div>
-        <label htmlFor="subject" className={labelClasses}>
+        <label htmlFor="subject" className={labelClasses()}>
           {t('contactForm.subject')}
         </label>
         <input
@@ -89,14 +89,14 @@ export const ContactForm: React.FC<ContactFormProps> = ({
           name="subject"
           value={formData.subject}
           onChange={handleInputChange}
-          className={inputClasses}
+          className={inputClasses()}
           placeholder={t('contactForm.subjectPlaceholder')}
           required
         />
       </div>
 
       <div>
-        <label htmlFor="message" className={labelClasses}>
+        <label htmlFor="message" className={labelClasses()}>
           {t('contactForm.message')}
         </label>
         <textarea
